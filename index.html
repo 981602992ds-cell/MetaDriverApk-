@@ -12,39 +12,86 @@
             --bg: #05050f;
             --surface: #12121f;
             --surface2: #1a1a2e;
+            --text: #ffffff;
+            --text2: #8c8ca5;
             --accent: #ff6b35;
             --green: #3efc5a;
             --red: #ff3860;
             --blue: #0ad4ff;
             --purple: #b34aee;
             --gold: #f7c948;
-            --text: #ffffff;
-            --text2: #8c8ca5;
-            --radius-sm: 12px;
-            --radius: 18px;
-            --radius-lg: 24px;
+            --border: rgba(255,255,255,0.06);
+            --shadow-card: 0 4px 12px rgba(0,0,0,0.3);
+            --modal-bg: rgba(18,18,31,0.95);
+            --timer-glow: rgba(255,107,53,0.15);
+            --option-bg: rgba(255,255,255,0.04);
+            --option-border: rgba(255,255,255,0.08);
+            --btn-secondary-bg: rgba(255,255,255,0.04);
+            --btn-secondary-border: rgba(255,255,255,0.06);
+            --carousel-active-bg: linear-gradient(135deg, #ff6b35, #f7c948);
+            --carousel-done-bg: linear-gradient(135deg, #39ff14, #00e676);
+            --carousel-side-bg: #1e1e30;
+            /* Cores das bolinhas */
+            --dot-uber: #000000;
+            --dot-99: #f7c948;
+            --dot-indriver: #39ff14;
+            --dot-particular: #aaaaaa;
         }
+
+        body.light {
+            --bg: #f0f2f5;
+            --surface: #ffffff;
+            --surface2: #e9ecef;
+            --text: #111111;
+            --text2: #555555;
+            --accent: #ff6b35;
+            --green: #2e7d32;
+            --red: #d32f2f;
+            --blue: #0288d1;
+            --purple: #9c27b0;
+            --gold: #f9a825;
+            --border: rgba(0,0,0,0.08);
+            --shadow-card: 0 4px 12px rgba(0,0,0,0.08);
+            --modal-bg: rgba(255,255,255,0.97);
+            --timer-glow: rgba(255,107,53,0.08);
+            --option-bg: rgba(0,0,0,0.04);
+            --option-border: rgba(0,0,0,0.08);
+            --btn-secondary-bg: rgba(0,0,0,0.04);
+            --btn-secondary-border: rgba(0,0,0,0.08);
+            --carousel-active-bg: linear-gradient(135deg, #ff6b35, #f9a825);
+            --carousel-done-bg: linear-gradient(135deg, #2e7d32, #64dd17);
+            --carousel-side-bg: #ffffff;
+            --dot-uber: #000000;
+            --dot-99: #f9a825;
+            --dot-indriver: #2e7d32;
+            --dot-particular: #888888;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', sans-serif;
             background: var(--bg);
-            background-image: 
-                radial-gradient(ellipse at 20% 0%, rgba(255,107,53,0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 100%, rgba(10,212,255,0.06) 0%, transparent 50%);
             color: var(--text);
             min-height: 100vh;
             padding-bottom: 60px;
             -webkit-tap-highlight-color: transparent;
             user-select: none;
+            transition: background 0.3s, color 0.3s;
+            overflow-x: hidden;
+            perspective: 800px;
         }
+
         .container { max-width: 520px; margin: 0 auto; padding: 16px 14px; }
         @media (min-width: 768px) { .container { max-width: 780px; padding: 24px 20px; } }
         @media (min-width: 1024px) { .container { max-width: 900px; } }
+
+        /* Header */
         .header {
             display: flex; align-items: center; justify-content: space-between;
-            margin-bottom: 14px; background: var(--surface); border-radius: var(--radius-lg);
-            padding: 14px 18px; border: 1px solid rgba(255,255,255,0.06);
-            backdrop-filter: blur(20px); box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            margin-bottom: 14px; background: var(--surface); border-radius: 24px;
+            padding: 14px 18px; border: 1px solid var(--border);
+            backdrop-filter: blur(20px); box-shadow: var(--shadow-card);
+            transition: background 0.3s, border-color 0.3s;
         }
         .brand { display: flex; align-items: center; gap: 12px; }
         .logo-icon {
@@ -55,18 +102,21 @@
         }
         .header h1 {
             font-size: 18px; font-weight: 800;
-            background: linear-gradient(135deg, #fff, #e0e0e0);
+            background: linear-gradient(135deg, var(--accent), var(--gold));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
         .header p { font-size: 11px; color: var(--text2); margin-top: 2px; }
-        .settings-btn {
-            background: var(--surface2); border: 1px solid rgba(255,255,255,0.08);
+        .header-actions { display: flex; gap: 8px; }
+        .icon-btn {
+            background: var(--surface2); border: 1px solid var(--border);
             border-radius: 14px; width: 42px; height: 42px;
             display: flex; align-items: center; justify-content: center;
             cursor: pointer; font-size: 18px; color: var(--text2);
             transition: 0.3s; backdrop-filter: blur(10px);
         }
-        .settings-btn:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 12px rgba(255,107,53,0.3); }
+        .icon-btn:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 12px rgba(255,107,53,0.3); }
+
+        /* Status */
         .status-box { text-align: center; margin-bottom: 14px; }
         .status-badge {
             display: inline-flex; align-items: center; gap: 6px;
@@ -81,22 +131,25 @@
         .off .status-dot { background: var(--red); box-shadow: 0 0 8px var(--red); }
         .on .status-dot { background: var(--green); box-shadow: 0 0 8px var(--green); }
         .paused .status-dot { background: #ffaa00; box-shadow: 0 0 8px #ffaa00; }
+
+        /* Timer */
         .timer-section {
-            background: rgba(10,10,25,0.8); border-radius: var(--radius-lg);
+            background: var(--surface); border-radius: 24px;
             padding: 18px; margin-bottom: 14px; border: 1.5px solid var(--accent);
-            box-shadow: 0 8px 32px rgba(255,107,53,0.15); text-align: center;
+            box-shadow: 0 8px 32px var(--timer-glow); text-align: center;
+            transition: background 0.3s, border-color 0.3s;
         }
         .timer-label { font-size: 11px; font-weight: 700; color: var(--accent); letter-spacing: 2px; margin-bottom: 4px; }
         .timer-display {
             font-size: 46px; font-weight: 900; letter-spacing: 3px;
-            background: linear-gradient(180deg, #fff, #ffb38a);
+            background: linear-gradient(180deg, var(--text), var(--accent));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
             margin-bottom: 12px;
         }
         .timer-buttons { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
         .btn {
-            border: none; border-radius: 14px; padding: 10px 18px;
-            font-weight: 700; font-size: 13px; cursor: pointer; transition: 0.2s;
+            border: none; border-radius: 14px; padding: 12px 20px;
+            font-weight: 700; font-size: 14px; cursor: pointer; transition: 0.2s;
             color: #fff; letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 6px;
         }
         .btn:active { transform: scale(0.96); }
@@ -104,111 +157,145 @@
         .btn.pause { background: linear-gradient(135deg, #ffaa00, #f28500); box-shadow: 0 6px 20px rgba(255,170,0,0.3); }
         .btn.stop { background: linear-gradient(135deg, #ff3860, #d6304a); box-shadow: 0 6px 20px rgba(255,56,96,0.3); }
         .hidden { display: none !important; }
+
+        /* Progresso */
         .progress-card {
-            background: var(--surface); border-radius: var(--radius);
-            padding: 14px; margin-bottom: 14px; border: 1px solid rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px); box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+            background: var(--surface); border-radius: 18px;
+            padding: 14px; margin-bottom: 14px; border: 1px solid var(--border);
+            backdrop-filter: blur(10px); box-shadow: var(--shadow-card);
+            transition: background 0.3s, border-color 0.3s;
         }
         .progress-header { display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; color: var(--text2); margin-bottom: 8px; }
         .progress-header span:last-child { color: var(--accent); font-weight: 800; }
-        .progress-bar { background: rgba(255,255,255,0.05); height: 8px; border-radius: 10px; overflow: hidden; }
+        .progress-bar { background: rgba(128,128,128,0.2); height: 8px; border-radius: 10px; overflow: hidden; }
         .progress-fill { background: linear-gradient(90deg, var(--accent), var(--gold)); height: 100%; width: 0%; border-radius: 10px; transition: width 0.5s; }
+
+        /* Dashboard */
         .dashboard { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 14px; }
         @media (min-width: 768px) { .dashboard { grid-template-columns: repeat(6,1fr); } }
         .card {
-            background: var(--surface); border-radius: var(--radius); padding: 12px 6px;
-            text-align: center; border: 1px solid rgba(255,255,255,0.05);
-            backdrop-filter: blur(8px); transition: 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            background: var(--surface); border-radius: 18px; padding: 14px 6px;
+            text-align: center; border: 1px solid var(--border);
+            backdrop-filter: blur(8px); transition: 0.3s; box-shadow: var(--shadow-card);
         }
-        .card:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.1); }
-        .card-title { font-size: 9px; color: var(--text2); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px; font-weight: 600; }
-        .card-value { font-size: 16px; font-weight: 800; color: #fff; }
+        .card:hover { transform: translateY(-2px); border-color: rgba(128,128,128,0.2); }
+        .card-title { font-size: 10px; color: var(--text2); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 6px; font-weight: 600; }
+        .card-value { font-size: 17px; font-weight: 800; color: var(--text); }
         .card.accent .card-value { color: var(--accent); }
         .card.green .card-value { color: var(--green); }
         .card.blue .card-value { color: var(--blue); }
-        .section-title { font-size: 14px; font-weight: 700; margin: 14px 0 8px; display: flex; align-items: center; gap: 8px; color: #fff; }
-        .runs-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 6px; margin-bottom: 10px; }
-        .run-btn {
-            background: var(--surface2); border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 14px; padding: 8px 2px; text-align: center;
-            font-weight: 700; font-size: 11px; color: #aaa; cursor: pointer;
-            transition: 0.2s; position: relative; overflow: hidden;
+
+        /* Carrossel */
+        .section-title { font-size: 14px; font-weight: 700; margin: 14px 0 8px; display: flex; align-items: center; gap: 8px; color: var(--text); }
+        .carousel-wrapper { position: relative; width: 100%; overflow: hidden; padding: 20px 0 10px; margin-bottom: 10px; perspective: 800px; }
+        .carousel-track-container { overflow: visible; width: 100%; }
+        .carousel-track {
+            display: flex; transition: transform 0.25s ease-out; align-items: center;
+            padding: 0 calc(50% - 70px); transform-style: preserve-3d;
         }
-        .run-btn:hover { border-color: var(--blue); box-shadow: 0 0 8px rgba(10,212,255,0.2); color: #fff; }
-        .run-btn.done {
-            border-color: var(--green); background: linear-gradient(145deg, #0f2a1f, #13261a);
-            color: #fff; box-shadow: 0 0 12px rgba(62,252,90,0.15);
+        @media (min-width: 600px) { .carousel-track { padding: 0 calc(50% - 90px); } }
+        .carousel-card {
+            flex: 0 0 auto; width: 130px; margin: 0 8px; background: var(--carousel-side-bg);
+            border: 1px solid var(--border); border-radius: 20px; padding: 16px 6px;
+            text-align: center; cursor: pointer; transition: all 0.25s ease-out;
+            transform: rotateY(25deg) scale(0.8) translateZ(-50px); opacity: 0.6;
+            filter: brightness(0.7); position: relative; box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transform-style: preserve-3d; backface-visibility: hidden;
         }
-        .run-btn .pred { font-size: 8px; color: #666; display: block; }
-        .run-btn .real { font-size: 9px; color: var(--green); display: block; font-weight: 600; }
+        @media (min-width: 600px) { .carousel-card { width: 160px; margin: 0 12px; } }
+        .carousel-card.active {
+            transform: rotateY(0deg) scale(1.1) translateZ(0px); opacity: 1; filter: brightness(1);
+            z-index: 2; border-color: transparent; background: var(--carousel-active-bg);
+            box-shadow: 0 20px 40px rgba(255,107,53,0.5), 0 0 60px rgba(255,107,53,0.2); color: #fff;
+        }
+        .carousel-card.done { border-color: rgba(62,252,90,0.6); background: var(--carousel-done-bg); box-shadow: 0 0 20px rgba(62,252,90,0.4); }
+        .carousel-card.active.done { background: var(--carousel-done-bg); box-shadow: 0 20px 50px rgba(62,252,90,0.6), 0 0 70px rgba(62,252,90,0.3); }
+        .carousel-card .carousel-num { font-size: 13px; font-weight: 800; color: var(--text); margin-bottom: 2px; }
+        .carousel-card .carousel-pred { font-size: 10px; color: var(--text2); display: block; }
+        .carousel-card .carousel-real { font-size: 14px; color: var(--green); display: block; font-weight: 800; margin-top: 4px; text-shadow: 0 0 8px rgba(62,252,90,0.5); }
+        .carousel-card.left { transform: rotateY(15deg) scale(0.85) translateZ(-30px); opacity: 0.8; filter: brightness(0.85); }
+        .carousel-card.right { transform: rotateY(-15deg) scale(0.85) translateZ(-30px); opacity: 0.8; filter: brightness(0.85); }
+        .carousel-arrow {
+            position: absolute; top: 50%; transform: translateY(-50%); width: 36px; height: 36px;
+            border-radius: 50%; background: var(--surface); border: 1px solid var(--border);
+            color: var(--text); font-size: 16px; cursor: pointer; z-index: 10;
+            display: flex; align-items: center; justify-content: center; transition: 0.2s;
+            box-shadow: var(--shadow-card); backdrop-filter: blur(8px);
+        }
+        .carousel-arrow:hover { border-color: var(--accent); color: var(--accent); }
+        .carousel-arrow.left { left: 2px; }
+        .carousel-arrow.right { right: 2px; }
+        .carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 6px; }
+        .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text2); opacity: 0.4; transition: 0.3s; cursor: pointer; }
+        .carousel-dot.active { opacity: 1; background: var(--accent); width: 24px; border-radius: 4px; }
+
+        /* Corrida rápida */
         .quick-btn {
             width: 100%; background: linear-gradient(135deg, var(--accent), #ff5500);
-            border: none; border-radius: 16px; padding: 14px;
-            font-weight: 700; font-size: 14px; color: #fff; cursor: pointer;
-            transition: 0.2s; box-shadow: 0 6px 20px rgba(255,107,53,0.2);
+            border: none; border-radius: 16px; padding: 16px; font-weight: 700; font-size: 15px;
+            color: #fff; cursor: pointer; transition: 0.2s; box-shadow: 0 6px 20px rgba(255,107,53,0.2);
             margin-bottom: 14px;
         }
         .quick-btn:active { transform: scale(0.97); }
-        .ranking { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
-        .rank-card {
-            background: var(--surface); border-radius: var(--radius); padding: 12px;
-            text-align: center; border: 1px solid rgba(255,255,255,0.04); font-size: 11px; color: var(--text2);
-        }
-        .rank-card div { font-size: 18px; font-weight: 800; margin-top: 4px; }
 
-        /* Layout lado a lado para Gastos e Relatório */
-        .side-by-side {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 14px;
+        /* Gráfico */
+        .chart-section { background: var(--surface); border-radius: 18px; padding: 16px; margin-bottom: 14px; border: 1px solid var(--border); box-shadow: var(--shadow-card); }
+        .chart-title { font-size: 14px; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; color: var(--text); }
+        .chart-container { display: flex; align-items: flex-end; gap: 6px; height: 180px; padding: 0 4px; overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; scrollbar-color: rgba(128,128,128,0.3) transparent; }
+        .chart-container::-webkit-scrollbar { height: 4px; }
+        .chart-container::-webkit-scrollbar-thumb { background: rgba(128,128,128,0.3); border-radius: 4px; }
+        .chart-bar-group { display: flex; flex-direction: column; align-items: center; min-width: 28px; flex: 0 0 auto; position: relative; }
+        .chart-bar-wrapper { display: flex; align-items: flex-end; gap: 3px; height: 150px; cursor: pointer; position: relative; }
+        .chart-bar { width: 14px; border-radius: 6px 6px 0 0; transition: all 0.3s ease; position: relative; }
+        .chart-bar.predicted { background: rgba(128,128,128,0.3); }
+        .chart-bar.real { background: var(--green); width: 18px; box-shadow: 0 0 8px rgba(62,252,90,0.4); }
+        .chart-bar.real.negative { background: var(--red); box-shadow: 0 0 8px rgba(255,56,96,0.4); }
+        .chart-bar-label { font-size: 9px; color: var(--text2); margin-top: 4px; text-align: center; white-space: nowrap; }
+        .chart-tooltip {
+            position: absolute; bottom: 110%; left: 50%; transform: translateX(-50%);
+            background: var(--surface2); color: var(--text); padding: 6px 10px;
+            border-radius: 8px; font-size: 10px; white-space: nowrap;
+            pointer-events: none; opacity: 0; transition: opacity 0.2s;
+            border: 1px solid var(--border); box-shadow: var(--shadow-card); z-index: 5;
         }
-        .side-by-side .half {
-            flex: 1 1 280px;
-            min-width: 0;
-        }
+        .chart-bar-group:hover .chart-tooltip { opacity: 1; }
+
+        /* Layout lado a lado */
+        .side-by-side { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 14px; }
+        .side-by-side .half { flex: 1 1 280px; min-width: 0; }
         .expenses, .report {
-            background: var(--surface);
-            border-radius: var(--radius);
-            padding: 14px;
-            border: 1px solid rgba(255,255,255,0.04);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            background: var(--surface); border-radius: 18px; padding: 14px;
+            border: 1px solid var(--border); box-shadow: var(--shadow-card);
+            transition: background 0.3s, border-color 0.3s;
         }
-        .expense-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 12px; }
+        .expense-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--text); }
         .secondary-btn {
-            width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 12px; padding: 10px; color: #ccc; font-weight: 600; font-size: 12px;
+            width: 100%; background: var(--btn-secondary-bg); border: 1px solid var(--btn-secondary-border);
+            border-radius: 12px; padding: 12px; color: var(--text); font-weight: 600; font-size: 13px;
             cursor: pointer; margin-top: 10px; transition: 0.2s; text-align: center;
         }
-        .secondary-btn:hover { background: rgba(255,255,255,0.07); }
-        .report { font-size: 12px; line-height: 1.7; color: #ccc; }
+        .secondary-btn:hover { background: rgba(128,128,128,0.1); }
+        .report { font-size: 13px; line-height: 1.7; color: var(--text); }
 
         .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
         .danger-btn {
             background: transparent; border: 1px solid var(--red); color: var(--red);
-            padding: 12px; border-radius: 14px; font-weight: 700; font-size: 12px;
+            padding: 14px; border-radius: 14px; font-weight: 700; font-size: 13px;
             text-align: center; cursor: pointer; transition: 0.2s;
         }
         .danger-btn:hover { background: rgba(255,56,96,0.08); }
         .month-btn {
             background: rgba(180,74,238,0.08); border: 1px solid var(--purple); color: var(--purple);
-            padding: 12px; border-radius: 14px; font-weight: 700; font-size: 12px;
+            padding: 14px; border-radius: 14px; font-weight: 700; font-size: 13px;
             text-align: center; cursor: pointer; transition: 0.2s;
         }
         .month-btn:hover { background: rgba(180,74,238,0.15); }
         .disabled-area { opacity: 0.5; pointer-events: none; filter: grayscale(0.5); }
 
-        /* Rodapé simples */
+        /* Rodapé */
         .app-footer {
-            text-align: center;
-            padding: 14px 20px;
-            margin-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.06);
-            color: var(--text2);
-            font-size: 11px;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
+            text-align: center; padding: 14px 20px; margin-top: 20px;
+            border-top: 1px solid var(--border); color: var(--text2); font-size: 11px;
         }
         .app-footer strong { color: var(--accent); }
 
@@ -220,19 +307,18 @@
         }
         @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
         .modal {
-            background: rgba(18,18,31,0.95); border-radius: 24px;
+            background: var(--modal-bg); border-radius: 24px;
             padding: 22px; width: 92%; max-width: 380px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(255,107,53,0.2);
-            border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);
-            animation: slideUp 0.3s ease-out;
-            max-height: 85vh; overflow-y: auto;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4); border: 1px solid var(--border);
+            backdrop-filter: blur(20px); animation: slideUp 0.3s ease-out;
+            max-height: 85vh; overflow-y: auto; color: var(--text);
         }
         @keyframes slideUp { from { transform: translateY(30px); opacity:0; } to { transform: translateY(0); opacity:1; } }
         .modal h3 { margin-bottom: 12px; font-size: 18px; font-weight: 700; }
         .modal label { display: block; font-size: 11px; color: var(--text2); margin-bottom: 4px; font-weight: 600; }
         .modal input, .modal select, .modal textarea {
-            width: 100%; background: rgba(25,25,40,0.8); border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px; padding: 10px 12px; color: #fff; font-size: 14px;
+            width: 100%; background: var(--surface2); border: 1px solid var(--border);
+            border-radius: 12px; padding: 10px 12px; color: var(--text); font-size: 14px;
             outline: none; transition: 0.2s; font-family: 'Inter', sans-serif;
         }
         .modal input:focus, .modal select:focus, .modal textarea:focus {
@@ -240,33 +326,50 @@
         }
         .option-group { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
         .option-item {
-            flex: 1 0 auto; min-width: 70px; background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08); border-radius: 12px;
-            padding: 8px 6px; text-align: center; font-size: 12px; font-weight: 600;
-            color: #ccc; cursor: pointer; transition: 0.2s; white-space: nowrap;
+            flex: 1 0 auto; min-width: 70px; background: var(--option-bg);
+            border: 1px solid var(--option-border); border-radius: 12px;
+            padding: 10px 6px; text-align: center; font-size: 13px; font-weight: 600;
+            color: var(--text); cursor: pointer; transition: 0.2s; white-space: nowrap;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
         }
-        .option-item:hover { border-color: var(--accent); color: #fff; }
+        .option-item:hover { border-color: var(--accent); color: var(--accent); }
         .option-item.active {
             background: var(--accent); color: #fff; border-color: var(--accent);
             box-shadow: 0 0 14px rgba(255,107,53,0.4);
         }
+        /* Bolinhas coloridas */
+        .dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            box-shadow: 0 0 4px rgba(0,0,0,0.5);
+        }
+        .dot.uber { background: var(--dot-uber); }
+        .dot.novennove { background: var(--dot-99); }
+        .dot.indriver { background: var(--dot-indriver); }
+        .dot.particular { background: var(--dot-particular); }
+
         .modal .btn-row { display: flex; gap: 8px; justify-content: flex-end; margin-top: 16px; }
         .btn-sm { padding: 8px 16px; font-size: 12px; border-radius: 10px; }
-        .month-table { width: 100%; border-collapse: collapse; font-size: 11px; margin: 12px 0; }
-        .month-table th { text-align: left; color: var(--accent); padding: 6px 4px; border-bottom: 1px solid #333; }
-        .month-table td { padding: 6px 4px; border-bottom: 1px solid #222; color: #ccc; }
-        .month-total { font-weight: 800; color: #fff; border-top: 2px solid #444; }
-        @media print { body { background: white; color: black; } .timer-section, .btn, .settings-btn, .actions, .quick-btn, .status-box { display: none !important; } }
+        .month-table { width: 100%; border-collapse: collapse; font-size: 11px; margin: 12px 0; color: var(--text); }
+        .month-table th { text-align: left; color: var(--accent); padding: 6px 4px; border-bottom: 1px solid var(--border); }
+        .month-table td { padding: 6px 4px; border-bottom: 1px solid var(--border); }
+        .month-total { font-weight: 800; color: var(--text); border-top: 2px solid var(--border); }
     </style>
 </head>
-<body>
+<body class="dark">
     <div class="container">
         <header class="header">
             <div class="brand">
                 <div class="logo-icon">🚗</div>
                 <div><h1>Meta Driver PRO</h1><p>Dashboard Premium</p></div>
             </div>
-            <button class="settings-btn" id="btnConfig">⚙️</button>
+            <div class="header-actions">
+                <button class="icon-btn" id="btnTheme" title="Alternar tema">🌙</button>
+                <button class="icon-btn" id="btnConfig" title="Configurar meta">⚙️</button>
+            </div>
         </header>
 
         <div class="status-box"><div class="status-badge off" id="statusBadge"><span class="status-dot"></span> PARADO</div></div>
@@ -295,17 +398,25 @@
             <div class="card"><div class="card-title">📈 Projeção</div><div class="card-value" id="cardProjecao">R$ 0</div></div>
         </section>
 
+        <!-- Gráfico -->
+        <div class="chart-section">
+            <div class="chart-title">📊 Progressão das Corridas</div>
+            <div class="chart-container" id="chartContainer"></div>
+        </div>
+
+        <!-- Carrossel -->
         <div class="section-title">📋 Corridas Previstas</div>
-        <div class="runs-grid" id="runsGrid"></div>
+        <div class="carousel-wrapper" id="carouselWrapper">
+            <button class="carousel-arrow left" id="carouselLeft">◀</button>
+            <div class="carousel-track-container">
+                <div class="carousel-track" id="carouselTrack"></div>
+            </div>
+            <button class="carousel-arrow right" id="carouselRight">▶</button>
+        </div>
+        <div class="carousel-dots" id="carouselDots"></div>
 
         <button id="btnQuickRun" class="quick-btn">⚡ Registrar Corrida Rápida</button>
 
-        <section class="ranking" id="rankingSection">
-            <div class="rank-card">🏆 Melhor<div id="bestRun">R$ 0</div></div>
-            <div class="rank-card">🔻 Menor<div id="worstRun">R$ 0</div></div>
-        </section>
-
-        <!-- Gastos e Relatório lado a lado (layout model) -->
         <div class="side-by-side">
             <div class="half" id="expensesSection">
                 <div class="expenses">
@@ -327,14 +438,12 @@
             <button id="btnGestaoMes" class="month-btn">📅 Gestão do Mês</button>
         </section>
 
-        <!-- Rodapé simples -->
         <footer class="app-footer">
             <span>🚗 <strong>Meta Driver PRO</strong> &copy; 2025</span>
-            <span>Controle inteligente para motoristas de app</span>
         </footer>
     </div>
 
-    <!-- Modais mantidos como antes -->
+    <!-- Modal Registro de Corrida com bolinhas -->
     <div class="modal-overlay hidden" id="modalCorrida">
         <div class="modal">
             <h3>🏁 Corrida <span id="modalCorridaNum"></span></h3>
@@ -342,13 +451,12 @@
             <input type="text" id="inputPrevisto" disabled>
             <label>Valor recebido (R$)</label>
             <input type="number" id="inputValorReal" placeholder="Deixe vazio = usar previsto" step="0.01">
-            <label>Forma de pagamento</label>
+            <label>Plataforma</label>
             <div class="option-group" id="paymentOptions">
-                <div class="option-item active" data-value="Dinheiro">💰 Dinheiro</div>
-                <div class="option-item" data-value="PIX">💠 PIX</div>
-                <div class="option-item" data-value="Cartão">💳 Cartão</div>
-                <div class="option-item" data-value="Débito">🏧 Débito</div>
-                <div class="option-item" data-value="Outro">📦 Outro</div>
+                <div class="option-item active" data-value="Uber"><span class="dot uber"></span> Uber</div>
+                <div class="option-item" data-value="99"><span class="dot novennove"></span> 99</div>
+                <div class="option-item" data-value="InDriver"><span class="dot indriver"></span> InDriver</div>
+                <div class="option-item" data-value="Particular"><span class="dot particular"></span> Particular</div>
             </div>
             <label>Observação (opcional)</label>
             <input type="text" id="inputObs" placeholder="Ex: Corrida para o aeroporto">
@@ -360,6 +468,7 @@
         </div>
     </div>
 
+    <!-- Modal Gasto (mantido) -->
     <div class="modal-overlay hidden" id="modalGasto">
         <div class="modal">
             <h3>➕ Novo Gasto</h3>
@@ -381,6 +490,7 @@
         </div>
     </div>
 
+    <!-- Modal Meta (mantido) -->
     <div class="modal-overlay hidden" id="modalMeta">
         <div class="modal">
             <h3>⚙️ Meta do Dia</h3>
@@ -393,6 +503,7 @@
         </div>
     </div>
 
+    <!-- Modal Resumo Final -->
     <div class="modal-overlay hidden" id="modalResumo">
         <div class="modal" style="max-width:420px;">
             <h3>🏁 Jornada Encerrada</h3>
@@ -401,10 +512,11 @@
         </div>
     </div>
 
+    <!-- Modal Gestão do Mês -->
     <div class="modal-overlay hidden" id="modalGestaoMes">
         <div class="modal" style="max-width:440px;">
             <h3>📅 Gestão do Mês</h3>
-            <div id="gestaoMesContent" style="font-size:12px; line-height:1.6; color:#ccc;"></div>
+            <div id="gestaoMesContent" style="font-size:12px; line-height:1.6;"></div>
             <div class="btn-row"><button class="btn start btn-sm" id="btnFecharGestao">Fechar</button></div>
         </div>
     </div>
@@ -421,6 +533,7 @@
                 jornadaEncerrada: false,
                 timerInterval: null,
                 dataJornada: new Date().toISOString().split('T')[0],
+                carouselIndex: 0,
             };
 
             const $ = id => document.getElementById(id);
@@ -437,6 +550,18 @@
             };
             const podeRegistrar = () => state.jornadaInicio && !state.jornadaEncerrada;
 
+            function applyTheme(theme) {
+                document.body.classList.toggle('light', theme === 'light');
+                document.body.classList.toggle('dark', theme === 'dark');
+                $('btnTheme').textContent = theme === 'light' ? '☀️' : '🌙';
+                localStorage.setItem('theme', theme);
+            }
+            $('btnTheme').addEventListener('click', () => {
+                const current = document.body.classList.contains('light') ? 'dark' : 'light';
+                applyTheme(current);
+            });
+            applyTheme(localStorage.getItem('theme') || 'dark');
+
             function gerarProgressao(meta, n) {
                 if(n<=1) return [meta];
                 let a1 = Math.round(meta/(n*2.8)), an = Math.round((2*meta/n)-a1);
@@ -452,17 +577,141 @@
                 state.metaDiaria = meta; state.corridasPrevistas = n;
                 const prog = gerarProgressao(meta,n);
                 state.corridas = prog.map((p,i) => i < state.corridas.length ? {...state.corridas[i], previsto:p} : {previsto:p, real:null, pagamento:null, obs:'', hora:null}).slice(0,n);
+                state.carouselIndex = 0;
                 salvar(); renderizarTudo();
             }
 
-            function renderizarGrid() {
-                const grid = $('runsGrid'); grid.innerHTML = '';
-                state.corridas.forEach((c,i) => {
-                    const btn = document.createElement('div');
-                    btn.className = 'run-btn' + (c.real !== null ? ' done' : '');
-                    btn.innerHTML = `#${i+1}<span class="pred">prev. ${formatMoney(c.previsto)}</span>${c.real !== null ? `<span class="real">real ${formatMoney(c.real)}</span>` : ''}`;
-                    btn.addEventListener('click', () => abrirModalCorrida(i));
-                    grid.appendChild(btn);
+            /* ============ CARRROSSEL 3D RÁPIDO ============ */
+            let carouselDragStart = 0;
+            let carouselDragging = false;
+            let carouselOffsetX = 0;
+
+            function renderizarCarrossel() {
+                const track = $('carouselTrack');
+                const dotsContainer = $('carouselDots');
+                track.innerHTML = '';
+                dotsContainer.innerHTML = '';
+                if (!state.corridas.length) return;
+
+                state.corridas.forEach((c, i) => {
+                    const card = document.createElement('div');
+                    card.className = 'carousel-card';
+                    if (c.real !== null) card.classList.add('done');
+                    card.innerHTML = `
+                        <div class="carousel-num">#${i+1}</div>
+                        <span class="carousel-pred">prev. ${formatMoney(c.previsto)}</span>
+                        ${c.real !== null ? `<span class="carousel-real">real ${formatMoney(c.real)}</span>` : ''}
+                    `;
+                    card.addEventListener('click', () => {
+                        if (i === state.carouselIndex) abrirModalCorrida(i);
+                        else { state.carouselIndex = i; atualizarCarrossel(); }
+                    });
+                    track.appendChild(card);
+
+                    const dot = document.createElement('div');
+                    dot.className = 'carousel-dot';
+                    dot.addEventListener('click', () => { state.carouselIndex = i; atualizarCarrossel(); });
+                    dotsContainer.appendChild(dot);
+                });
+
+                $('carouselLeft').onclick = () => { if (state.carouselIndex > 0) { state.carouselIndex--; atualizarCarrossel(); } };
+                $('carouselRight').onclick = () => { if (state.carouselIndex < state.corridas.length - 1) { state.carouselIndex++; atualizarCarrossel(); } };
+
+                track.addEventListener('mousedown', (e) => {
+                    carouselDragging = true; carouselDragStart = e.clientX; carouselOffsetX = 0;
+                    track.style.transition = 'none';
+                });
+                window.addEventListener('mousemove', (e) => {
+                    if (!carouselDragging) return;
+                    carouselOffsetX = e.clientX - carouselDragStart;
+                    const cardWidth = window.innerWidth >= 600 ? 184 : 146;
+                    const shift = -state.carouselIndex * cardWidth + carouselOffsetX;
+                    track.style.transform = `translateX(${shift}px)`;
+                });
+                window.addEventListener('mouseup', () => {
+                    if (!carouselDragging) return;
+                    carouselDragging = false;
+                    track.style.transition = 'transform 0.25s ease-out';
+                    if (carouselOffsetX < -20 && state.carouselIndex < state.corridas.length - 1) state.carouselIndex++;
+                    else if (carouselOffsetX > 20 && state.carouselIndex > 0) state.carouselIndex--;
+                    atualizarCarrossel();
+                });
+
+                track.addEventListener('touchstart', (e) => {
+                    carouselDragging = true; carouselDragStart = e.touches[0].clientX; carouselOffsetX = 0;
+                    track.style.transition = 'none';
+                }, {passive: true});
+                track.addEventListener('touchmove', (e) => {
+                    if (!carouselDragging) return;
+                    carouselOffsetX = e.touches[0].clientX - carouselDragStart;
+                    const cardWidth = window.innerWidth >= 600 ? 184 : 146;
+                    const shift = -state.carouselIndex * cardWidth + carouselOffsetX;
+                    track.style.transform = `translateX(${shift}px)`;
+                }, {passive: true});
+                track.addEventListener('touchend', () => {
+                    if (!carouselDragging) return;
+                    carouselDragging = false;
+                    track.style.transition = 'transform 0.25s ease-out';
+                    if (carouselOffsetX < -20 && state.carouselIndex < state.corridas.length - 1) state.carouselIndex++;
+                    else if (carouselOffsetX > 20 && state.carouselIndex > 0) state.carouselIndex--;
+                    atualizarCarrossel();
+                });
+
+                atualizarCarrossel();
+            }
+
+            function atualizarCarrossel() {
+                const track = $('carouselTrack');
+                const cardWidth = window.innerWidth >= 600 ? 184 : 146;
+                const shift = -state.carouselIndex * cardWidth;
+                track.style.transform = `translateX(${shift}px)`;
+                const cards = track.querySelectorAll('.carousel-card');
+                cards.forEach((card, i) => {
+                    card.classList.remove('active', 'left', 'right');
+                    if (i === state.carouselIndex) card.classList.add('active');
+                    else if (i === state.carouselIndex - 1) card.classList.add('left');
+                    else if (i === state.carouselIndex + 1) card.classList.add('right');
+                });
+                const dots = $('carouselDots').querySelectorAll('.carousel-dot');
+                dots.forEach((dot, i) => dot.classList.toggle('active', i === state.carouselIndex));
+                $('carouselLeft').style.opacity = state.carouselIndex === 0 ? '0.3' : '1';
+                $('carouselRight').style.opacity = state.carouselIndex >= state.corridas.length - 1 ? '0.3' : '1';
+            }
+
+            function renderizarGrafico() {
+                const container = $('chartContainer');
+                container.innerHTML = '';
+                if (!state.corridas.length) {
+                    container.innerHTML = '<p style="color:var(--text2); font-size:12px; text-align:center; width:100%;">Registre corridas para ver o gráfico.</p>';
+                    return;
+                }
+                const valores = state.corridas.map(c => ({ previsto: c.previsto, real: c.real }));
+                const maxVal = Math.max(...valores.map(v => v.previsto), ...valores.filter(v => v.real !== null).map(v => v.real), 1);
+                valores.forEach((v, i) => {
+                    const group = document.createElement('div'); group.className = 'chart-bar-group';
+                    const wrapper = document.createElement('div'); wrapper.className = 'chart-bar-wrapper';
+                    const prevBar = document.createElement('div'); prevBar.className = 'chart-bar predicted';
+                    prevBar.style.height = (v.previsto / maxVal) * 130 + 'px';
+                    wrapper.appendChild(prevBar);
+                    if (v.real !== null) {
+                        const realBar = document.createElement('div'); realBar.className = 'chart-bar real';
+                        if (v.real < v.previsto) realBar.classList.add('negative');
+                        realBar.style.height = (v.real / maxVal) * 130 + 'px';
+                        wrapper.appendChild(realBar);
+                        const tooltip = document.createElement('div'); tooltip.className = 'chart-tooltip';
+                        const dif = v.real - v.previsto;
+                        tooltip.innerHTML = `#${i+1} | Prev: ${formatMoney(v.previsto)} | Real: ${formatMoney(v.real)}<br>Dif: ${dif >= 0 ? '+' : ''}${formatMoney(dif)}`;
+                        wrapper.appendChild(tooltip);
+                    } else {
+                        const tooltip = document.createElement('div'); tooltip.className = 'chart-tooltip';
+                        tooltip.textContent = `#${i+1} | Prev: ${formatMoney(v.previsto)} | Pendente`;
+                        wrapper.appendChild(tooltip);
+                    }
+                    group.appendChild(wrapper);
+                    const label = document.createElement('div'); label.className = 'chart-bar-label';
+                    label.textContent = `#${i+1}`;
+                    group.appendChild(label);
+                    container.appendChild(group);
                 });
             }
 
@@ -475,8 +724,9 @@
                 $('inputPrevisto').value = formatMoney(c.previsto);
                 $('inputValorReal').value = '';
                 $('inputObs').value = c.obs || '';
+                const plataforma = c.pagamento || 'Uber';
                 document.querySelectorAll('#paymentOptions .option-item').forEach(opt => {
-                    opt.classList.toggle('active', opt.dataset.value === (c.pagamento || 'Dinheiro'));
+                    opt.classList.toggle('active', opt.dataset.value === plataforma);
                 });
                 $('modalCorrida').classList.remove('hidden');
             }
@@ -484,7 +734,7 @@
             function salvarCorrida() {
                 const valorDigitado = $('inputValorReal').value.trim();
                 let real = valorDigitado === '' ? state.corridas[corridaEditando].previsto : (parseFloat(valorDigitado) || 0);
-                const pagamento = document.querySelector('#paymentOptions .option-item.active')?.dataset.value || 'Dinheiro';
+                const pagamento = document.querySelector('#paymentOptions .option-item.active')?.dataset.value || 'Uber';
                 const obs = $('inputObs').value;
                 const c = state.corridas[corridaEditando];
                 c.real = real; c.pagamento = pagamento; c.obs = obs;
@@ -502,14 +752,16 @@
                 if(!podeRegistrar()) return alert('Inicie a jornada!');
                 const idx = state.corridas.findIndex(c => c.real === null);
                 if(idx === -1) { alert('Todas as corridas previstas já foram registradas!'); return; }
+                state.carouselIndex = idx;
                 corridaEditando = idx;
                 const c = state.corridas[idx];
                 $('modalCorridaNum').textContent = idx+1;
                 $('inputPrevisto').value = formatMoney(c.previsto);
                 $('inputValorReal').value = '';
                 $('inputObs').value = '';
-                document.querySelectorAll('#paymentOptions .option-item').forEach(opt => opt.classList.toggle('active', opt.dataset.value === 'Dinheiro'));
+                document.querySelectorAll('#paymentOptions .option-item').forEach(opt => opt.classList.toggle('active', opt.dataset.value === 'Uber'));
                 $('modalCorrida').classList.remove('hidden');
+                atualizarCarrossel();
             }
 
             document.querySelectorAll('#paymentOptions .option-item').forEach(opt => {
@@ -554,7 +806,6 @@
                 const proj = tempo>60 ? (arr/(tempo/3600))*24 : 0;
                 const falta = Math.max(0, state.metaDiaria - arr);
                 const pct = state.metaDiaria>0 ? Math.min(100, Math.round((arr/state.metaDiaria)*100)) : 0;
-
                 $('cardArrecadado').textContent = formatMoney(arr);
                 $('cardMeta').textContent = formatMoney(state.metaDiaria);
                 $('cardCorridas').textContent = feitas;
@@ -563,10 +814,6 @@
                 $('cardProjecao').textContent = formatMoney(proj);
                 $('progressPercent').textContent = pct+'%';
                 $('progressFill').style.width = pct+'%';
-
-                const reais = state.corridas.filter(c => c.real!==null).map(c=>c.real);
-                $('bestRun').textContent = reais.length ? formatMoney(Math.max(...reais)) : 'R$ 0';
-                $('worstRun').textContent = reais.length ? formatMoney(Math.min(...reais)) : 'R$ 0';
             }
 
             function atualizarGastos() {
@@ -579,7 +826,7 @@
                     </div>
                 `).join('');
                 const total = state.gastos.reduce((s,g)=>s+g.valor,0);
-                list.innerHTML += `<div class="expense-item" style="font-weight:700;border-top:1px solid #222;margin-top:6px;padding-top:8px;"><span>Total</span><span>- ${formatMoney(total)}</span></div>`;
+                list.innerHTML += `<div class="expense-item" style="font-weight:700;border-top:1px solid var(--border);margin-top:6px;padding-top:8px;"><span>Total</span><span>- ${formatMoney(total)}</span></div>`;
             }
 
             function atualizarRelatorio() {
@@ -622,11 +869,12 @@
 
             function atualizarAreas() {
                 const liberado = podeRegistrar();
-                ['runsGrid','rankingSection','expensesSection','btnQuickRun'].forEach(id => $(id)?.classList.toggle('disabled-area', !liberado));
+                ['carouselWrapper','carouselDots','expensesSection','btnQuickRun'].forEach(id => $(id)?.classList.toggle('disabled-area', !liberado));
             }
 
             function renderizarTudo() {
-                renderizarGrid();
+                renderizarCarrossel();
+                renderizarGrafico();
                 atualizarDashboard();
                 atualizarGastos();
                 atualizarRelatorio();
@@ -676,7 +924,7 @@
                     html += `<table style="width:100%;font-size:11px;margin-top:8px;border-collapse:collapse;"><tr><th>#</th><th>Prev.</th><th>Real</th><th>Dif.</th></tr>`;
                     feitas.forEach((c,i) => {
                         const d = c.real - c.previsto;
-                        html += `<tr><td>${i+1}</td><td>${formatMoney(c.previsto)}</td><td>${formatMoney(c.real)}</td><td style="color:${d>=0?'#3efc5a':'#ff3860'}">${formatMoney(d)}</td></tr>`;
+                        html += `<tr><td>${i+1}</td><td>${formatMoney(c.previsto)}</td><td>${formatMoney(c.real)}</td><td style="color:${d>=0?'var(--green)':'var(--red)'}">${formatMoney(d)}</td></tr>`;
                     });
                     html += `</table>`;
                 }
@@ -721,6 +969,7 @@
                 state.jornadaInicio=null; state.jornadaPausas=[]; state.jornadaEncerrada=false; state.jornadaFim=null;
                 state.corridas = gerarProgressao(state.metaDiaria, state.corridasPrevistas).map(p => ({previsto:p, real:null, pagamento:null, obs:'', hora:null}));
                 state.gastos = []; state.dataJornada = new Date().toISOString().split('T')[0];
+                state.carouselIndex = 0;
                 $('timerDisplay').textContent = '00:00:00';
                 salvar(); renderizarTudo();
             }
@@ -734,54 +983,35 @@
                     const d = new Date(r.data + 'T00:00:00');
                     return d.getMonth() === mesAtual && d.getFullYear() === anoAtual;
                 }).sort((a,b) => a.data.localeCompare(b.data));
-
                 let html = '';
                 if (diasDoMes.length === 0) {
                     html = '<p>Nenhum registro para este mês.</p>';
                 } else {
-                    html = `<table class="month-table">
-                        <thead><tr><th>Dia</th><th>Meta</th><th>Arrec.</th><th>Corr.</th><th>Lucro</th><th>%</th></tr></thead><tbody>`;
+                    html = `<table class="month-table"><thead><tr><th>Dia</th><th>Meta</th><th>Arrec.</th><th>Corr.</th><th>Lucro</th><th>%</th></tr></thead><tbody>`;
                     let totalMeta = 0, totalArr = 0, totalCorr = 0, totalLucro = 0;
                     diasDoMes.forEach(r => {
                         const dataFormatada = r.data.split('-').reverse().join('/');
-                        html += `<tr>
-                            <td>${dataFormatada}</td>
-                            <td>${formatMoney(r.meta)}</td>
-                            <td>${formatMoney(r.arrecadado)}</td>
-                            <td>${r.corridas}</td>
-                            <td style="color:${r.lucro>=0?'#3efc5a':'#ff3860'}">${formatMoney(r.lucro)}</td>
-                            <td>${r.pctMeta}%</td>
-                        </tr>`;
-                        totalMeta += r.meta;
-                        totalArr += r.arrecadado;
-                        totalCorr += r.corridas;
-                        totalLucro += r.lucro;
+                        html += `<tr><td>${dataFormatada}</td><td>${formatMoney(r.meta)}</td><td>${formatMoney(r.arrecadado)}</td><td>${r.corridas}</td><td style="color:${r.lucro>=0?'var(--green)':'var(--red)'}">${formatMoney(r.lucro)}</td><td>${r.pctMeta}%</td></tr>`;
+                        totalMeta += r.meta; totalArr += r.arrecadado; totalCorr += r.corridas; totalLucro += r.lucro;
                     });
-                    html += `<tr class="month-total">
-                        <td><strong>Total</strong></td>
-                        <td>${formatMoney(totalMeta)}</td>
-                        <td>${formatMoney(totalArr)}</td>
-                        <td>${totalCorr}</td>
-                        <td style="color:${totalLucro>=0?'#3efc5a':'#ff3860'}">${formatMoney(totalLucro)}</td>
-                        <td>--</td>
-                    </tr></tbody></table>`;
+                    html += `<tr class="month-total"><td><strong>Total</strong></td><td>${formatMoney(totalMeta)}</td><td>${formatMoney(totalArr)}</td><td>${totalCorr}</td><td style="color:${totalLucro>=0?'var(--green)':'var(--red)'}">${formatMoney(totalLucro)}</td><td>--</td></tr></tbody></table>`;
                 }
                 $('gestaoMesContent').innerHTML = html;
                 $('modalGestaoMes').classList.remove('hidden');
             }
 
             function salvar() {
-                localStorage.setItem('metaDriverPro_v3', JSON.stringify({
+                localStorage.setItem('metaDriverPro_v6', JSON.stringify({
                     metaDiaria: state.metaDiaria, corridasPrevistas: state.corridasPrevistas,
                     corridas: state.corridas, gastos: state.gastos,
                     jornadaInicio: state.jornadaInicio, jornadaPausas: state.jornadaPausas,
                     jornadaEncerrada: state.jornadaEncerrada, jornadaFim: state.jornadaFim,
-                    dataJornada: state.dataJornada
+                    dataJornada: state.dataJornada, carouselIndex: state.carouselIndex
                 }));
             }
 
             function carregar() {
-                const d = localStorage.getItem('metaDriverPro_v3');
+                const d = localStorage.getItem('metaDriverPro_v6');
                 if(!d) return false;
                 try {
                     const obj = JSON.parse(d);
@@ -794,14 +1024,11 @@
                 return false;
             }
 
+            // Eventos
             $('btnStart').addEventListener('click', iniciar);
             $('btnPause').addEventListener('click', pausar);
             $('btnStop').addEventListener('click', encerrar);
-            $('btnConfig').addEventListener('click', ()=>{
-                $('editMetaValor').value=state.metaDiaria;
-                $('editMetaCorridas').value=state.corridasPrevistas;
-                $('modalMeta').classList.remove('hidden');
-            });
+            $('btnConfig').addEventListener('click', ()=>{ $('editMetaValor').value=state.metaDiaria; $('editMetaCorridas').value=state.corridasPrevistas; $('modalMeta').classList.remove('hidden'); });
             $('btnCancelMeta').addEventListener('click', ()=>$('modalMeta').classList.add('hidden'));
             $('btnSaveMeta').addEventListener('click', ()=>{
                 const m = parseFloat($('editMetaValor').value)||500, n = parseInt($('editMetaCorridas').value)||20;
