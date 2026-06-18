@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -22,20 +22,6 @@
             --gold: #f7c948;
             --border: rgba(255,255,255,0.06);
             --shadow-card: 0 4px 12px rgba(0,0,0,0.3);
-            --modal-bg: rgba(18,18,31,0.95);
-            --timer-glow: rgba(255,107,53,0.15);
-            --option-bg: rgba(255,255,255,0.04);
-            --option-border: rgba(255,255,255,0.08);
-            --btn-secondary-bg: rgba(255,255,255,0.04);
-            --btn-secondary-border: rgba(255,255,255,0.06);
-            --carousel-active-bg: linear-gradient(135deg, #ff6b35, #f7c948);
-            --carousel-done-bg: linear-gradient(135deg, #39ff14, #00e676);
-            --carousel-side-bg: #1e1e30;
-            /* Cores das bolinhas */
-            --dot-uber: #000000;
-            --dot-99: #f7c948;
-            --dot-indriver: #39ff14;
-            --dot-particular: #aaaaaa;
         }
 
         body.light {
@@ -52,19 +38,6 @@
             --gold: #f9a825;
             --border: rgba(0,0,0,0.08);
             --shadow-card: 0 4px 12px rgba(0,0,0,0.08);
-            --modal-bg: rgba(255,255,255,0.97);
-            --timer-glow: rgba(255,107,53,0.08);
-            --option-bg: rgba(0,0,0,0.04);
-            --option-border: rgba(0,0,0,0.08);
-            --btn-secondary-bg: rgba(0,0,0,0.04);
-            --btn-secondary-border: rgba(0,0,0,0.08);
-            --carousel-active-bg: linear-gradient(135deg, #ff6b35, #f9a825);
-            --carousel-done-bg: linear-gradient(135deg, #2e7d32, #64dd17);
-            --carousel-side-bg: #ffffff;
-            --dot-uber: #000000;
-            --dot-99: #f9a825;
-            --dot-indriver: #2e7d32;
-            --dot-particular: #888888;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -77,15 +50,106 @@
             -webkit-tap-highlight-color: transparent;
             user-select: none;
             transition: background 0.3s, color 0.3s;
-            overflow-x: hidden;
-            perspective: 800px;
         }
 
-        .container { max-width: 520px; margin: 0 auto; padding: 16px 14px; }
-        @media (min-width: 768px) { .container { max-width: 780px; padding: 24px 20px; } }
-        @media (min-width: 1024px) { .container { max-width: 900px; } }
+        /* ===== TELA DE AUTENTICAÇÃO ===== */
+        .auth-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .auth-card {
+            background: var(--surface);
+            border-radius: 32px;
+            padding: 32px 24px;
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-card);
+            text-align: center;
+        }
+        .auth-logo {
+            font-size: 48px;
+            margin-bottom: 8px;
+        }
+        .auth-title {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 4px;
+            background: linear-gradient(135deg, var(--accent), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .auth-subtitle {
+            font-size: 13px;
+            color: var(--text2);
+            margin-bottom: 24px;
+        }
+        .auth-input {
+            width: 100%;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 14px 16px;
+            color: var(--text);
+            font-size: 15px;
+            outline: none;
+            transition: 0.2s;
+            margin-bottom: 12px;
+            font-family: 'Inter', sans-serif;
+        }
+        .auth-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(255,107,53,0.15);
+        }
+        .auth-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--accent), #ff5500);
+            border: none;
+            border-radius: 14px;
+            padding: 16px;
+            font-weight: 700;
+            font-size: 16px;
+            color: #fff;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 8px;
+            box-shadow: 0 6px 20px rgba(255,107,53,0.3);
+        }
+        .auth-btn:active { transform: scale(0.97); }
+        .auth-switch {
+            margin-top: 16px;
+            font-size: 13px;
+            color: var(--text2);
+        }
+        .auth-switch a {
+            color: var(--accent);
+            cursor: pointer;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        .auth-error {
+            color: var(--red);
+            font-size: 12px;
+            margin-bottom: 8px;
+            display: none;
+            text-align: left;
+        }
+        .auth-error.show { display: block; }
 
-        /* Header */
+        /* ===== CONTEÚDO PRINCIPAL (oculto até login) ===== */
+        .app-container {
+            max-width: 520px;
+            margin: 0 auto;
+            padding: 16px 14px;
+        }
+        @media (min-width: 768px) { .app-container { max-width: 780px; padding: 24px 20px; } }
+        @media (min-width: 1024px) { .app-container { max-width: 900px; } }
+
+        /* (O restante do CSS do app continua idêntico ao último código) */
         .header {
             display: flex; align-items: center; justify-content: space-between;
             margin-bottom: 14px; background: var(--surface); border-radius: 24px;
@@ -116,7 +180,6 @@
         }
         .icon-btn:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 12px rgba(255,107,53,0.3); }
 
-        /* Status */
         .status-box { text-align: center; margin-bottom: 14px; }
         .status-badge {
             display: inline-flex; align-items: center; gap: 6px;
@@ -132,12 +195,10 @@
         .on .status-dot { background: var(--green); box-shadow: 0 0 8px var(--green); }
         .paused .status-dot { background: #ffaa00; box-shadow: 0 0 8px #ffaa00; }
 
-        /* Timer */
         .timer-section {
             background: var(--surface); border-radius: 24px;
             padding: 18px; margin-bottom: 14px; border: 1.5px solid var(--accent);
-            box-shadow: 0 8px 32px var(--timer-glow); text-align: center;
-            transition: background 0.3s, border-color 0.3s;
+            box-shadow: 0 8px 32px rgba(255,107,53,0.15); text-align: center;
         }
         .timer-label { font-size: 11px; font-weight: 700; color: var(--accent); letter-spacing: 2px; margin-bottom: 4px; }
         .timer-display {
@@ -158,19 +219,16 @@
         .btn.stop { background: linear-gradient(135deg, #ff3860, #d6304a); box-shadow: 0 6px 20px rgba(255,56,96,0.3); }
         .hidden { display: none !important; }
 
-        /* Progresso */
         .progress-card {
             background: var(--surface); border-radius: 18px;
             padding: 14px; margin-bottom: 14px; border: 1px solid var(--border);
             backdrop-filter: blur(10px); box-shadow: var(--shadow-card);
-            transition: background 0.3s, border-color 0.3s;
         }
         .progress-header { display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; color: var(--text2); margin-bottom: 8px; }
         .progress-header span:last-child { color: var(--accent); font-weight: 800; }
         .progress-bar { background: rgba(128,128,128,0.2); height: 8px; border-radius: 10px; overflow: hidden; }
         .progress-fill { background: linear-gradient(90deg, var(--accent), var(--gold)); height: 100%; width: 0%; border-radius: 10px; transition: width 0.5s; }
 
-        /* Dashboard */
         .dashboard { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 14px; }
         @media (min-width: 768px) { .dashboard { grid-template-columns: repeat(6,1fr); } }
         .card {
@@ -185,8 +243,9 @@
         .card.green .card-value { color: var(--green); }
         .card.blue .card-value { color: var(--blue); }
 
-        /* Carrossel */
         .section-title { font-size: 14px; font-weight: 700; margin: 14px 0 8px; display: flex; align-items: center; gap: 8px; color: var(--text); }
+
+        /* Carrossel (mantido) */
         .carousel-wrapper { position: relative; width: 100%; overflow: hidden; padding: 20px 0 10px; margin-bottom: 10px; perspective: 800px; }
         .carousel-track-container { overflow: visible; width: 100%; }
         .carousel-track {
@@ -195,7 +254,7 @@
         }
         @media (min-width: 600px) { .carousel-track { padding: 0 calc(50% - 90px); } }
         .carousel-card {
-            flex: 0 0 auto; width: 130px; margin: 0 8px; background: var(--carousel-side-bg);
+            flex: 0 0 auto; width: 130px; margin: 0 8px; background: #1e1e30;
             border: 1px solid var(--border); border-radius: 20px; padding: 16px 6px;
             text-align: center; cursor: pointer; transition: all 0.25s ease-out;
             transform: rotateY(25deg) scale(0.8) translateZ(-50px); opacity: 0.6;
@@ -205,11 +264,11 @@
         @media (min-width: 600px) { .carousel-card { width: 160px; margin: 0 12px; } }
         .carousel-card.active {
             transform: rotateY(0deg) scale(1.1) translateZ(0px); opacity: 1; filter: brightness(1);
-            z-index: 2; border-color: transparent; background: var(--carousel-active-bg);
+            z-index: 2; border-color: transparent; background: linear-gradient(135deg, var(--accent), var(--gold));
             box-shadow: 0 20px 40px rgba(255,107,53,0.5), 0 0 60px rgba(255,107,53,0.2); color: #fff;
         }
-        .carousel-card.done { border-color: rgba(62,252,90,0.6); background: var(--carousel-done-bg); box-shadow: 0 0 20px rgba(62,252,90,0.4); }
-        .carousel-card.active.done { background: var(--carousel-done-bg); box-shadow: 0 20px 50px rgba(62,252,90,0.6), 0 0 70px rgba(62,252,90,0.3); }
+        .carousel-card.done { border-color: rgba(62,252,90,0.6); background: linear-gradient(135deg, #39ff14, #00e676); box-shadow: 0 0 20px rgba(62,252,90,0.4); }
+        .carousel-card.active.done { background: linear-gradient(135deg, #39ff14, #00e676); box-shadow: 0 20px 50px rgba(62,252,90,0.6), 0 0 70px rgba(62,252,90,0.3); }
         .carousel-card .carousel-num { font-size: 13px; font-weight: 800; color: var(--text); margin-bottom: 2px; }
         .carousel-card .carousel-pred { font-size: 10px; color: var(--text2); display: block; }
         .carousel-card .carousel-real { font-size: 14px; color: var(--green); display: block; font-weight: 800; margin-top: 4px; text-shadow: 0 0 8px rgba(62,252,90,0.5); }
@@ -229,7 +288,6 @@
         .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text2); opacity: 0.4; transition: 0.3s; cursor: pointer; }
         .carousel-dot.active { opacity: 1; background: var(--accent); width: 24px; border-radius: 4px; }
 
-        /* Corrida rápida */
         .quick-btn {
             width: 100%; background: linear-gradient(135deg, var(--accent), #ff5500);
             border: none; border-radius: 16px; padding: 16px; font-weight: 700; font-size: 15px;
@@ -238,7 +296,6 @@
         }
         .quick-btn:active { transform: scale(0.97); }
 
-        /* Gráfico */
         .chart-section { background: var(--surface); border-radius: 18px; padding: 16px; margin-bottom: 14px; border: 1px solid var(--border); box-shadow: var(--shadow-card); }
         .chart-title { font-size: 14px; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; color: var(--text); }
         .chart-container { display: flex; align-items: flex-end; gap: 6px; height: 180px; padding: 0 4px; overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; scrollbar-color: rgba(128,128,128,0.3) transparent; }
@@ -260,17 +317,15 @@
         }
         .chart-bar-group:hover .chart-tooltip { opacity: 1; }
 
-        /* Layout lado a lado */
         .side-by-side { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 14px; }
         .side-by-side .half { flex: 1 1 280px; min-width: 0; }
         .expenses, .report {
             background: var(--surface); border-radius: 18px; padding: 14px;
             border: 1px solid var(--border); box-shadow: var(--shadow-card);
-            transition: background 0.3s, border-color 0.3s;
         }
         .expense-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--text); }
         .secondary-btn {
-            width: 100%; background: var(--btn-secondary-bg); border: 1px solid var(--btn-secondary-border);
+            width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
             border-radius: 12px; padding: 12px; color: var(--text); font-weight: 600; font-size: 13px;
             cursor: pointer; margin-top: 10px; transition: 0.2s; text-align: center;
         }
@@ -292,7 +347,6 @@
         .month-btn:hover { background: rgba(180,74,238,0.15); }
         .disabled-area { opacity: 0.5; pointer-events: none; filter: grayscale(0.5); }
 
-        /* Rodapé */
         .app-footer {
             text-align: center; padding: 14px 20px; margin-top: 20px;
             border-top: 1px solid var(--border); color: var(--text2); font-size: 11px;
@@ -307,9 +361,9 @@
         }
         @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
         .modal {
-            background: var(--modal-bg); border-radius: 24px;
+            background: rgba(18,18,31,0.95); border-radius: 24px;
             padding: 22px; width: 92%; max-width: 380px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.4); border: 1px solid var(--border);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.08);
             backdrop-filter: blur(20px); animation: slideUp 0.3s ease-out;
             max-height: 85vh; overflow-y: auto; color: var(--text);
         }
@@ -317,8 +371,8 @@
         .modal h3 { margin-bottom: 12px; font-size: 18px; font-weight: 700; }
         .modal label { display: block; font-size: 11px; color: var(--text2); margin-bottom: 4px; font-weight: 600; }
         .modal input, .modal select, .modal textarea {
-            width: 100%; background: var(--surface2); border: 1px solid var(--border);
-            border-radius: 12px; padding: 10px 12px; color: var(--text); font-size: 14px;
+            width: 100%; background: #1a1a2e; border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px; padding: 10px 12px; color: #fff; font-size: 14px;
             outline: none; transition: 0.2s; font-family: 'Inter', sans-serif;
         }
         .modal input:focus, .modal select:focus, .modal textarea:focus {
@@ -326,8 +380,8 @@
         }
         .option-group { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
         .option-item {
-            flex: 1 0 auto; min-width: 70px; background: var(--option-bg);
-            border: 1px solid var(--option-border); border-radius: 12px;
+            flex: 1 0 auto; min-width: 70px; background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08); border-radius: 12px;
             padding: 10px 6px; text-align: center; font-size: 13px; font-weight: 600;
             color: var(--text); cursor: pointer; transition: 0.2s; white-space: nowrap;
             display: flex; align-items: center; justify-content: center; gap: 6px;
@@ -337,19 +391,14 @@
             background: var(--accent); color: #fff; border-color: var(--accent);
             box-shadow: 0 0 14px rgba(255,107,53,0.4);
         }
-        /* Bolinhas coloridas */
         .dot {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            flex-shrink: 0;
-            box-shadow: 0 0 4px rgba(0,0,0,0.5);
+            display: inline-block; width: 10px; height: 10px; border-radius: 50%;
+            flex-shrink: 0; box-shadow: 0 0 4px rgba(0,0,0,0.5);
         }
-        .dot.uber { background: var(--dot-uber); }
-        .dot.novennove { background: var(--dot-99); }
-        .dot.indriver { background: var(--dot-indriver); }
-        .dot.particular { background: var(--dot-particular); }
+        .dot.uber { background: #000; }
+        .dot.novennove { background: var(--gold); }
+        .dot.indriver { background: var(--green); }
+        .dot.particular { background: #aaa; }
 
         .modal .btn-row { display: flex; gap: 8px; justify-content: flex-end; margin-top: 16px; }
         .btn-sm { padding: 8px 16px; font-size: 12px; border-radius: 10px; }
@@ -360,7 +409,24 @@
     </style>
 </head>
 <body class="dark">
-    <div class="container">
+    <!-- Tela de Autenticação -->
+    <div id="authScreen" class="auth-screen">
+        <div class="auth-card" id="authCard">
+            <div class="auth-logo">🚗</div>
+            <div class="auth-title">Meta Driver PRO</div>
+            <div class="auth-subtitle" id="authSubtitle">Faça login para continuar</div>
+            <div class="auth-error" id="authError">Mensagem de erro</div>
+            <input type="text" id="authUser" class="auth-input" placeholder="Usuário">
+            <input type="password" id="authPass" class="auth-input" placeholder="Senha">
+            <button class="auth-btn" id="authBtn">Entrar</button>
+            <div class="auth-switch">
+                <span id="authSwitchText">Não tem conta? <a id="authSwitchLink">Crie uma</a></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conteúdo Principal (oculto inicialmente) -->
+    <div id="appContainer" class="app-container hidden">
         <header class="header">
             <div class="brand">
                 <div class="logo-icon">🚗</div>
@@ -369,6 +435,7 @@
             <div class="header-actions">
                 <button class="icon-btn" id="btnTheme" title="Alternar tema">🌙</button>
                 <button class="icon-btn" id="btnConfig" title="Configurar meta">⚙️</button>
+                <button class="icon-btn" id="btnLogout" title="Sair">🔓</button>
             </div>
         </header>
 
@@ -398,13 +465,11 @@
             <div class="card"><div class="card-title">📈 Projeção</div><div class="card-value" id="cardProjecao">R$ 0</div></div>
         </section>
 
-        <!-- Gráfico -->
         <div class="chart-section">
             <div class="chart-title">📊 Progressão das Corridas</div>
             <div class="chart-container" id="chartContainer"></div>
         </div>
 
-        <!-- Carrossel -->
         <div class="section-title">📋 Corridas Previstas</div>
         <div class="carousel-wrapper" id="carouselWrapper">
             <button class="carousel-arrow left" id="carouselLeft">◀</button>
@@ -443,7 +508,7 @@
         </footer>
     </div>
 
-    <!-- Modal Registro de Corrida com bolinhas -->
+    <!-- Modais (mantidos) -->
     <div class="modal-overlay hidden" id="modalCorrida">
         <div class="modal">
             <h3>🏁 Corrida <span id="modalCorridaNum"></span></h3>
@@ -468,7 +533,6 @@
         </div>
     </div>
 
-    <!-- Modal Gasto (mantido) -->
     <div class="modal-overlay hidden" id="modalGasto">
         <div class="modal">
             <h3>➕ Novo Gasto</h3>
@@ -490,7 +554,6 @@
         </div>
     </div>
 
-    <!-- Modal Meta (mantido) -->
     <div class="modal-overlay hidden" id="modalMeta">
         <div class="modal">
             <h3>⚙️ Meta do Dia</h3>
@@ -503,7 +566,6 @@
         </div>
     </div>
 
-    <!-- Modal Resumo Final -->
     <div class="modal-overlay hidden" id="modalResumo">
         <div class="modal" style="max-width:420px;">
             <h3>🏁 Jornada Encerrada</h3>
@@ -512,7 +574,6 @@
         </div>
     </div>
 
-    <!-- Modal Gestão do Mês -->
     <div class="modal-overlay hidden" id="modalGestaoMes">
         <div class="modal" style="max-width:440px;">
             <h3>📅 Gestão do Mês</h3>
@@ -523,538 +584,1913 @@
 
     <script>
         (function() {
-            const state = {
-                metaDiaria: 500,
-                corridasPrevistas: 20,
-                corridas: [],
-                gastos: [],
-                jornadaInicio: null,
-                jornadaPausas: [],
-                jornadaEncerrada: false,
-                timerInterval: null,
-                dataJornada: new Date().toISOString().split('T')[0],
-                carouselIndex: 0,
-            };
+            // ============ AUTENTICAÇÃO ============
+            let currentUser = localStorage.getItem('currentUser');
+            let authMode = 'login'; // 'login' ou 'signup'
 
-            const $ = id => document.getElementById(id);
-            const formatMoney = v => 'R$ ' + (parseFloat(v)||0).toFixed(2).replace('.',',');
-            const formatTime = s => {
-                const h = Math.floor(s/3600), m = Math.floor((s%3600)/60), sec = Math.floor(s%60);
-                return `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${sec.toString().padStart(2,'0')}`;
-            };
-            const calcTempo = () => {
-                if(!state.jornadaInicio) return 0;
-                let fim = state.jornadaEncerrada ? (state.jornadaFim||Date.now()) : Date.now();
-                let pausas = state.jornadaPausas.reduce((a,p) => a + ((p.fim||Date.now())-p.inicio), 0);
-                return Math.max(0, Math.floor((fim - state.jornadaInicio - pausas)/1000));
-            };
-            const podeRegistrar = () => state.jornadaInicio && !state.jornadaEncerrada;
+            const authScreen = document.getElementById('authScreen');
+            const appContainer = document.getElementById('appContainer');
+            const authCard = document.getElementById('authCard');
+            const authSubtitle = document.getElementById('authSubtitle');
+            const authError = document.getElementById('authError');
+            const authUser = document.getElementById('authUser');
+            const authPass = document.getElementById('authPass');
+            const authBtn = document.getElementById('authBtn');
+            const authSwitchText = document.getElementById('authSwitchText');
+            const authSwitchLink = document.getElementById('authSwitchLink');
 
-            function applyTheme(theme) {
-                document.body.classList.toggle('light', theme === 'light');
-                document.body.classList.toggle('dark', theme === 'dark');
-                $('btnTheme').textContent = theme === 'light' ? '☀️' : '🌙';
-                localStorage.setItem('theme', theme);
+            function showError(msg) {
+                authError.textContent = msg;
+                authError.classList.add('show');
             }
-            $('btnTheme').addEventListener('click', () => {
-                const current = document.body.classList.contains('light') ? 'dark' : 'light';
-                applyTheme(current);
-            });
-            applyTheme(localStorage.getItem('theme') || 'dark');
-
-            function gerarProgressao(meta, n) {
-                if(n<=1) return [meta];
-                let a1 = Math.round(meta/(n*2.8)), an = Math.round((2*meta/n)-a1);
-                if(an<=a1) an = a1+n;
-                let r = (an-a1)/(n-1);
-                let arr = Array.from({length:n}, (_,i) => Math.round(a1+r*i));
-                let diff = meta - arr.reduce((a,b)=>a+b,0);
-                arr[arr.length-1] += diff;
-                return arr;
+            function hideError() {
+                authError.classList.remove('show');
             }
 
-            function aplicarMeta(meta, n) {
-                state.metaDiaria = meta; state.corridasPrevistas = n;
-                const prog = gerarProgressao(meta,n);
-                state.corridas = prog.map((p,i) => i < state.corridas.length ? {...state.corridas[i], previsto:p} : {previsto:p, real:null, pagamento:null, obs:'', hora:null}).slice(0,n);
-                state.carouselIndex = 0;
-                salvar(); renderizarTudo();
-            }
-
-            /* ============ CARRROSSEL 3D RÁPIDO ============ */
-            let carouselDragStart = 0;
-            let carouselDragging = false;
-            let carouselOffsetX = 0;
-
-            function renderizarCarrossel() {
-                const track = $('carouselTrack');
-                const dotsContainer = $('carouselDots');
-                track.innerHTML = '';
-                dotsContainer.innerHTML = '';
-                if (!state.corridas.length) return;
-
-                state.corridas.forEach((c, i) => {
-                    const card = document.createElement('div');
-                    card.className = 'carousel-card';
-                    if (c.real !== null) card.classList.add('done');
-                    card.innerHTML = `
-                        <div class="carousel-num">#${i+1}</div>
-                        <span class="carousel-pred">prev. ${formatMoney(c.previsto)}</span>
-                        ${c.real !== null ? `<span class="carousel-real">real ${formatMoney(c.real)}</span>` : ''}
-                    `;
-                    card.addEventListener('click', () => {
-                        if (i === state.carouselIndex) abrirModalCorrida(i);
-                        else { state.carouselIndex = i; atualizarCarrossel(); }
+            function updateAuthUI() {
+                if (authMode === 'login') {
+                    authSubtitle.textContent = 'Faça login para continuar';
+                    authBtn.textContent = 'Entrar';
+                    authSwitchText.innerHTML = 'Não tem conta? <a id="authSwitchLink">Crie uma</a>';
+                    document.getElementById('authSwitchLink').addEventListener('click', () => {
+                        authMode = 'signup';
+                        hideError();
+                        updateAuthUI();
                     });
-                    track.appendChild(card);
-
-                    const dot = document.createElement('div');
-                    dot.className = 'carousel-dot';
-                    dot.addEventListener('click', () => { state.carouselIndex = i; atualizarCarrossel(); });
-                    dotsContainer.appendChild(dot);
-                });
-
-                $('carouselLeft').onclick = () => { if (state.carouselIndex > 0) { state.carouselIndex--; atualizarCarrossel(); } };
-                $('carouselRight').onclick = () => { if (state.carouselIndex < state.corridas.length - 1) { state.carouselIndex++; atualizarCarrossel(); } };
-
-                track.addEventListener('mousedown', (e) => {
-                    carouselDragging = true; carouselDragStart = e.clientX; carouselOffsetX = 0;
-                    track.style.transition = 'none';
-                });
-                window.addEventListener('mousemove', (e) => {
-                    if (!carouselDragging) return;
-                    carouselOffsetX = e.clientX - carouselDragStart;
-                    const cardWidth = window.innerWidth >= 600 ? 184 : 146;
-                    const shift = -state.carouselIndex * cardWidth + carouselOffsetX;
-                    track.style.transform = `translateX(${shift}px)`;
-                });
-                window.addEventListener('mouseup', () => {
-                    if (!carouselDragging) return;
-                    carouselDragging = false;
-                    track.style.transition = 'transform 0.25s ease-out';
-                    if (carouselOffsetX < -20 && state.carouselIndex < state.corridas.length - 1) state.carouselIndex++;
-                    else if (carouselOffsetX > 20 && state.carouselIndex > 0) state.carouselIndex--;
-                    atualizarCarrossel();
-                });
-
-                track.addEventListener('touchstart', (e) => {
-                    carouselDragging = true; carouselDragStart = e.touches[0].clientX; carouselOffsetX = 0;
-                    track.style.transition = 'none';
-                }, {passive: true});
-                track.addEventListener('touchmove', (e) => {
-                    if (!carouselDragging) return;
-                    carouselOffsetX = e.touches[0].clientX - carouselDragStart;
-                    const cardWidth = window.innerWidth >= 600 ? 184 : 146;
-                    const shift = -state.carouselIndex * cardWidth + carouselOffsetX;
-                    track.style.transform = `translateX(${shift}px)`;
-                }, {passive: true});
-                track.addEventListener('touchend', () => {
-                    if (!carouselDragging) return;
-                    carouselDragging = false;
-                    track.style.transition = 'transform 0.25s ease-out';
-                    if (carouselOffsetX < -20 && state.carouselIndex < state.corridas.length - 1) state.carouselIndex++;
-                    else if (carouselOffsetX > 20 && state.carouselIndex > 0) state.carouselIndex--;
-                    atualizarCarrossel();
-                });
-
-                atualizarCarrossel();
+                } else {
+                    authSubtitle.textContent = 'Crie sua conta gratuita';
+                    authBtn.textContent = 'Criar conta';
+                    authSwitchText.innerHTML = 'Já tem conta? <a id="authSwitchLink">Faça login</a>';
+                    document.getElementById('authSwitchLink').addEventListener('click', () => {
+                        authMode = 'login';
+                        hideError();
+                        updateAuthUI();
+                    });
+                }
             }
 
-            function atualizarCarrossel() {
-                const track = $('carouselTrack');
-                const cardWidth = window.innerWidth >= 600 ? 184 : 146;
-                const shift = -state.carouselIndex * cardWidth;
-                track.style.transform = `translateX(${shift}px)`;
-                const cards = track.querySelectorAll('.carousel-card');
-                cards.forEach((card, i) => {
-                    card.classList.remove('active', 'left', 'right');
-                    if (i === state.carouselIndex) card.classList.add('active');
-                    else if (i === state.carouselIndex - 1) card.classList.add('left');
-                    else if (i === state.carouselIndex + 1) card.classList.add('right');
-                });
-                const dots = $('carouselDots').querySelectorAll('.carousel-dot');
-                dots.forEach((dot, i) => dot.classList.toggle('active', i === state.carouselIndex));
-                $('carouselLeft').style.opacity = state.carouselIndex === 0 ? '0.3' : '1';
-                $('carouselRight').style.opacity = state.carouselIndex >= state.corridas.length - 1 ? '0.3' : '1';
-            }
-
-            function renderizarGrafico() {
-                const container = $('chartContainer');
-                container.innerHTML = '';
-                if (!state.corridas.length) {
-                    container.innerHTML = '<p style="color:var(--text2); font-size:12px; text-align:center; width:100%;">Registre corridas para ver o gráfico.</p>';
+            function authenticate() {
+                const user = authUser.value.trim();
+                const pass = authPass.value.trim();
+                if (!user || !pass) {
+                    showError('Preencha todos os campos.');
                     return;
                 }
-                const valores = state.corridas.map(c => ({ previsto: c.previsto, real: c.real }));
-                const maxVal = Math.max(...valores.map(v => v.previsto), ...valores.filter(v => v.real !== null).map(v => v.real), 1);
-                valores.forEach((v, i) => {
-                    const group = document.createElement('div'); group.className = 'chart-bar-group';
-                    const wrapper = document.createElement('div'); wrapper.className = 'chart-bar-wrapper';
-                    const prevBar = document.createElement('div'); prevBar.className = 'chart-bar predicted';
-                    prevBar.style.height = (v.previsto / maxVal) * 130 + 'px';
-                    wrapper.appendChild(prevBar);
-                    if (v.real !== null) {
-                        const realBar = document.createElement('div'); realBar.className = 'chart-bar real';
-                        if (v.real < v.previsto) realBar.classList.add('negative');
-                        realBar.style.height = (v.real / maxVal) * 130 + 'px';
-                        wrapper.appendChild(realBar);
-                        const tooltip = document.createElement('div'); tooltip.className = 'chart-tooltip';
-                        const dif = v.real - v.previsto;
-                        tooltip.innerHTML = `#${i+1} | Prev: ${formatMoney(v.previsto)} | Real: ${formatMoney(v.real)}<br>Dif: ${dif >= 0 ? '+' : ''}${formatMoney(dif)}`;
-                        wrapper.appendChild(tooltip);
-                    } else {
-                        const tooltip = document.createElement('div'); tooltip.className = 'chart-tooltip';
-                        tooltip.textContent = `#${i+1} | Prev: ${formatMoney(v.previsto)} | Pendente`;
-                        wrapper.appendChild(tooltip);
+                if (authMode === 'login') {
+                    const storedPass = localStorage.getItem(`user_${user}_pass`);
+                    if (storedPass === null) {
+                        showError('Usuário não encontrado.');
+                        return;
                     }
-                    group.appendChild(wrapper);
-                    const label = document.createElement('div'); label.className = 'chart-bar-label';
-                    label.textContent = `#${i+1}`;
-                    group.appendChild(label);
-                    container.appendChild(group);
-                });
+                    if (storedPass !== pass) {
+                        showError('Senha incorreta.');
+                        return;
+                    }
+                    // Login bem-sucedido
+                    currentUser = user;
+                    localStorage.setItem('currentUser', currentUser);
+                    entrarNoApp();
+                } else {
+                    // Cadastro
+                    const existing = localStorage.getItem(`user_${user}_pass`);
+                    if (existing !== null) {
+                        showError('Usuário já existe.');
+                        return;
+                    }
+                    localStorage.setItem(`user_${user}_pass`, pass);
+                    currentUser = user;
+                    localStorage.setItem('currentUser', currentUser);
+                    entrarNoApp();
+                }
             }
 
-            let corridaEditando = null;
-            function abrirModalCorrida(index) {
-                if(!podeRegistrar()) return alert('Inicie a jornada primeiro!');
-                corridaEditando = index;
-                const c = state.corridas[index];
-                $('modalCorridaNum').textContent = index+1;
-                $('inputPrevisto').value = formatMoney(c.previsto);
-                $('inputValorReal').value = '';
-                $('inputObs').value = c.obs || '';
-                const plataforma = c.pagamento || 'Uber';
-                document.querySelectorAll('#paymentOptions .option-item').forEach(opt => {
-                    opt.classList.toggle('active', opt.dataset.value === plataforma);
-                });
-                $('modalCorrida').classList.remove('hidden');
+            function entrarNoApp() {
+                authScreen.classList.add('hidden');
+                appContainer.classList.remove('hidden');
+                // Inicializa o app com os dados do usuário
+                initApp(currentUser);
             }
 
-            function salvarCorrida() {
-                const valorDigitado = $('inputValorReal').value.trim();
-                let real = valorDigitado === '' ? state.corridas[corridaEditando].previsto : (parseFloat(valorDigitado) || 0);
-                const pagamento = document.querySelector('#paymentOptions .option-item.active')?.dataset.value || 'Uber';
-                const obs = $('inputObs').value;
-                const c = state.corridas[corridaEditando];
-                c.real = real; c.pagamento = pagamento; c.obs = obs;
-                c.hora = new Date().toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
-                salvar(); $('modalCorrida').classList.add('hidden'); renderizarTudo();
+            function logout() {
+                localStorage.removeItem('currentUser');
+                currentUser = null;
+                appContainer.classList.add('hidden');
+                authScreen.classList.remove('hidden');
+                authUser.value = '';
+                authPass.value = '';
+                hideError();
+                if (state.timerInterval) clearInterval(state.timerInterval);
             }
 
-            function removerCorrida() {
-                const c = state.corridas[corridaEditando];
-                c.real = null; c.pagamento = null; c.obs = ''; c.hora = null;
-                salvar(); $('modalCorrida').classList.add('hidden'); renderizarTudo();
-            }
-
-            function quickRun() {
-                if(!podeRegistrar()) return alert('Inicie a jornada!');
-                const idx = state.corridas.findIndex(c => c.real === null);
-                if(idx === -1) { alert('Todas as corridas previstas já foram registradas!'); return; }
-                state.carouselIndex = idx;
-                corridaEditando = idx;
-                const c = state.corridas[idx];
-                $('modalCorridaNum').textContent = idx+1;
-                $('inputPrevisto').value = formatMoney(c.previsto);
-                $('inputValorReal').value = '';
-                $('inputObs').value = '';
-                document.querySelectorAll('#paymentOptions .option-item').forEach(opt => opt.classList.toggle('active', opt.dataset.value === 'Uber'));
-                $('modalCorrida').classList.remove('hidden');
-                atualizarCarrossel();
-            }
-
-            document.querySelectorAll('#paymentOptions .option-item').forEach(opt => {
-                opt.addEventListener('click', () => {
-                    document.querySelectorAll('#paymentOptions .option-item').forEach(o => o.classList.remove('active'));
-                    opt.classList.add('active');
-                });
+            // Event listeners da autenticação
+            authBtn.addEventListener('click', authenticate);
+            authPass.addEventListener('keydown', (e) => { if (e.key === 'Enter') authenticate(); });
+            authSwitchLink.addEventListener('click', () => {
+                authMode = authMode === 'login' ? 'signup' : 'login';
+                hideError();
+                updateAuthUI();
             });
+            updateAuthUI();
 
-            document.querySelectorAll('#gastoCategoryOptions .option-item').forEach(opt => {
-                opt.addEventListener('click', () => {
-                    document.querySelectorAll('#gastoCategoryOptions .option-item').forEach(o => o.classList.remove('active'));
-                    opt.classList.add('active');
-                });
-            });
-
-            function abrirModalGasto() {
-                if(!podeRegistrar()) return alert('Inicie a jornada primeiro!');
-                $('inputGastoDesc').value = '';
-                $('inputGastoValor').value = '';
-                document.querySelectorAll('#gastoCategoryOptions .option-item').forEach(o => o.classList.remove('active'));
-                document.querySelector('#gastoCategoryOptions .option-item[data-cat="Combustível"]').classList.add('active');
-                $('modalGasto').classList.remove('hidden');
+            // Se já estiver logado, entrar direto
+            if (currentUser) {
+                entrarNoApp();
+                return; // para não executar o resto duas vezes
             }
 
-            function salvarGasto() {
-                const desc = $('inputGastoDesc').value.trim();
-                const valor = parseFloat($('inputGastoValor').value) || 0;
-                const cat = document.querySelector('#gastoCategoryOptions .option-item.active')?.dataset.cat || 'Outro';
-                if (valor <= 0) return alert('Informe um valor válido.');
-                const descFinal = desc || cat;
-                state.gastos.push({ desc: descFinal, valor, cat });
-                salvar(); $('modalGasto').classList.add('hidden'); renderizarTudo();
-            }
+            // ============ APP PRINCIPAL ============
+            function initApp(username) {
+                const stateKey = `metaDriverPro_${username}`;
+                const historyKey = `historicoMensal_${username}`;
 
-            function atualizarDashboard() {
-                const arr = state.corridas.reduce((s,c) => s + (c.real||0), 0);
-                const gastos = state.gastos.reduce((s,g) => s + g.valor, 0);
-                const feitas = state.corridas.filter(c => c.real !== null).length;
-                const tempo = calcTempo();
-                const ganhoH = tempo>0 ? arr/(tempo/3600) : 0;
-                const proj = tempo>60 ? (arr/(tempo/3600))*24 : 0;
-                const falta = Math.max(0, state.metaDiaria - arr);
-                const pct = state.metaDiaria>0 ? Math.min(100, Math.round((arr/state.metaDiaria)*100)) : 0;
-                $('cardArrecadado').textContent = formatMoney(arr);
-                $('cardMeta').textContent = formatMoney(state.metaDiaria);
-                $('cardCorridas').textContent = feitas;
-                $('cardHora').textContent = formatMoney(ganhoH);
-                $('cardFalta').textContent = formatMoney(falta);
-                $('cardProjecao').textContent = formatMoney(proj);
-                $('progressPercent').textContent = pct+'%';
-                $('progressFill').style.width = pct+'%';
-            }
-
-            function atualizarGastos() {
-                const list = $('expensesList');
-                if(!state.gastos.length) { list.innerHTML = 'Nenhum gasto'; return; }
-                list.innerHTML = state.gastos.map(g => `
-                    <div class="expense-item">
-                        <span>${g.desc} <small style="color:var(--text2)">(${g.cat || 'Outro'})</small></span>
-                        <span>- ${formatMoney(g.valor)}</span>
-                    </div>
-                `).join('');
-                const total = state.gastos.reduce((s,g)=>s+g.valor,0);
-                list.innerHTML += `<div class="expense-item" style="font-weight:700;border-top:1px solid var(--border);margin-top:6px;padding-top:8px;"><span>Total</span><span>- ${formatMoney(total)}</span></div>`;
-            }
-
-            function atualizarRelatorio() {
-                const arr = state.corridas.reduce((s,c)=>s+(c.real||0),0);
-                const gastos = state.gastos.reduce((s,g)=>s+g.valor,0);
-                const feitas = state.corridas.filter(c=>c.real!==null).length;
-                const tempo = calcTempo();
-                const inicio = state.jornadaInicio ? new Date(state.jornadaInicio).toLocaleTimeString('pt-BR') : '--:--';
-                const fim = state.jornadaEncerrada && state.jornadaFim ? new Date(state.jornadaFim).toLocaleTimeString('pt-BR') : '--:--';
-                $('reportBox').innerHTML = `
-                    <strong>📅 ${state.dataJornada.split('-').reverse().join('/')}</strong><br>
-                    ⏱ ${inicio} → ${fim} | ⏳ ${formatTime(tempo)}<br>
-                    🚕 ${feitas} corridas | 💰 ${formatMoney(arr)} arrecadado<br>
-                    🧾 ${formatMoney(gastos)} gastos | 💵 ${formatMoney(arr-gastos)} líquido
-                `;
-            }
-
-            function atualizarStatus() {
-                const b = $('statusBadge');
-                if(!state.jornadaInicio) b.innerHTML = '<span class="status-dot"></span> PARADO', b.className='status-badge off';
-                else if(state.jornadaEncerrada) b.innerHTML = '<span class="status-dot"></span> ENCERRADO', b.className='status-badge off';
-                else {
-                    const paused = state.jornadaPausas.length && state.jornadaPausas[state.jornadaPausas.length-1].fim===null;
-                    if(paused) b.innerHTML = '<span class="status-dot"></span> PAUSADO', b.className='status-badge paused';
-                    else b.innerHTML = '<span class="status-dot"></span> EM ANDAMENTO', b.className='status-badge on';
-                }
-            }
-
-            function atualizarBotoes() {
-                const s=$('btnStart'), p=$('btnPause'), st=$('btnStop');
-                if(!state.jornadaInicio) { s.classList.remove('hidden'); p.classList.add('hidden'); st.classList.add('hidden'); }
-                else if(state.jornadaEncerrada) { s.classList.add('hidden'); p.classList.add('hidden'); st.classList.add('hidden'); }
-                else {
-                    s.classList.add('hidden');
-                    const paused = state.jornadaPausas.length && state.jornadaPausas[state.jornadaPausas.length-1].fim===null;
-                    p.textContent = paused ? '▶ Retomar' : '⏸ Pausar';
-                    p.classList.remove('hidden'); st.classList.remove('hidden');
-                }
-            }
-
-            function atualizarAreas() {
-                const liberado = podeRegistrar();
-                ['carouselWrapper','carouselDots','expensesSection','btnQuickRun'].forEach(id => $(id)?.classList.toggle('disabled-area', !liberado));
-            }
-
-            function renderizarTudo() {
-                renderizarCarrossel();
-                renderizarGrafico();
-                atualizarDashboard();
-                atualizarGastos();
-                atualizarRelatorio();
-                atualizarBotoes();
-                atualizarAreas();
-                atualizarStatus();
-            }
-
-            function atualizarTimer() {
-                const segundos = calcTempo();
-                $('timerDisplay').textContent = formatTime(segundos);
-                atualizarDashboard();
-                atualizarRelatorio();
-            }
-
-            function iniciar() {
-                state.jornadaInicio = Date.now(); state.jornadaPausas = []; state.jornadaEncerrada = false; state.jornadaFim = null;
-                salvar(); clearInterval(state.timerInterval);
-                state.timerInterval = setInterval(atualizarTimer, 1000);
-                atualizarTimer(); renderizarTudo();
-            }
-
-            function pausar() {
-                if(!state.jornadaInicio || state.jornadaEncerrada) return;
-                const p = state.jornadaPausas;
-                p.length && p[p.length-1].fim===null ? p[p.length-1].fim=Date.now() : p.push({inicio:Date.now(), fim:null});
-                salvar(); renderizarTudo();
-            }
-
-            function encerrar() {
-                if(!state.jornadaInicio || state.jornadaEncerrada) return;
-                const p = state.jornadaPausas;
-                if(p.length && p[p.length-1].fim===null) p[p.length-1].fim=Date.now();
-                state.jornadaEncerrada = true; state.jornadaFim = Date.now();
-                clearInterval(state.timerInterval);
-                salvarResumoDiario();
-                salvar(); atualizarTimer(); renderizarTudo();
-                mostrarResumo();
-            }
-
-            function mostrarResumo() {
-                const feitas = state.corridas.filter(c=>c.real!==null);
-                const arr = feitas.reduce((s,c)=>s+c.real,0);
-                const gastos = state.gastos.reduce((s,g)=>s+g.valor,0);
-                let html = `<p>⏱ ${formatTime(calcTempo())} | 🚕 ${feitas.length} corridas</p><p>💰 ${formatMoney(arr)} arrecadado | 💵 ${formatMoney(arr-gastos)} líquido</p>`;
-                if(feitas.length) {
-                    html += `<table style="width:100%;font-size:11px;margin-top:8px;border-collapse:collapse;"><tr><th>#</th><th>Prev.</th><th>Real</th><th>Dif.</th></tr>`;
-                    feitas.forEach((c,i) => {
-                        const d = c.real - c.previsto;
-                        html += `<tr><td>${i+1}</td><td>${formatMoney(c.previsto)}</td><td>${formatMoney(c.real)}</td><td style="color:${d>=0?'var(--green)':'var(--red)'}">${formatMoney(d)}</td></tr>`;
-                    });
-                    html += `</table>`;
-                }
-                $('resumoContent').innerHTML = html;
-                $('modalResumo').classList.remove('hidden');
-            }
-
-            function salvarResumoDiario() {
-                const arr = state.corridas.reduce((s,c) => s + (c.real||0), 0);
-                const gastos = state.gastos.reduce((s,g) => s + g.valor, 0);
-                const feitas = state.corridas.filter(c => c.real !== null).length;
-                const tempo = calcTempo();
-                const registro = {
-                    data: state.dataJornada,
-                    meta: state.metaDiaria,
-                    arrecadado: arr,
-                    corridas: feitas,
-                    tempo: tempo,
-                    gastos: gastos,
-                    lucro: arr - gastos,
-                    pctMeta: state.metaDiaria > 0 ? Math.round((arr/state.metaDiaria)*100) : 0
+                const state = {
+                    metaDiaria: 500,
+                    corridasPrevistas: 20,
+                    corridas: [],
+                    gastos: [],
+                    jornadaInicio: null,
+                    jornadaPausas: [],
+                    jornadaEncerrada: false,
+                    timerInterval: null,
+                    dataJornada: new Date().toISOString().split('T')[0],
+                    carouselIndex: 0,
                 };
-                let historico = JSON.parse(localStorage.getItem('historicoMensal') || '[]');
-                historico = historico.filter(r => r.data !== state.dataJornada);
-                historico.push(registro);
-                if (historico.length > 60) historico = historico.slice(-60);
-                localStorage.setItem('historicoMensal', JSON.stringify(historico));
-            }
 
-            function resetar() {
-                if(!confirm('Iniciar nova jornada? Os dados atuais serão perdidos (mas salvos no histórico se houver algo).')) return;
-                if (state.jornadaInicio && !state.jornadaEncerrada) {
+                const $ = id => document.getElementById(id);
+                const formatMoney = v => 'R$ ' + (parseFloat(v)||0).toFixed(2).replace('.',',');
+                const formatTime = s => {
+                    const h = Math.floor(s/3600), m = Math.floor((s%3600)/60), sec = Math.floor(s%60);
+                    return `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${sec.toString().padStart(2,'0')}`;
+                };
+                const calcTempo = () => {
+                    if(!state.jornadaInicio) return 0;
+                    let fim = state.jornadaEncerrada ? (state.jornadaFim||Date.now()) : Date.now();
+                    let pausas = state.jornadaPausas.reduce((a,p) => a + ((p.fim||Date.now())-p.inicio), 0);
+                    return Math.max(0, Math.floor((fim - state.jornadaInicio - pausas)/1000));
+                };
+                const podeRegistrar = () => state.jornadaInicio && !state.jornadaEncerrada;
+
+                // Tema
+                function applyTheme(theme) {
+                    document.body.classList.toggle('light', theme === 'light');
+                    document.body.classList.toggle('dark', theme === 'dark');
+                    $('btnTheme').textContent = theme === 'light' ? '☀️' : '🌙';
+                    localStorage.setItem('theme', theme);
+                }
+                $('btnTheme').addEventListener('click', () => {
+                    const current = document.body.classList.contains('light') ? 'dark' : 'light';
+                    applyTheme(current);
+                });
+                applyTheme(localStorage.getItem('theme') || 'dark');
+
+                function gerarProgressao(meta, n) {
+                    if(n<=1) return [meta];
+                    let a1 = Math.round(meta/(n*2.8)), an = Math.round((2*meta/n)-a1);
+                    if(an<=a1) an = a1+n;
+                    let r = (an-a1)/(n-1);
+                    let arr = Array.from({length:n}, (_,i) => Math.round(a1+r*i));
+                    let diff = meta - arr.reduce((a,b)=>a+b,0);
+                    arr[arr.length-1] += diff;
+                    return arr;
+                }
+
+                function aplicarMeta(meta, n) {
+                    state.metaDiaria = meta; state.corridasPrevistas = n;
+                    const prog = gerarProgressao(meta,n);
+                    state.corridas = prog.map((p,i) => i < state.corridas.length ? {...state.corridas[i], previsto:p} : {previsto:p, real:null, pagamento:null, obs:'', hora:null}).slice(0,n);
+                    state.carouselIndex = 0;
+                    salvar(); renderizarTudo();
+                }
+
+                /* ============ CARRROSSEL 3D RÁPIDO ============ */
+                let carouselDragStart = 0;
+                let carouselDragging = false;
+                let carouselOffsetX = 0;
+
+                function renderizarCarrossel() {
+                    const track = $('carouselTrack');
+                    const dotsContainer = $('carouselDots');
+                    track.innerHTML = '';
+                    dotsContainer.innerHTML = '';
+                    if (!state.corridas.length) return;
+
+                    state.corridas.forEach((c, i) => {
+                        const card = document.createElement('div');
+                        card.className = 'carousel-card';
+                        if (c.real !== null) card.classList.add('done');
+                        card.innerHTML = `
+                            <div class="carousel-num">#${i+1}</div>
+                            <span class="carousel-pred">prev. ${formatMoney(c.previsto)}</span>
+                            ${c.real !== null ? `<span class="carousel-real">real ${formatMoney(c.real)}</span>` : ''}
+                        `;
+                        card.addEventListener('click', () => {
+                            if (i === state.carouselIndex) abrirModalCorrida(i);
+                            else { state.carouselIndex = i; atualizarCarrossel(); }
+                        });
+                        track.appendChild(card);
+
+                        const dot = document.createElement('div');
+                        dot.className = 'carousel-dot';
+                        dot.addEventListener('click', () => { state.carouselIndex = i; atualizarCarrossel(); });
+                        dotsContainer.appendChild(dot);
+                    });
+
+                    $('carouselLeft').onclick = () => { if (state.carouselIndex > 0) { state.carouselIndex--; atualizarCarrossel(); } };
+                    $('carouselRight').onclick = () => { if (state.carouselIndex < state.corridas.length - 1) { state.carouselIndex++; atualizarCarrossel(); } };
+
+                    track.addEventListener('mousedown', (e) => {
+                        carouselDragging = true; carouselDragStart = e.clientX; carouselOffsetX = 0;
+                        track.style.transition = 'none';
+                    });
+                    window.addEventListener('mousemove', (e) => {
+                        if (!carouselDragging) return;
+                        carouselOffsetX = e.clientX - carouselDragStart;
+                        const cardWidth = window.innerWidth >= 600 ? 184 : 146;
+                        const shift = -state.carouselIndex * cardWidth + carouselOffsetX;
+                        track.style.transform = `translateX(${shift}px)`;
+                    });
+                    window.addEventListener('mouseup', () => {
+                        if (!carouselDragging) return;
+                        carouselDragging = false;
+                        track.style.transition = 'transform 0.25s ease-out';
+                        if (carouselOffsetX < -20 && state.carouselIndex < state.corridas.length - 1) state.carouselIndex++;
+                        else if (carouselOffsetX > 20 && state.carouselIndex > 0) state.carouselIndex--;
+                        atualizarCarrossel();
+                    });
+                    track.addEventListener('touchstart', (e) => {
+                        carouselDragging = true; carouselDragStart = e.touches[0].clientX; carouselOffsetX = 0;
+                        track.style.transition = 'none';
+                    }, {passive: true});
+                    track.addEventListener('touchmove', (e) => {
+                        if (!carouselDragging) return;
+                        carouselOffsetX = e.touches[0].clientX - carouselDragStart;
+                        const cardWidth = window.innerWidth >= 600 ? 184 : 146;
+                        const shift = -state.carouselIndex * cardWidth + carouselOffsetX;
+                        track.style.transform = `translateX(${shift}px)`;
+                    }, {passive: true});
+                    track.addEventListener('touchend', () => {
+                        if (!carouselDragging) return;
+                        carouselDragging = false;
+                        track.style.transition = 'transform 0.25s ease-out';
+                        if (carouselOffsetX < -20 && state.carouselIndex < state.corridas.length - 1) state.carouselIndex++;
+                        else if (carouselOffsetX > 20 && state.carouselIndex > 0) state.carouselIndex--;
+                        atualizarCarrossel();
+                    });
+
+                    atualizarCarrossel();
+                }
+
+                function atualizarCarrossel() {
+                    const track = $('carouselTrack');
+                    const cardWidth = window.innerWidth >= 600 ? 184 : 146;
+                    const shift = -state.carouselIndex * cardWidth;
+                    track.style.transform = `translateX(${shift}px)`;
+                    const cards = track.querySelectorAll('.carousel-card');
+                    cards.forEach((card, i) => {
+                        card.classList.remove('active', 'left', 'right');
+                        if (i === state.carouselIndex) card.classList.add('active');
+                        else if (i === state.carouselIndex - 1) card.classList.add('left');
+                        else if (i === state.carouselIndex + 1) card.classList.add('right');
+                    });
+                    const dots = $('carouselDots').querySelectorAll('.carousel-dot');
+                    dots.forEach((dot, i) => dot.classList.toggle('active', i === state.carouselIndex));
+                    $('carouselLeft').style.opacity = state.carouselIndex === 0 ? '0.3' : '1';
+                    $('carouselRight').style.opacity = state.carouselIndex >= state.corridas.length - 1 ? '0.3' : '1';
+                }
+
+                function renderizarGrafico() {
+                    const container = $('chartContainer');
+                    container.innerHTML = '';
+                    if (!state.corridas.length) {
+                        container.innerHTML = '<p style="color:var(--text2); font-size:12px; text-align:center; width:100%;">Registre corridas para ver o gráfico.</p>';
+                        return;
+                    }
+                    const valores = state.corridas.map(c => ({ previsto: c.previsto, real: c.real }));
+                    const maxVal = Math.max(...valores.map(v => v.previsto), ...valores.filter(v => v.real !== null).map(v => v.real), 1);
+                    valores.forEach((v, i) => {
+                        const group = document.createElement('div'); group.className = 'chart-bar-group';
+                        const wrapper = document.createElement('div'); wrapper.className = 'chart-bar-wrapper';
+                        const prevBar = document.createElement('div'); prevBar.className = 'chart-bar predicted';
+                        prevBar.style.height = (v.previsto / maxVal) * 130 + 'px';
+                        wrapper.appendChild(prevBar);
+                        if (v.real !== null) {
+                            const realBar = document.createElement('div'); realBar.className = 'chart-bar real';
+                            if (v.real < v.previsto) realBar.classList.add('negative');
+                            realBar.style.height = (v.real / maxVal) * 130 + 'px';
+                            wrapper.appendChild(realBar);
+                            const tooltip = document.createElement('div'); tooltip.className = 'chart-tooltip';
+                            const dif = v.real - v.previsto;
+                            tooltip.innerHTML = `#${i+1} | Prev: ${formatMoney(v.previsto)} | Real: ${formatMoney(v.real)}<br>Dif: ${dif >= 0 ? '+' : ''}${formatMoney(dif)}`;
+                            wrapper.appendChild(tooltip);
+                        } else {
+                            const tooltip = document.createElement('div'); tooltip.className = 'chart-tooltip';
+                            tooltip.textContent = `#${i+1} | Prev: ${formatMoney(v.previsto)} | Pendente`;
+                            wrapper.appendChild(tooltip);
+                        }
+                        group.appendChild(wrapper);
+                        const label = document.createElement('div'); label.className = 'chart-bar-label';
+                        label.textContent = `#${i+1}`;
+                        group.appendChild(label);
+                        container.appendChild(group);
+                    });
+                }
+
+                let corridaEditando = null;
+                function abrirModalCorrida(index) {
+                    if(!podeRegistrar()) return alert('Inicie a jornada primeiro!');
+                    corridaEditando = index;
+                    const c = state.corridas[index];
+                    $('modalCorridaNum').textContent = index+1;
+                    $('inputPrevisto').value = formatMoney(c.previsto);
+                    $('inputValorReal').value = '';
+                    $('inputObs').value = c.obs || '';
+                    const plataforma = c.pagamento || 'Uber';
+                    document.querySelectorAll('#paymentOptions .option-item').forEach(opt => {
+                        opt.classList.toggle('active', opt.dataset.value === plataforma);
+                    });
+                    $('modalCorrida').classList.remove('hidden');
+                }
+
+                function salvarCorrida() {
+                    const valorDigitado = $('inputValorReal').value.trim();
+                    let real = valorDigitado === '' ? state.corridas[corridaEditando].previsto : (parseFloat(valorDigitado) || 0);
+                    const pagamento = document.querySelector('#paymentOptions .option-item.active')?.dataset.value || 'Uber';
+                    const obs = $('inputObs').value;
+                    const c = state.corridas[corridaEditando];
+                    c.real = real; c.pagamento = pagamento; c.obs = obs;
+                    c.hora = new Date().toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
+                    salvar(); $('modalCorrida').classList.add('hidden'); renderizarTudo();
+                }
+
+                function removerCorrida() {
+                    const c = state.corridas[corridaEditando];
+                    c.real = null; c.pagamento = null; c.obs = ''; c.hora = null;
+                    salvar(); $('modalCorrida').classList.add('hidden'); renderizarTudo();
+                }
+
+                function quickRun() {
+                    if(!podeRegistrar()) return alert('Inicie a jornada!');
+                    const idx = state.corridas.findIndex(c => c.real === null);
+                    if(idx === -1) { alert('Todas as corridas previstas já foram registradas!'); return; }
+                    state.carouselIndex = idx;
+                    corridaEditando = idx;
+                    const c = state.corridas[idx];
+                    $('modalCorridaNum').textContent = idx+1;
+                    $('inputPrevisto').value = formatMoney(c.previsto);
+                    $('inputValorReal').value = '';
+                    $('inputObs').value = '';
+                    document.querySelectorAll('#paymentOptions .option-item').forEach(opt => opt.classList.toggle('active', opt.dataset.value === 'Uber'));
+                    $('modalCorrida').classList.remove('hidden');
+                    atualizarCarrossel();
+                }
+
+                document.querySelectorAll('#paymentOptions .option-item').forEach(opt => {
+                    opt.addEventListener('click', () => {
+                        document.querySelectorAll('#paymentOptions .option-item').forEach(o => o.classList.remove('active'));
+                        opt.classList.add('active');
+                    });
+                });
+                document.querySelectorAll('#gastoCategoryOptions .option-item').forEach(opt => {
+                    opt.addEventListener('click', () => {
+                        document.querySelectorAll('#gastoCategoryOptions .option-item').forEach(o => o.classList.remove('active'));
+                        opt.classList.add('active');
+                    });
+                });
+
+                function abrirModalGasto() {
+                    if(!podeRegistrar()) return alert('Inicie a jornada primeiro!');
+                    $('inputGastoDesc').value = '';
+                    $('inputGastoValor').value = '';
+                    document.querySelectorAll('#gastoCategoryOptions .option-item').forEach(o => o.classList.remove('active'));
+                    document.querySelector('#gastoCategoryOptions .option-item[data-cat="Combustível"]').classList.add('active');
+                    $('modalGasto').classList.remove('hidden');
+                }
+
+                function salvarGasto() {
+                    const desc = $('inputGastoDesc').value.trim();
+                    const valor = parseFloat($('inputGastoValor').value) || 0;
+                    const cat = document.querySelector('#gastoCategoryOptions .option-item.active')?.dataset.cat || 'Outro';
+                    if (valor <= 0) return alert('Informe um valor válido.');
+                    const descFinal = desc || cat;
+                    state.gastos.push({ desc: descFinal, valor, cat });
+                    salvar(); $('modalGasto').classList.add('hidden'); renderizarTudo();
+                }
+
+                function atualizarDashboard() {
+                    const arr = state.corridas.reduce((s,c) => s + (c.real||0), 0);
+                    const gastos = state.gastos.reduce((s,g) => s + g.valor, 0);
+                    const feitas = state.corridas.filter(c => c.real !== null).length;
+                    const tempo = calcTempo();
+                    const ganhoH = tempo>0 ? arr/(tempo/3600) : 0;
+                    const proj = tempo>60 ? (arr/(tempo/3600))*24 : 0;
+                    const falta = Math.max(0, state.metaDiaria - arr);
+                    const pct = state.metaDiaria>0 ? Math.min(100, Math.round((arr/state.metaDiaria)*100)) : 0;
+                    $('cardArrecadado').textContent = formatMoney(arr);
+                    $('cardMeta').textContent = formatMoney(state.metaDiaria);
+                    $('cardCorridas').textContent = feitas;
+                    $('cardHora').textContent = formatMoney(ganhoH);
+                    $('cardFalta').textContent = formatMoney(falta);
+                    $('cardProjecao').textContent = formatMoney(proj);
+                    $('progressPercent').textContent = pct+'%';
+                    $('progressFill').style.width = pct+'%';
+                }
+
+                function atualizarGastos() {
+                    const list = $('expensesList');
+                    if(!state.gastos.length) { list.innerHTML = 'Nenhum gasto'; return; }
+                    list.innerHTML = state.gastos.map(g => `
+                        <div class="expense-item">
+                            <span>${g.desc} <small style="color:var(--text2)">(${g.cat || 'Outro'})</small></span>
+                            <span>- ${formatMoney(g.valor)}</span>
+                        </div>
+                    `).join('');
+                    const total = state.gastos.reduce((s,g)=>s+g.valor,0);
+                    list.innerHTML += `<div class="expense-item" style="font-weight:700;border-top:1px solid var(--border);margin-top:6px;padding-top:8px;"><span>Total</span><span>- ${formatMoney(total)}</span></div>`;
+                }
+
+                function atualizarRelatorio() {
+                    const arr = state.corridas.reduce((s,c)=>s+(c.real||0),0);
+                    const gastos = state.gastos.reduce((s,g)=>s+g.valor,0);
+                    const feitas = state.corridas.filter(c=>c.real!==null).length;
+                    const tempo = calcTempo();
+                    const inicio = state.jornadaInicio ? new Date(state.jornadaInicio).toLocaleTimeString('pt-BR') : '--:--';
+                    const fim = state.jornadaEncerrada && state.jornadaFim ? new Date(state.jornadaFim).toLocaleTimeString('pt-BR') : '--:--';
+                    $('reportBox').innerHTML = `
+                        <strong>📅 ${state.dataJornada.split('-').reverse().join('/')}</strong><br>
+                        ⏱ ${inicio} → ${fim} | ⏳ ${formatTime(tempo)}<br>
+                        🚕 ${feitas} corridas | 💰 ${formatMoney(arr)} arrecadado<br>
+                        🧾 ${formatMoney(gastos)} gastos | 💵 ${formatMoney(arr-gastos)} líquido
+                    `;
+                }
+
+                function atualizarStatus() {
+                    const b = $('statusBadge');
+                    if(!state.jornadaInicio) b.innerHTML = '<span class="status-dot"></span> PARADO', b.className='status-badge off';
+                    else if(state.jornadaEncerrada) b.innerHTML = '<span class="status-dot"></span> ENCERRADO', b.className='status-badge off';
+                    else {
+                        const paused = state.jornadaPausas.length && state.jornadaPausas[state.jornadaPausas.length-1].fim===null;
+                        if(paused) b.innerHTML = '<span class="status-dot"></span> PAUSADO', b.className='status-badge paused';
+                        else b.innerHTML = '<span class="status-dot"></span> EM ANDAMENTO', b.className='status-badge on';
+                    }
+                }
+
+                function atualizarBotoes() {
+                    const s=$('btnStart'), p=$('btnPause'), st=$('btnStop');
+                    if(!state.jornadaInicio) { s.classList.remove('hidden'); p.classList.add('hidden'); st.classList.add('hidden'); }
+                    else if(state.jornadaEncerrada) { s.classList.add('hidden'); p.classList.add('hidden'); st.classList.add('hidden'); }
+                    else {
+                        s.classList.add('hidden');
+                        const paused = state.jornadaPausas.length && state.jornadaPausas[state.jornadaPausas.length-1].fim===null;
+                        p.textContent = paused ? '▶ Retomar' : '⏸ Pausar';
+                        p.classList.remove('hidden'); st.classList.remove('hidden');
+                    }
+                }
+
+                function atualizarAreas() {
+                    const liberado = podeRegistrar();
+                    ['carouselWrapper','carouselDots','expensesSection','btnQuickRun'].forEach(id => $(id)?.classList.toggle('disabled-area', !liberado));
+                }
+
+                function renderizarTudo() {
+                    renderizarCarrossel();
+                    renderizarGrafico();
+                    atualizarDashboard();
+                    atualizarGastos();
+                    atualizarRelatorio();
+                    atualizarBotoes();
+                    atualizarAreas();
+                    atualizarStatus();
+                }
+
+                function atualizarTimer() {
+                    const segundos = calcTempo();
+                    $('timerDisplay').textContent = formatTime(segundos);
+                    atualizarDashboard();
+                    atualizarRelatorio();
+                }
+
+                function iniciar() {
+                    state.jornadaInicio = Date.now(); state.jornadaPausas = []; state.jornadaEncerrada = false; state.jornadaFim = null;
+                    salvar(); clearInterval(state.timerInterval);
+                    state.timerInterval = setInterval(atualizarTimer, 1000);
+                    atualizarTimer(); renderizarTudo();
+                }
+
+                function pausar() {
+                    if(!state.jornadaInicio || state.jornadaEncerrada) return;
+                    const p = state.jornadaPausas;
+                    p.length && p[p.length-1].fim===null ? p[p.length-1].fim=Date.now() : p.push({inicio:Date.now(), fim:null});
+                    salvar(); renderizarTudo();
+                }
+
+                function encerrar() {
+                    if(!state.jornadaInicio || state.jornadaEncerrada) return;
                     const p = state.jornadaPausas;
                     if(p.length && p[p.length-1].fim===null) p[p.length-1].fim=Date.now();
-                    state.jornadaEncerrada = true;
-                    state.jornadaFim = Date.now();
+                    state.jornadaEncerrada = true; state.jornadaFim = Date.now();
+                    clearInterval(state.timerInterval);
                     salvarResumoDiario();
-                } else if (state.corridas.some(c => c.real !== null) || state.gastos.length > 0) {
-                    salvarResumoDiario();
+                    salvar(); atualizarTimer(); renderizarTudo();
+                    mostrarResumo();
                 }
-                clearInterval(state.timerInterval);
-                state.jornadaInicio=null; state.jornadaPausas=[]; state.jornadaEncerrada=false; state.jornadaFim=null;
-                state.corridas = gerarProgressao(state.metaDiaria, state.corridasPrevistas).map(p => ({previsto:p, real:null, pagamento:null, obs:'', hora:null}));
-                state.gastos = []; state.dataJornada = new Date().toISOString().split('T')[0];
-                state.carouselIndex = 0;
-                $('timerDisplay').textContent = '00:00:00';
-                salvar(); renderizarTudo();
-            }
 
-            function abrirGestaoMes() {
-                const historico = JSON.parse(localStorage.getItem('historicoMensal') || '[]');
-                const agora = new Date();
-                const mesAtual = agora.getMonth();
-                const anoAtual = agora.getFullYear();
-                const diasDoMes = historico.filter(r => {
-                    const d = new Date(r.data + 'T00:00:00');
-                    return d.getMonth() === mesAtual && d.getFullYear() === anoAtual;
-                }).sort((a,b) => a.data.localeCompare(b.data));
-                let html = '';
-                if (diasDoMes.length === 0) {
-                    html = '<p>Nenhum registro para este mês.</p>';
-                } else {
-                    html = `<table class="month-table"><thead><tr><th>Dia</th><th>Meta</th><th>Arrec.</th><th>Corr.</th><th>Lucro</th><th>%</th></tr></thead><tbody>`;
-                    let totalMeta = 0, totalArr = 0, totalCorr = 0, totalLucro = 0;
-                    diasDoMes.forEach(r => {
-                        const dataFormatada = r.data.split('-').reverse().join('/');
-                        html += `<tr><td>${dataFormatada}</td><td>${formatMoney(r.meta)}</td><td>${formatMoney(r.arrecadado)}</td><td>${r.corridas}</td><td style="color:${r.lucro>=0?'var(--green)':'var(--red)'}">${formatMoney(r.lucro)}</td><td>${r.pctMeta}%</td></tr>`;
-                        totalMeta += r.meta; totalArr += r.arrecadado; totalCorr += r.corridas; totalLucro += r.lucro;
-                    });
-                    html += `<tr class="month-total"><td><strong>Total</strong></td><td>${formatMoney(totalMeta)}</td><td>${formatMoney(totalArr)}</td><td>${totalCorr}</td><td style="color:${totalLucro>=0?'var(--green)':'var(--red)'}">${formatMoney(totalLucro)}</td><td>--</td></tr></tbody></table>`;
-                }
-                $('gestaoMesContent').innerHTML = html;
-                $('modalGestaoMes').classList.remove('hidden');
-            }
-
-            function salvar() {
-                localStorage.setItem('metaDriverPro_v6', JSON.stringify({
-                    metaDiaria: state.metaDiaria, corridasPrevistas: state.corridasPrevistas,
-                    corridas: state.corridas, gastos: state.gastos,
-                    jornadaInicio: state.jornadaInicio, jornadaPausas: state.jornadaPausas,
-                    jornadaEncerrada: state.jornadaEncerrada, jornadaFim: state.jornadaFim,
-                    dataJornada: state.dataJornada, carouselIndex: state.carouselIndex
-                }));
-            }
-
-            function carregar() {
-                const d = localStorage.getItem('metaDriverPro_v6');
-                if(!d) return false;
-                try {
-                    const obj = JSON.parse(d);
-                    if(obj.dataJornada === new Date().toISOString().split('T')[0] || obj.jornadaEncerrada===false) {
-                        Object.assign(state, obj);
-                        if(state.jornadaInicio && !state.jornadaEncerrada) state.timerInterval = setInterval(atualizarTimer, 1000);
-                        renderizarTudo(); atualizarTimer(); return true;
+                function mostrarResumo() {
+                    const feitas = state.corridas.filter(c=>c.real!==null);
+                    const arr = feitas.reduce((s,c)=>s+c.real,0);
+                    const gastos = state.gastos.reduce((s,g)=>s+g.valor,0);
+                    let html = `<p>⏱ ${formatTime(calcTempo())} | 🚕 ${feitas.length} corridas</p><p>💰 ${formatMoney(arr)} arrecadado | 💵 ${formatMoney(arr-gastos)} líquido</p>`;
+                    if(feitas.length) {
+                        html += `<table style="width:100%;font-size:11px;margin-top:8px;border-collapse:collapse;"><tr><th>#</th><th>Prev.</th><th>Real</th><th>Dif.</th></tr>`;
+                        feitas.forEach((c,i) => {
+                            const d = c.real - c.previsto;
+                            html += `<tr><td>${i+1}</td><td>${formatMoney(c.previsto)}</td><td>${formatMoney(c.real)}</td><td style="color:${d>=0?'var(--green)':'var(--red)'}">${formatMoney(d)}</td></tr>`;
+                        });
+                        html += `</table>`;
                     }
-                } catch(e){}
-                return false;
+                    $('resumoContent').innerHTML = html;
+                    $('modalResumo').classList.remove('hidden');
+                }
+
+                function salvarResumoDiario() {
+                    const arr = state.corridas.reduce((s,c) => s + (c.real||0), 0);
+                    const gastos = state.gastos.reduce((s,g) => s + g.valor, 0);
+                    const feitas = state.corridas.filter(c => c.real !== null).length;
+                    const tempo = calcTempo();
+                    const registro = {
+                        data: state.dataJornada,
+                        meta: state.metaDiaria,
+                        arrecadado: arr,
+                        corridas: feitas,
+                        tempo: tempo,
+                        gastos: gastos,
+                        lucro: arr - gastos,
+                        pctMeta: state.metaDiaria > 0 ? Math.round((arr/state.metaDiaria)*100) : 0
+                    };
+                    let historico = JSON.parse(localStorage.getItem(historyKey) || '[]');
+                    historico = historico.filter(r => r.data !== state.dataJornada);
+                    historico.push(registro);
+                    if (historico.length > 60) historico = historico.slice(-60);
+                    localStorage.setItem(historyKey, JSON.stringify(historico));
+                }
+
+                function resetar() {
+                    if(!confirm('Iniciar nova jornada? Os dados atuais serão perdidos (mas salvos no histórico se houver algo).')) return;
+                    if (state.jornadaInicio && !state.jornadaEncerrada) {
+                        const p = state.jornadaPausas;
+                        if(p.length && p[p.length-1].fim===null) p[p.length-1].fim=Date.now();
+                        state.jornadaEncerrada = true;
+                        state.jornadaFim = Date.now();
+                        salvarResumoDiario();
+                    } else if (state.corridas.some(c => c.real !== null) || state.gastos.length > 0) {
+                        salvarResumoDiario();
+                    }
+                    clearInterval(state.timerInterval);
+                    state.jornadaInicio=null; state.jornadaPausas=[]; state.jornadaEncerrada=false; state.jornadaFim=null;
+                    state.corridas = gerarProgressao(state.metaDiaria, state.corridasPrevistas).map(p => ({previsto:p, real:null, pagamento:null, obs:'', hora:null}));
+                    state.gastos = []; state.dataJornada = new Date().toISOString().split('T')[0];
+                    state.carouselIndex = 0;
+                    $('timerDisplay').textContent = '00:00:00';
+                    salvar(); renderizarTudo();
+                }
+
+                function abrirGestaoMes() {
+                    const historico = JSON.parse(localStorage.getItem(historyKey) || '[]');
+                    const agora = new Date();
+                    const mesAtual = agora.getMonth();
+                    const anoAtual = agora.getFullYear();
+                    const diasDoMes = historico.filter(r => {
+                        const d = new Date(r.data + 'T00:00:00');
+                        return d.getMonth() === mesAtual && d.getFullYear() === anoAtual;
+                    }).sort((a,b) => a.data.localeCompare(b.data));
+                    let html = '';
+                    if (diasDoMes.length === 0) {
+                        html = '<p>Nenhum registro para este mês.</p>';
+                    } else {
+                        html = `<table class="month-table"><thead><tr><th>Dia</th><th>Meta</th><th>Arrec.</th><th>Corr.</th><th>Lucro</th><th>%</th></tr></thead><tbody>`;
+                        let totalMeta = 0, totalArr = 0, totalCorr = 0, totalLucro = 0;
+                        diasDoMes.forEach(r => {
+                            const dataFormatada = r.data.split('-').reverse().join('/');
+                            html += `<tr><td>${dataFormatada}</td><td>${formatMoney(r.meta)}</td><td>${formatMoney(r.arrecadado)}</td><td>${r.corridas}</td><td style="color:${r.lucro>=0?'var(--green)':'var(--red)'}">${formatMoney(r.lucro)}</td><td>${r.pctMeta}%</td></tr>`;
+                            totalMeta += r.meta; totalArr += r.arrecadado; totalCorr += r.corridas; totalLucro += r.lucro;
+                        });
+                        html += `<tr class="month-total"><td><strong>Total</strong></td><td>${formatMoney(totalMeta)}</td><td>${formatMoney(totalArr)}</td><td>${totalCorr}</td><td style="color:${totalLucro>=0?'var(--green)':'var(--red)'}">${formatMoney(totalLucro)}</td><td>--</td></tr></tbody></table>`;
+                    }
+                    $('gestaoMesContent').innerHTML = html;
+                    $('modalGestaoMes').classList.remove('hidden');
+                }
+
+                function salvar() {
+                    const toSave = {
+                        metaDiaria: state.metaDiaria, corridasPrevistas: state.corridasPrevistas,
+                        corridas: state.corridas, gastos: state.gastos,
+                        jornadaInicio: state.jornadaInicio, jornadaPausas: state.jornadaPausas,
+                        jornadaEncerrada: state.jornadaEncerrada, jornadaFim: state.jornadaFim,
+                        dataJornada: state.dataJornada, carouselIndex: state.carouselIndex
+                    };
+                    localStorage.setItem(stateKey, JSON.stringify(toSave));
+                }
+
+                function carregar() {
+                    const d = localStorage.getItem(stateKey);
+                    if(!d) return false;
+                    try {
+                        const obj = JSON.parse(d);
+                        if(obj.dataJornada === new Date().toISOString().split('T')[0] || obj.jornadaEncerrada===false) {
+                            Object.assign(state, obj);
+                            if(state.jornadaInicio && !state.jornadaEncerrada) state.timerInterval = setInterval(atualizarTimer, 1000);
+                            renderizarTudo(); atualizarTimer(); return true;
+                        }
+                    } catch(e){}
+                    return false;
+                }
+
+                // Eventos
+                $('btnStart').addEventListener('click', iniciar);
+                $('btnPause').addEventListener('click', pausar);
+                $('btnStop').addEventListener('click', encerrar);
+                $('btnConfig').addEventListener('click', ()=>{ $('editMetaValor').value=state.metaDiaria; $('editMetaCorridas').value=state.corridasPrevistas; $('modalMeta').classList.remove('hidden'); });
+                $('btnCancelMeta').addEventListener('click', ()=>$('modalMeta').classList.add('hidden'));
+                $('btnSaveMeta').addEventListener('click', ()=>{
+     <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Meta Driver PRO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #05050f;
+            --surface: #12121f;
+            --surface2: #1a1a2e;
+            --text: #ffffff;
+            --text2: #8c8ca5;
+            --accent: #ff6b35;
+            --green: #3efc5a;
+            --red: #ff3860;
+            --blue: #0ad4ff;
+            --purple: #b34aee;
+            --gold: #f7c948;
+            --border: rgba(255,255,255,0.06);
+            --shadow-card: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        body.light {
+            --bg: #f0f2f5;
+            --surface: #ffffff;
+            --surface2: #e9ecef;
+            --text: #111111;
+            --text2: #555555;
+            --accent: #ff6b35;
+            --green: #2e7d32;
+            --red: #d32f2f;
+            --blue: #0288d1;
+            --purple: #9c27b0;
+            --gold: #f9a825;
+            --border: rgba(0,0,0,0.08);
+            --shadow-card: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding-bottom: 60px;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* ===== TELA DE AUTENTICAÇÃO ===== */
+        .auth-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .auth-card {
+            background: var(--surface);
+            border-radius: 32px;
+            padding: 32px 24px;
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-card);
+            text-align: center;
+        }
+        .auth-logo {
+            font-size: 48px;
+            margin-bottom: 8px;
+        }
+        .auth-title {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 4px;
+            background: linear-gradient(135deg, var(--accent), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .auth-subtitle {
+            font-size: 13px;
+            color: var(--text2);
+            margin-bottom: 24px;
+        }
+        .auth-input {
+            width: 100%;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 14px 16px;
+            color: var(--text);
+            font-size: 15px;
+            outline: none;
+            transition: 0.2s;
+            margin-bottom: 12px;
+            font-family: 'Inter', sans-serif;
+        }
+        .auth-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(255,107,53,0.15);
+        }
+        .auth-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--accent), #ff5500);
+            border: none;
+            border-radius: 14px;
+            padding: 16px;
+            font-weight: 700;
+            font-size: 16px;
+            color: #fff;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 8px;
+            box-shadow: 0 6px 20px rgba(255,107,53,0.3);
+        }
+        .auth-btn:active { transform: scale(0.97); }
+        .auth-switch {
+            margin-top: 16px;
+            font-size: 13px;
+            color: var(--text2);
+        }
+        .auth-switch a {
+            color: var(--accent);
+            cursor: pointer;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        .auth-error {
+            color: var(--red);
+            font-size: 12px;
+            margin-bottom: 8px;
+            display: none;
+            text-align: left;
+        }
+        .auth-error.show { display: block; }
+
+        /* ===== CONTEÚDO PRINCIPAL (oculto até login) ===== */
+        .app-container {
+            max-width: 520px;
+            margin: 0 auto;
+            padding: 16px 14px;
+        }
+        @media (min-width: 768px) { .app-container { max-width: 780px; padding: 24px 20px; } }
+        @media (min-width: 1024px) { .app-container { max-width: 900px; } }
+
+        /* (O restante do CSS do app continua idêntico ao último código) */
+        .header {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 14px; background: var(--surface); border-radius: 24px;
+            padding: 14px 18px; border: 1px solid var(--border);
+            backdrop-filter: blur(20px); box-shadow: var(--shadow-card);
+            transition: background 0.3s, border-color 0.3s;
+        }
+        .brand { display: flex; align-items: center; gap: 12px; }
+        .logo-icon {
+            width: 42px; height: 42px;
+            background: linear-gradient(135deg, var(--accent), var(--gold));
+            border-radius: 14px; display: flex; align-items: center; justify-content: center;
+            font-size: 22px; box-shadow: 0 0 24px rgba(255,107,53,0.3);
+        }
+        .header h1 {
+            font-size: 18px; font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), var(--gold));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .header p { font-size: 11px; color: var(--text2); margin-top: 2px; }
+        .header-actions { display: flex; gap: 8px; }
+        .icon-btn {
+            background: var(--surface2); border: 1px solid var(--border);
+            border-radius: 14px; width: 42px; height: 42px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; font-size: 18px; color: var(--text2);
+            transition: 0.3s; backdrop-filter: blur(10px);
+        }
+        .icon-btn:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 12px rgba(255,107,53,0.3); }
+
+        .status-box { text-align: center; margin-bottom: 14px; }
+        .status-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 6px 18px; border-radius: 20px;
+            font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+        }
+        .status-badge.off { background: rgba(255,56,96,0.12); border: 1px solid rgba(255,56,96,0.3); color: var(--red); }
+        .status-badge.on { background: rgba(62,252,90,0.12); border: 1px solid rgba(62,252,90,0.3); color: var(--green); animation: pulse 2s infinite; }
+        .status-badge.paused { background: rgba(255,170,0,0.12); border: 1px solid rgba(255,170,0,0.3); color: #ffaa00; }
+        @keyframes pulse { 0%,100%{ opacity:1; } 50%{ opacity:0.7; } }
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; }
+        .off .status-dot { background: var(--red); box-shadow: 0 0 8px var(--red); }
+        .on .status-dot { background: var(--green); box-shadow: 0 0 8px var(--green); }
+        .paused .status-dot { background: #ffaa00; box-shadow: 0 0 8px #ffaa00; }
+
+        .timer-section {
+            background: var(--surface); border-radius: 24px;
+            padding: 18px; margin-bottom: 14px; border: 1.5px solid var(--accent);
+            box-shadow: 0 8px 32px rgba(255,107,53,0.15); text-align: center;
+        }
+        .timer-label { font-size: 11px; font-weight: 700; color: var(--accent); letter-spacing: 2px; margin-bottom: 4px; }
+        .timer-display {
+            font-size: 46px; font-weight: 900; letter-spacing: 3px;
+            background: linear-gradient(180deg, var(--text), var(--accent));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            margin-bottom: 12px;
+        }
+        .timer-buttons { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+        .btn {
+            border: none; border-radius: 14px; padding: 12px 20px;
+            font-weight: 700; font-size: 14px; cursor: pointer; transition: 0.2s;
+            color: #fff; letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 6px;
+        }
+        .btn:active { transform: scale(0.96); }
+        .btn.start { background: linear-gradient(135deg, #2ecc40, #27ae30); box-shadow: 0 6px 20px rgba(46,204,64,0.3); }
+        .btn.pause { background: linear-gradient(135deg, #ffaa00, #f28500); box-shadow: 0 6px 20px rgba(255,170,0,0.3); }
+        .btn.stop { background: linear-gradient(135deg, #ff3860, #d6304a); box-shadow: 0 6px 20px rgba(255,56,96,0.3); }
+        .hidden { display: none !important; }
+
+        .progress-card {
+            background: var(--surface); border-radius: 18px;
+            padding: 14px; margin-bottom: 14px; border: 1px solid var(--border);
+            backdrop-filter: blur(10px); box-shadow: var(--shadow-card);
+        }
+        .progress-header { display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; color: var(--text2); margin-bottom: 8px; }
+        .progress-header span:last-child { color: var(--accent); font-weight: 800; }
+        .progress-bar { background: rgba(128,128,128,0.2); height: 8px; border-radius: 10px; overflow: hidden; }
+        .progress-fill { background: linear-gradient(90deg, var(--accent), var(--gold)); height: 100%; width: 0%; border-radius: 10px; transition: width 0.5s; }
+
+        .dashboard { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 14px; }
+        @media (min-width: 768px) { .dashboard { grid-template-columns: repeat(6,1fr); } }
+        .card {
+            background: var(--surface); border-radius: 18px; padding: 14px 6px;
+            text-align: center; border: 1px solid var(--border);
+            backdrop-filter: blur(8px); transition: 0.3s; box-shadow: var(--shadow-card);
+        }
+        .card:hover { transform: translateY(-2px); border-color: rgba(128,128,128,0.2); }
+        .card-title { font-size: 10px; color: var(--text2); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 6px; font-weight: 600; }
+        .card-value { font-size: 17px; font-weight: 800; color: var(--text); }
+        .card.accent .card-value { color: var(--accent); }
+        .card.green .card-value { color: var(--green); }
+        .card.blue .card-value { color: var(--blue); }
+
+        .section-title { font-size: 14px; font-weight: 700; margin: 14px 0 8px; display: flex; align-items: center; gap: 8px; color: var(--text); }
+
+        /* Carrossel (mantido) */
+        .carousel-wrapper { position: relative; width: 100%; overflow: hidden; padding: 20px 0 10px; margin-bottom: 10px; perspective: 800px; }
+        .carousel-track-container { overflow: visible; width: 100%; }
+        .carousel-track {
+            display: flex; transition: transform 0.25s ease-out; align-items: center;
+            padding: 0 calc(50% - 70px); transform-style: preserve-3d;
+        }
+        @media (min-width: 600px) { .carousel-track { padding: 0 calc(50% - 90px); } }
+        .carousel-card {
+            flex: 0 0 auto; width: 130px; margin: 0 8px; background: #1e1e30;
+            border: 1px solid var(--border); border-radius: 20px; padding: 16px 6px;
+            text-align: center; cursor: pointer; transition: all 0.25s ease-out;
+            transform: rotateY(25deg) scale(0.8) translateZ(-50px); opacity: 0.6;
+            filter: brightness(0.7); position: relative; box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transform-style: preserve-3d; backface-visibility: hidden;
+        }
+        @media (min-width: 600px) { .carousel-card { width: 160px; margin: 0 12px; } }
+        .carousel-card.active {
+            transform: rotateY(0deg) scale(1.1) translateZ(0px); opacity: 1; filter: brightness(1);
+            z-index: 2; border-color: transparent; background: linear-gradient(135deg, var(--accent), var(--gold));
+            box-shadow: 0 20px 40px rgba(255,107,53,0.5), 0 0 60px rgba(255,107,53,0.2); color: #fff;
+        }
+        .carousel-card.done { border-color: rgba(62,252,90,0.6); background: linear-gradient(135deg, #39ff14, #00e676); box-shadow: 0 0 20px rgba(62,252,90,0.4); }
+        .carousel-card.active.done { background: linear-gradient(135deg, #39ff14, #00e676); box-shadow: 0 20px 50px rgba(62,252,90,0.6), 0 0 70px rgba(62,252,90,0.3); }
+        .carousel-card .carousel-num { font-size: 13px; font-weight: 800; color: var(--text); margin-bottom: 2px; }
+        .carousel-card .carousel-pred { font-size: 10px; color: var(--text2); display: block; }
+        .carousel-card .carousel-real { font-size: 14px; color: var(--green); display: block; font-weight: 800; margin-top: 4px; text-shadow: 0 0 8px rgba(62,252,90,0.5); }
+        .carousel-card.left { transform: rotateY(15deg) scale(0.85) translateZ(-30px); opacity: 0.8; filter: brightness(0.85); }
+        .carousel-card.right { transform: rotateY(-15deg) scale(0.85) translateZ(-30px); opacity: 0.8; filter: brightness(0.85); }
+        .carousel-arrow {
+            position: absolute; top: 50%; transform: translateY(-50%); width: 36px; height: 36px;
+            border-radius: 50%; background: var(--surface); border: 1px solid var(--border);
+            color: var(--text); font-size: 16px; cursor: pointer; z-index: 10;
+            display: flex; align-items: center; justify-content: center; transition: 0.2s;
+            box-shadow: var(--shadow-card); backdrop-filter: blur(8px);
+        }
+        .carousel-arrow:hover { border-color: var(--accent); color: var(--accent); }
+        .carousel-arrow.left { left: 2px; }
+        .carousel-arrow.right { right: 2px; }
+        .carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 6px; }
+        .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text2); opacity: 0.4; transition: 0.3s; cursor: pointer; }
+        .carousel-dot.active { opacity: 1; background: var(--accent); width: 24px; border-radius: 4px; }
+
+        .quick-btn {
+            width: 100%; background: linear-gradient(135deg, var(--accent), #ff5500);
+            border: none; border-radius: 16px; padding: 16px; font-weight: 700; font-size: 15px;
+            color: #fff; cursor: pointer; transition: 0.2s; box-shadow: 0 6px 20px rgba(255,107,53,0.2);
+            margin-bottom: 14px;
+        }
+        .quick-btn:active { transform: scale(0.97); }
+
+        .chart-section { background: var(--surface); border-radius: 18px; padding: 16px; margin-bottom: 14px; border: 1px solid var(--border); box-shadow: var(--shadow-card); }
+        .chart-title { font-size: 14px; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; color: var(--text); }
+        .chart-container { display: flex; align-items: flex-end; gap: 6px; height: 180px; padding: 0 4px; overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; scrollbar-color: rgba(128,128,128,0.3) transparent; }
+        .chart-container::-webkit-scrollbar { height: 4px; }
+        .chart-container::-webkit-scrollbar-thumb { background: rgba(128,128,128,0.3); border-radius: 4px; }
+        .chart-bar-group { display: flex; flex-direction: column; align-items: center; min-width: 28px; flex: 0 0 auto; position: relative; }
+        .chart-bar-wrapper { display: flex; align-items: flex-end; gap: 3px; height: 150px; cursor: pointer; position: relative; }
+        .chart-bar { width: 14px; border-radius: 6px 6px 0 0; transition: all 0.3s ease; position: relative; }
+        .chart-bar.predicted { background: rgba(128,128,128,0.3); }
+        .chart-bar.real { background: var(--green); width: 18px; box-shadow: 0 0 8px rgba(62,252,90,0.4); }
+        .chart-bar.real.negative { background: var(--red); box-shadow: 0 0 8px rgba(255,56,96,0.4); }
+        .chart-bar-label { font-size: 9px; color: var(--text2); margin-top: 4px; text-align: center; white-space: nowrap; }
+        .chart-tooltip {
+            position: absolute; bottom: 110%; left: 50%; transform: translateX(-50%);
+            background: var(--surface2); color: var(--text); padding: 6px 10px;
+            border-radius: 8px; font-size: 10px; white-space: nowrap;
+            pointer-events: none; opacity: 0; transition: opacity 0.2s;
+            border: 1px solid var(--border); box-shadow: var(--shadow-card); z-index: 5;
+        }
+        .chart-bar-group:hover .chart-tooltip { opacity: 1; }
+
+        .side-by-side { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 14px; }
+        .side-by-side .half { flex: 1 1 280px; min-width: 0; }
+        .expenses, .report {
+            background: var(--surface); border-radius: 18px; padding: 14px;
+            border: 1px solid var(--border); box-shadow: var(--shadow-card);
+        }
+        .expense-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--text); }
+        .secondary-btn {
+            width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px; padding: 12px; color: var(--text); font-weight: 600; font-size: 13px;
+            cursor: pointer; margin-top: 10px; transition: 0.2s; text-align: center;
+        }
+        .secondary-btn:hover { background: rgba(128,128,128,0.1); }
+        .report { font-size: 13px; line-height: 1.7; color: var(--text); }
+
+        .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        .danger-btn {
+            background: transparent; border: 1px solid var(--red); color: var(--red);
+            padding: 14px; border-radius: 14px; font-weight: 700; font-size: 13px;
+            text-align: center; cursor: pointer; transition: 0.2s;
+        }
+        .danger-btn:hover { background: rgba(255,56,96,0.08); }
+        .month-btn {
+            background: rgba(180,74,238,0.08); border: 1px solid var(--purple); color: var(--purple);
+            padding: 14px; border-radius: 14px; font-weight: 700; font-size: 13px;
+            text-align: center; cursor: pointer; transition: 0.2s;
+        }
+        .month-btn:hover { background: rgba(180,74,238,0.15); }
+        .disabled-area { opacity: 0.5; pointer-events: none; filter: grayscale(0.5); }
+
+        .app-footer {
+            text-align: center; padding: 14px 20px; margin-top: 20px;
+            border-top: 1px solid var(--border); color: var(--text2); font-size: 11px;
+        }
+        .app-footer strong { color: var(--accent); }
+
+        /* Modais */
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 1000; backdrop-filter: blur(8px); animation: fadeIn 0.2s;
+        }
+        @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+        .modal {
+            background: rgba(18,18,31,0.95); border-radius: 24px;
+            padding: 22px; width: 92%; max-width: 380px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(20px); animation: slideUp 0.3s ease-out;
+            max-height: 85vh; overflow-y: auto; color: var(--text);
+        }
+        @keyframes slideUp { from { transform: translateY(30px); opacity:0; } to { transform: translateY(0); opacity:1; } }
+        .modal h3 { margin-bottom: 12px; font-size: 18px; font-weight: 700; }
+        .modal label { display: block; font-size: 11px; color: var(--text2); margin-bottom: 4px; font-weight: 600; }
+        .modal input, .modal select, .modal textarea {
+            width: 100%; background: #1a1a2e; border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px; padding: 10px 12px; color: #fff; font-size: 14px;
+            outline: none; transition: 0.2s; font-family: 'Inter', sans-serif;
+        }
+        .modal input:focus, .modal select:focus, .modal textarea:focus {
+            border-color: var(--accent); box-shadow: 0 0 12px rgba(255,107,53,0.2);
+        }
+        .option-group { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+        .option-item {
+            flex: 1 0 auto; min-width: 70px; background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08); border-radius: 12px;
+            padding: 10px 6px; text-align: center; font-size: 13px; font-weight: 600;
+            color: var(--text); cursor: pointer; transition: 0.2s; white-space: nowrap;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+        }
+        .option-item:hover { border-color: var(--accent); color: var(--accent); }
+        .option-item.active {
+            background: var(--accent); color: #fff; border-color: var(--accent);
+            box-shadow: 0 0 14px rgba(255,107,53,0.4);
+        }
+        .dot {
+            display: inline-block; width: 10px; height: 10px; border-radius: 50%;
+            flex-shrink: 0; box-shadow: 0 0 4px rgba(0,0,0,0.5);
+        }
+        .dot.uber { background: #000; }
+        .dot.novennove { background: var(--gold); }
+        .dot.indriver { background: var(--green); }
+        .dot.particular { background: #aaa; }
+
+        .modal .btn-row { display: flex; gap: 8px; justify-content: flex-end; margin-top: 16px; }
+        .btn-sm { padding: 8px 16px; font-size: 12px; border-radius: 10px; }
+        .month-table { width: 100%; border-collapse: collapse; font-size: 11px; margin: 12px 0; color: var(--text); }
+        .month-table th { text-align: left; color: var(--accent); padding: 6px 4px; border-bottom: 1px solid var(--border); }
+        .month-table td { padding: 6px 4px; border-bottom: 1px solid var(--border); }
+        .month-total { font-weight: 800; color: var(--text); border-top: 2px solid var(--border); }
+    </style>
+</head>
+<body class="dark">
+    <!-- Tela de Autenticação -->
+    <div id="authScreen" class="auth-screen">
+        <div class="auth-card" id="authCard">
+            <div class="auth-logo">🚗</div>
+            <div class="auth-title">Meta Driver PRO</div>
+            <div class="auth-subtitle" id="authSubtitle">Faça login para continuar</div>
+            <div class="auth-error" id="authError">Mensagem de erro</div>
+            <input type="text" id="authUser" class="auth-input" placeholder="Usuário">
+            <input type="password" id="authPass" class="auth-input" placeholder="Senha">
+            <button class="auth-btn" id="authBtn">Entrar</button>
+            <div class="auth-switch">
+                <span id="authSwitchText">Não tem conta? <a id="authSwitchLink">Crie uma</a></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conteúdo Principal (oculto inicialmente) -->
+    <div id="appContainer" class="app-container hidden">
+        <header class="header">
+            <div class="brand">
+                <div class="logo-icon">🚗</div>
+                <div><h1>Meta Driver PRO</h1><p>Dashboard Premium</p></div>
+            </div>
+            <div class="header-actions">
+                <button class="icon-btn" id="btnTheme" title="Alternar tema">🌙</button>
+                <button class="icon-btn" id="btnConfig" title="Configurar meta">⚙️</button>
+                <button class="icon-btn" id="btnLogout" title="Sair">🔓</button>
+            </div>
+        </header>
+
+        <div class="status-box"><div class="status-badge off" id="statusBadge"><span class="status-dot"></span> PARADO</div></div>
+
+        <section class="timer-section">
+            <div class="timer-label">⏱ JORNADA</div>
+            <div class="timer-display" id="timerDisplay">00:00:00</div>
+            <div class="timer-buttons">
+                <button id="btnStart" class="btn start">▶ Iniciar</button>
+                <button id="btnPause" class="btn pause hidden">⏸ Pausar</button>
+                <button id="btnStop" class="btn stop hidden">⏹ Encerrar</button>
+            </div>
+        </section>
+
+        <section class="progress-card">
+            <div class="progress-header"><span>🎯 Meta Diária</span><span id="progressPercent">0%</span></div>
+            <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        </section>
+
+        <section class="dashboard">
+            <div class="card accent"><div class="card-title">💰 Arrecadado</div><div class="card-value" id="cardArrecadado">R$ 0</div></div>
+            <div class="card"><div class="card-title">🎯 Meta</div><div class="card-value" id="cardMeta">R$ 500</div></div>
+            <div class="card blue"><div class="card-title">🚕 Corridas</div><div class="card-value" id="cardCorridas">0</div></div>
+            <div class="card green"><div class="card-title">💵 Ganho/H</div><div class="card-value" id="cardHora">R$ 0</div></div>
+            <div class="card"><div class="card-title">⚠ Falta</div><div class="card-value" id="cardFalta">R$ 500</div></div>
+            <div class="card"><div class="card-title">📈 Projeção</div><div class="card-value" id="cardProjecao">R$ 0</div></div>
+        </section>
+
+        <div class="chart-section">
+            <div class="chart-title">📊 Progressão das Corridas</div>
+            <div class="chart-container" id="chartContainer"></div>
+        </div>
+
+        <div class="section-title">📋 Corridas Previstas</div>
+        <div class="carousel-wrapper" id="carouselWrapper">
+            <button class="carousel-arrow left" id="carouselLeft">◀</button>
+            <div class="carousel-track-container">
+                <div class="carousel-track" id="carouselTrack"></div>
+            </div>
+            <button class="carousel-arrow right" id="carouselRight">▶</button>
+        </div>
+        <div class="carousel-dots" id="carouselDots"></div>
+
+        <button id="btnQuickRun" class="quick-btn">⚡ Registrar Corrida Rápida</button>
+
+        <div class="side-by-side">
+            <div class="half" id="expensesSection">
+                <div class="expenses">
+                    <div class="section-title">⛽ Gastos</div>
+                    <div id="expensesList">Nenhum gasto</div>
+                    <button id="btnAddExpense" class="secondary-btn">➕ Adicionar Gasto</button>
+                </div>
+            </div>
+            <div class="half">
+                <div class="report">
+                    <div class="section-title">📊 Relatório</div>
+                    <div id="reportBox">Aguardando início...</div>
+                </div>
+            </div>
+        </div>
+
+        <section class="actions">
+            <button id="btnReset" class="danger-btn">🔄 Nova Jornada</button>
+            <button id="btnGestaoMes" class="month-btn">📅 Gestão do Mês</button>
+        </section>
+
+        <footer class="app-footer">
+            <span>🚗 <strong>Meta Driver PRO</strong> &copy; 2025</span>
+        </footer>
+    </div>
+
+    <!-- Modais (mantidos) -->
+    <div class="modal-overlay hidden" id="modalCorrida">
+        <div class="modal">
+            <h3>🏁 Corrida <span id="modalCorridaNum"></span></h3>
+            <label>Valor previsto</label>
+            <input type="text" id="inputPrevisto" disabled>
+            <label>Valor recebido (R$)</label>
+            <input type="number" id="inputValorReal" placeholder="Deixe vazio = usar previsto" step="0.01">
+            <label>Plataforma</label>
+            <div class="option-group" id="paymentOptions">
+                <div class="option-item active" data-value="Uber"><span class="dot uber"></span> Uber</div>
+                <div class="option-item" data-value="99"><span class="dot novennove"></span> 99</div>
+                <div class="option-item" data-value="InDriver"><span class="dot indriver"></span> InDriver</div>
+                <div class="option-item" data-value="Particular"><span class="dot particular"></span> Particular</div>
+            </div>
+            <label>Observação (opcional)</label>
+            <input type="text" id="inputObs" placeholder="Ex: Corrida para o aeroporto">
+            <div class="btn-row">
+                <button class="btn stop btn-sm" id="btnRemoveCorrida">🗑 Remover</button>
+                <button class="btn pause btn-sm" id="btnCancelCorrida">Cancelar</button>
+                <button class="btn start btn-sm" id="btnSalvarCorrida">✔ Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay hidden" id="modalGasto">
+        <div class="modal">
+            <h3>➕ Novo Gasto</h3>
+            <label>Descrição (opcional)</label>
+            <input type="text" id="inputGastoDesc" placeholder="Ex: Abastecimento Shell">
+            <label>Valor (R$)</label>
+            <input type="number" id="inputGastoValor" placeholder="0.00" step="0.01">
+            <label>Categoria</label>
+            <div class="option-group" id="gastoCategoryOptions">
+                <div class="option-item active" data-cat="Combustível">⛽ Combust.</div>
+                <div class="option-item" data-cat="Pedágio">🛣️ Pedágio</div>
+                <div class="option-item" data-cat="Alimentação">🍔 Aliment.</div>
+                <div class="option-item" data-cat="Outro">📦 Outro</div>
+            </div>
+            <div class="btn-row">
+                <button class="btn stop btn-sm" id="btnCancelGasto">Cancelar</button>
+                <button class="btn start btn-sm" id="btnSaveGasto">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay hidden" id="modalMeta">
+        <div class="modal">
+            <h3>⚙️ Meta do Dia</h3>
+            <label>Meta (R$)</label><input type="number" id="editMetaValor">
+            <label>Nº de corridas</label><input type="number" id="editMetaCorridas">
+            <div class="btn-row">
+                <button class="btn stop btn-sm" id="btnCancelMeta">Cancelar</button>
+                <button class="btn start btn-sm" id="btnSaveMeta">Aplicar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay hidden" id="modalResumo">
+        <div class="modal" style="max-width:420px;">
+            <h3>🏁 Jornada Encerrada</h3>
+            <div id="resumoContent"></div>
+            <div class="btn-row"><button class="btn start btn-sm" id="btnFecharResumo">OK</button></div>
+        </div>
+    </div>
+
+    <div class="modal-overlay hidden" id="modalGestaoMes">
+        <div class="modal" style="max-width:440px;">
+            <h3>📅 Gestão do Mês</h3>
+            <div id="gestaoMesContent" style="font-size:12px; line-height:1.6;"></div>
+            <div class="btn-row"><button class="btn start btn-sm" id="btnFecharGestao">Fechar</button></div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // ============ AUTENTICAÇÃO ============
+            let currentUser = localStorage.getItem('currentUser');
+            let authMode = 'login'; // 'login' ou 'signup'
+
+            const authScreen = document.getElementById('authScreen');
+            const appContainer = document.getElementById('appContainer');
+            const authCard = document.getElementById('authCard');
+            const authSubtitle = document.getElementById('authSubtitle');
+            const authError = document.getElementById('authError');
+            const authUser = document.getElementById('authUser');
+            const authPass = document.getElementById('authPass');
+            const authBtn = document.getElementById('authBtn');
+            const authSwitchText = document.getElementById('authSwitchText');
+            const authSwitchLink = document.getElementById('authSwitchLink');
+
+            function showError(msg) {
+                authError.textContent = msg;
+                authError.classList.add('show');
+            }
+            function hideError() {
+                authError.classList.remove('show');
             }
 
-            // Eventos
-            $('btnStart').addEventListener('click', iniciar);
-            $('btnPause').addEventListener('click', pausar);
-            $('btnStop').addEventListener('click', encerrar);
-            $('btnConfig').addEventListener('click', ()=>{ $('editMetaValor').value=state.metaDiaria; $('editMetaCorridas').value=state.corridasPrevistas; $('modalMeta').classList.remove('hidden'); });
-            $('btnCancelMeta').addEventListener('click', ()=>$('modalMeta').classList.add('hidden'));
-            $('btnSaveMeta').addEventListener('click', ()=>{
-                const m = parseFloat($('editMetaValor').value)||500, n = parseInt($('editMetaCorridas').value)||20;
-                if(m>0 && n>0) aplicarMeta(m,n);
-                $('modalMeta').classList.add('hidden');
-            });
-            $('btnQuickRun').addEventListener('click', quickRun);
-            $('btnSalvarCorrida').addEventListener('click', salvarCorrida);
-            $('btnCancelCorrida').addEventListener('click', ()=>$('modalCorrida').classList.add('hidden'));
-            $('btnRemoveCorrida').addEventListener('click', removerCorrida);
-            $('btnAddExpense').addEventListener('click', abrirModalGasto);
-            $('btnSaveGasto').addEventListener('click', salvarGasto);
-            $('btnCancelGasto').addEventListener('click', ()=>$('modalGasto').classList.add('hidden'));
-            $('btnReset').addEventListener('click', resetar);
-            $('btnGestaoMes').addEventListener('click', abrirGestaoMes);
-            $('btnFecharResumo').addEventListener('click', ()=>$('modalResumo').classList.add('hidden'));
-            $('btnFecharGestao').addEventListener('click', ()=>$('modalGestaoMes').classList.add('hidden'));
-            window.addEventListener('click', e => {
-                if(e.target === $('modalCorrida')) $('modalCorrida').classList.add('hidden');
-                if(e.target === $('modalGasto')) $('modalGasto').classList.add('hidden');
-                if(e.target === $('modalMeta')) $('modalMeta').classList.add('hidden');
-                if(e.target === $('modalResumo')) $('modalResumo').classList.add('hidden');
-                if(e.target === $('modalGestaoMes')) $('modalGestaoMes').classList.add('hidden');
-            });
+            function updateAuthUI() {
+                if (authMode === 'login') {
+                    authSubtitle.textContent = 'Faça login para continuar';
+                    authBtn.textContent = 'Entrar';
+                    authSwitchText.innerHTML = 'Não tem conta? <a id="authSwitchLink">Crie uma</a>';
+                    document.getElementById('authSwitchLink').addEventListener('click', () => {
+                        authMode = 'signup';
+                        hideError();
+                        updateAuthUI();
+                    });
+                } else {
+                    authSubtitle.textContent = 'Crie sua conta gratuita';
+                    authBtn.textContent = 'Criar conta';
+                    authSwitchText.innerHTML = 'Já tem conta? <a id="authSwitchLink">Faça login</a>';
+                    document.getElementById('authSwitchLink').addEventListener('click', () => {
+                        authMode = 'login';
+                        hideError();
+                        updateAuthUI();
+                    });
+                }
+            }
 
-            if(!carregar()) aplicarMeta(500,20);
+            function authenticate() {
+                const user = authUser.value.trim();
+                const pass = authPass.value.trim();
+                if (!user || !pass) {
+                    showError('Preencha todos os campos.');
+                    return;
+                }
+                if (authMode === 'login') {
+                    const storedPass = localStorage.getItem(`user_${user}_pass`);
+                    if (storedPass === null) {
+                        showError('Usuário não encontrado.');
+                        return;
+                    }
+                    if (storedPass !== pass) {
+                        showError('Senha incorreta.');
+                        return;
+                    }
+                    // Login bem-sucedido
+                    currentUser = user;
+                    localStorage.setItem('currentUser', currentUser);
+                    entrarNoApp();
+                } else {
+                    // Cadastro
+                    const existing = localStorage.getItem(`user_${user}_pass`);
+                    if (existing !== null) {
+                        showError('Usuário já existe.');
+                        return;
+                    }
+                    localStorage.setItem(`user_${user}_pass`, pass);
+                    currentUser = user;
+                    localStorage.setItem('currentUser', currentUser);
+                    entrarNoApp();
+                }
+            }
+
+            function entrarNoApp() {
+                authScreen.classList.add('hidden');
+                appContainer.classList.remove('hidden');
+                // Inicializa o app com os dados do usuário
+                initApp(currentUser);
+            }
+
+            function logout() {
+                localStorage.removeItem('currentUser');
+                currentUser = null;
+                appContainer.classList.add('hidden');
+                authScreen.classList.remove('hidden');
+                authUser.value = '';
+                authPass.value = '';
+                hideError();
+                if (state.timerInterval) clearInterval(state.timerInterval);
+            }
+
+            // Event listeners da autenticação
+            authBtn.addEventListener('click', authenticate);
+            authPass.addEventListener('keydown', (e) => { if (e.key === 'Enter') authenticate(); });
+            authSwitchLink.addEventListener('click', () => {
+                authMode = authMode === 'login' ? 'signup' : 'login';
+                hideError();
+                updateAuthUI();
+            });
+            updateAuthUI();
+
+            // Se já estiver logado, entrar direto
+            if (currentUser) {
+                entrarNoApp();
+                return; // para não executar o resto duas vezes
+            }
+
+            // ============ APP PRINCIPAL ============
+            function initApp(username) {
+                const stateKey = `metaDriverPro_${username}`;
+                const historyKey = `historicoMensal_${username}`;
+
+                const state = {
+                    metaDiaria: 500,
+                    corridasPrevistas: 20,
+                    corridas: [],
+                    gastos: [],
+                    jornadaInicio: null,
+                    jornadaPausas: [],
+                    jornadaEncerrada: false,
+                    timerInterval: null,
+                    dataJornada: new Date().toISOString().split('T')[0],
+                    carouselIndex: 0,
+                };
+
+                const $ = id => document.getElementById(id);
+                const formatMoney = v => 'R$ ' + (parseFloat(v)||0).toFixed(2).replace('.',',');
+                const formatTime = s => {
+                    const h = Math.floor(s/3600), m = Math.floor((s%3600)/60), sec = Math.floor(s%60);
+                    return `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${sec.toString().padStart(2,'0')}`;
+                };
+                const calcTempo = () => {
+                    if(!state.jornadaInicio) return 0;
+                    let fim = state.jornadaEncerrada ? (state.jornadaFim||Date.now()) : Date.now();
+                    let pausas = state.jornadaPausas.reduce((a,p) => a + ((p.fim||Date.now())-p.inicio), 0);
+                    return Math.max(0, Math.floor((fim - state.jornadaInicio - pausas)/1000));
+                };
+                const podeRegistrar = () => state.jornadaInicio && !state.jornadaEncerrada;
+
+                // Tema
+                function applyTheme(theme) {
+                    document.body.classList.toggle('light', theme === 'light');
+                    document.body.classList.toggle('dark', theme === 'dark');
+                    $('btnTheme').textContent = theme === 'light' ? '☀️' : '🌙';
+                    localStorage.setItem('theme', theme);
+                }
+                $('btnTheme').addEventListener('click', () => {
+                    const current = document.body.classList.contains('light') ? 'dark' : 'light';
+                    applyTheme(current);
+                });
+                applyTheme(localStorage.getItem('theme') || 'dark');
+
+                function gerarProgressao(meta, n) {
+                    if(n<=1) return [meta];
+                    let a1 = Math.round(meta/(n*2.8)), an = Math.round((2*meta/n)-a1);
+                    if(an<=a1) an = a1+n;
+                    let r = (an-a1)/(n-1);
+                    let arr = Array.from({length:n}, (_,i) => Math.round(a1+r*i));
+                    let diff = meta - arr.reduce((a,b)=>a+b,0);
+                    arr[arr.length-1] += diff;
+                    return arr;
+                }
+
+                function aplicarMeta(meta, n) {
+                    state.metaDiaria = meta; state.corridasPrevistas = n;
+                    const prog = gerarProgressao(meta,n);
+                    state.corridas = prog.map((p,i) => i < state.corridas.length ? {...state.corridas[i], previsto:p} : {previsto:p, real:null, pagamento:null, obs:'', hora:null}).slice(0,n);
+                    state.carouselIndex = 0;
+                    salvar(); renderizarTudo();
+                }
+
+                /* ============ CARRROSSEL 3D RÁPIDO ============ */
+                let carouselDragStart = 0;
+                let carouselDragging = false;
+                let carouselOffsetX = 0;
+
+                function renderizarCarrossel() {
+                    const track = $('carouselTrack');
+                    const dotsContainer = $('carouselDots');
+                    track.innerHTML = '';
+                    dotsContainer.innerHTML = '';
+                    if (!state.corridas.length) return;
+
+                    state.corridas.forEach((c, i) => {
+                        const card = document.createElement('div');
+                        card.className = 'carousel-card';
+                        if (c.real !== null) card.classList.add('done');
+                        card.innerHTML = `
+                            <div class="carousel-num">#${i+1}</div>
+                            <span class="carousel-pred">prev. ${formatMoney(c.previsto)}</span>
+                            ${c.real !== null ? `<span class="carousel-real">real ${formatMoney(c.real)}</span>` : ''}
+                        `;
+                        card.addEventListener('click', () => {
+                            if (i === state.carouselIndex) abrirModalCorrida(i);
+                            else { state.carouselIndex = i; atualizarCarrossel(); }
+                        });
+                        track.appendChild(card);
+
+                        const dot = document.createElement('div');
+                        dot.className = 'carousel-dot';
+                        dot.addEventListener('click', () => { state.carouselIndex = i; atualizarCarrossel(); });
+                        dotsContainer.appendChild(dot);
+                    });
+
+                    $('carouselLeft').onclick = () => { if (state.carouselIndex > 0) { state.carouselIndex--; atualizarCarrossel(); } };
+                    $('carouselRight').onclick = () => { if (state.carouselIndex < state.corridas.length - 1) { state.carouselIndex++; atualizarCarrossel(); } };
+
+                    track.addEventListener('mousedown', (e) => {
+                        carouselDragging = true; carouselDragStart = e.clientX; carouselOffsetX = 0;
+                        track.style.transition = 'none';
+                    });
+                    window.addEventListener('mousemove', (e) => {
+                        if (!carouselDragging) return;
+                        carouselOffsetX = e.clientX - carouselDragStart;
+                        const cardWidth = window.innerWidth >= 600 ? 184 : 146;
+                        const shift = -state.carouselIndex * cardWidth + carouselOffsetX;
+                        track.style.transform = `translateX(${shift}px)`;
+                    });
+                    window.addEventListener('mouseup', () => {
+                        if (!carouselDragging) return;
+                        carouselDragging = false;
+                        track.style.transition = 'transform 0.25s ease-out';
+                        if (carouselOffsetX < -20 && state.carouselIndex < state.corridas.length - 1) state.carouselIndex++;
+                        else if (carouselOffsetX > 20 && state.carouselIndex > 0) state.carouselIndex--;
+                        atualizarCarrossel();
+                    });
+                    track.addEventListener('touchstart', (e) => {
+                        carouselDragging = true; carouselDragStart = e.touches[0].clientX; carouselOffsetX = 0;
+                        track.style.transition = 'none';
+                    }, {passive: true});
+                    track.addEventListener('touchmove', (e) => {
+                        if (!carouselDragging) return;
+                        carouselOffsetX = e.touches[0].clientX - carouselDragStart;
+                        const cardWidth = window.innerWidth >= 600 ? 184 : 146;
+                        const shift = -state.carouselIndex * cardWidth + carouselOffsetX;
+                        track.style.transform = `translateX(${shift}px)`;
+                    }, {passive: true});
+                    track.addEventListener('touchend', () => {
+                        if (!carouselDragging) return;
+                        carouselDragging = false;
+                        track.style.transition = 'transform 0.25s ease-out';
+                        if (carouselOffsetX < -20 && state.carouselIndex < state.corridas.length - 1) state.carouselIndex++;
+                        else if (carouselOffsetX > 20 && state.carouselIndex > 0) state.carouselIndex--;
+                        atualizarCarrossel();
+                    });
+
+                    atualizarCarrossel();
+                }
+
+                function atualizarCarrossel() {
+                    const track = $('carouselTrack');
+                    const cardWidth = window.innerWidth >= 600 ? 184 : 146;
+                    const shift = -state.carouselIndex * cardWidth;
+                    track.style.transform = `translateX(${shift}px)`;
+                    const cards = track.querySelectorAll('.carousel-card');
+                    cards.forEach((card, i) => {
+                        card.classList.remove('active', 'left', 'right');
+                        if (i === state.carouselIndex) card.classList.add('active');
+                        else if (i === state.carouselIndex - 1) card.classList.add('left');
+                        else if (i === state.carouselIndex + 1) card.classList.add('right');
+                    });
+                    const dots = $('carouselDots').querySelectorAll('.carousel-dot');
+                    dots.forEach((dot, i) => dot.classList.toggle('active', i === state.carouselIndex));
+                    $('carouselLeft').style.opacity = state.carouselIndex === 0 ? '0.3' : '1';
+                    $('carouselRight').style.opacity = state.carouselIndex >= state.corridas.length - 1 ? '0.3' : '1';
+                }
+
+                function renderizarGrafico() {
+                    const container = $('chartContainer');
+                    container.innerHTML = '';
+                    if (!state.corridas.length) {
+                        container.innerHTML = '<p style="color:var(--text2); font-size:12px; text-align:center; width:100%;">Registre corridas para ver o gráfico.</p>';
+                        return;
+                    }
+                    const valores = state.corridas.map(c => ({ previsto: c.previsto, real: c.real }));
+                    const maxVal = Math.max(...valores.map(v => v.previsto), ...valores.filter(v => v.real !== null).map(v => v.real), 1);
+                    valores.forEach((v, i) => {
+                        const group = document.createElement('div'); group.className = 'chart-bar-group';
+                        const wrapper = document.createElement('div'); wrapper.className = 'chart-bar-wrapper';
+                        const prevBar = document.createElement('div'); prevBar.className = 'chart-bar predicted';
+                        prevBar.style.height = (v.previsto / maxVal) * 130 + 'px';
+                        wrapper.appendChild(prevBar);
+                        if (v.real !== null) {
+                            const realBar = document.createElement('div'); realBar.className = 'chart-bar real';
+                            if (v.real < v.previsto) realBar.classList.add('negative');
+                            realBar.style.height = (v.real / maxVal) * 130 + 'px';
+                            wrapper.appendChild(realBar);
+                            const tooltip = document.createElement('div'); tooltip.className = 'chart-tooltip';
+                            const dif = v.real - v.previsto;
+                            tooltip.innerHTML = `#${i+1} | Prev: ${formatMoney(v.previsto)} | Real: ${formatMoney(v.real)}<br>Dif: ${dif >= 0 ? '+' : ''}${formatMoney(dif)}`;
+                            wrapper.appendChild(tooltip);
+                        } else {
+                            const tooltip = document.createElement('div'); tooltip.className = 'chart-tooltip';
+                            tooltip.textContent = `#${i+1} | Prev: ${formatMoney(v.previsto)} | Pendente`;
+                            wrapper.appendChild(tooltip);
+                        }
+                        group.appendChild(wrapper);
+                        const label = document.createElement('div'); label.className = 'chart-bar-label';
+                        label.textContent = `#${i+1}`;
+                        group.appendChild(label);
+                        container.appendChild(group);
+                    });
+                }
+
+                let corridaEditando = null;
+                function abrirModalCorrida(index) {
+                    if(!podeRegistrar()) return alert('Inicie a jornada primeiro!');
+                    corridaEditando = index;
+                    const c = state.corridas[index];
+                    $('modalCorridaNum').textContent = index+1;
+                    $('inputPrevisto').value = formatMoney(c.previsto);
+                    $('inputValorReal').value = '';
+                    $('inputObs').value = c.obs || '';
+                    const plataforma = c.pagamento || 'Uber';
+                    document.querySelectorAll('#paymentOptions .option-item').forEach(opt => {
+                        opt.classList.toggle('active', opt.dataset.value === plataforma);
+                    });
+                    $('modalCorrida').classList.remove('hidden');
+                }
+
+                function salvarCorrida() {
+                    const valorDigitado = $('inputValorReal').value.trim();
+                    let real = valorDigitado === '' ? state.corridas[corridaEditando].previsto : (parseFloat(valorDigitado) || 0);
+                    const pagamento = document.querySelector('#paymentOptions .option-item.active')?.dataset.value || 'Uber';
+                    const obs = $('inputObs').value;
+                    const c = state.corridas[corridaEditando];
+                    c.real = real; c.pagamento = pagamento; c.obs = obs;
+                    c.hora = new Date().toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
+                    salvar(); $('modalCorrida').classList.add('hidden'); renderizarTudo();
+                }
+
+                function removerCorrida() {
+                    const c = state.corridas[corridaEditando];
+                    c.real = null; c.pagamento = null; c.obs = ''; c.hora = null;
+                    salvar(); $('modalCorrida').classList.add('hidden'); renderizarTudo();
+                }
+
+                function quickRun() {
+                    if(!podeRegistrar()) return alert('Inicie a jornada!');
+                    const idx = state.corridas.findIndex(c => c.real === null);
+                    if(idx === -1) { alert('Todas as corridas previstas já foram registradas!'); return; }
+                    state.carouselIndex = idx;
+                    corridaEditando = idx;
+                    const c = state.corridas[idx];
+                    $('modalCorridaNum').textContent = idx+1;
+                    $('inputPrevisto').value = formatMoney(c.previsto);
+                    $('inputValorReal').value = '';
+                    $('inputObs').value = '';
+                    document.querySelectorAll('#paymentOptions .option-item').forEach(opt => opt.classList.toggle('active', opt.dataset.value === 'Uber'));
+                    $('modalCorrida').classList.remove('hidden');
+                    atualizarCarrossel();
+                }
+
+                document.querySelectorAll('#paymentOptions .option-item').forEach(opt => {
+                    opt.addEventListener('click', () => {
+                        document.querySelectorAll('#paymentOptions .option-item').forEach(o => o.classList.remove('active'));
+                        opt.classList.add('active');
+                    });
+                });
+                document.querySelectorAll('#gastoCategoryOptions .option-item').forEach(opt => {
+                    opt.addEventListener('click', () => {
+                        document.querySelectorAll('#gastoCategoryOptions .option-item').forEach(o => o.classList.remove('active'));
+                        opt.classList.add('active');
+                    });
+                });
+
+                function abrirModalGasto() {
+                    if(!podeRegistrar()) return alert('Inicie a jornada primeiro!');
+                    $('inputGastoDesc').value = '';
+                    $('inputGastoValor').value = '';
+                    document.querySelectorAll('#gastoCategoryOptions .option-item').forEach(o => o.classList.remove('active'));
+                    document.querySelector('#gastoCategoryOptions .option-item[data-cat="Combustível"]').classList.add('active');
+                    $('modalGasto').classList.remove('hidden');
+                }
+
+                function salvarGasto() {
+                    const desc = $('inputGastoDesc').value.trim();
+                    const valor = parseFloat($('inputGastoValor').value) || 0;
+                    const cat = document.querySelector('#gastoCategoryOptions .option-item.active')?.dataset.cat || 'Outro';
+                    if (valor <= 0) return alert('Informe um valor válido.');
+                    const descFinal = desc || cat;
+                    state.gastos.push({ desc: descFinal, valor, cat });
+                    salvar(); $('modalGasto').classList.add('hidden'); renderizarTudo();
+                }
+
+                function atualizarDashboard() {
+                    const arr = state.corridas.reduce((s,c) => s + (c.real||0), 0);
+                    const gastos = state.gastos.reduce((s,g) => s + g.valor, 0);
+                    const feitas = state.corridas.filter(c => c.real !== null).length;
+                    const tempo = calcTempo();
+                    const ganhoH = tempo>0 ? arr/(tempo/3600) : 0;
+                    const proj = tempo>60 ? (arr/(tempo/3600))*24 : 0;
+                    const falta = Math.max(0, state.metaDiaria - arr);
+                    const pct = state.metaDiaria>0 ? Math.min(100, Math.round((arr/state.metaDiaria)*100)) : 0;
+                    $('cardArrecadado').textContent = formatMoney(arr);
+                    $('cardMeta').textContent = formatMoney(state.metaDiaria);
+                    $('cardCorridas').textContent = feitas;
+                    $('cardHora').textContent = formatMoney(ganhoH);
+                    $('cardFalta').textContent = formatMoney(falta);
+                    $('cardProjecao').textContent = formatMoney(proj);
+                    $('progressPercent').textContent = pct+'%';
+                    $('progressFill').style.width = pct+'%';
+                }
+
+                function atualizarGastos() {
+                    const list = $('expensesList');
+                    if(!state.gastos.length) { list.innerHTML = 'Nenhum gasto'; return; }
+                    list.innerHTML = state.gastos.map(g => `
+                        <div class="expense-item">
+                            <span>${g.desc} <small style="color:var(--text2)">(${g.cat || 'Outro'})</small></span>
+                            <span>- ${formatMoney(g.valor)}</span>
+                        </div>
+                    `).join('');
+                    const total = state.gastos.reduce((s,g)=>s+g.valor,0);
+                    list.innerHTML += `<div class="expense-item" style="font-weight:700;border-top:1px solid var(--border);margin-top:6px;padding-top:8px;"><span>Total</span><span>- ${formatMoney(total)}</span></div>`;
+                }
+
+                function atualizarRelatorio() {
+                    const arr = state.corridas.reduce((s,c)=>s+(c.real||0),0);
+                    const gastos = state.gastos.reduce((s,g)=>s+g.valor,0);
+                    const feitas = state.corridas.filter(c=>c.real!==null).length;
+                    const tempo = calcTempo();
+                    const inicio = state.jornadaInicio ? new Date(state.jornadaInicio).toLocaleTimeString('pt-BR') : '--:--';
+                    const fim = state.jornadaEncerrada && state.jornadaFim ? new Date(state.jornadaFim).toLocaleTimeString('pt-BR') : '--:--';
+                    $('reportBox').innerHTML = `
+                        <strong>📅 ${state.dataJornada.split('-').reverse().join('/')}</strong><br>
+                        ⏱ ${inicio} → ${fim} | ⏳ ${formatTime(tempo)}<br>
+                        🚕 ${feitas} corridas | 💰 ${formatMoney(arr)} arrecadado<br>
+                        🧾 ${formatMoney(gastos)} gastos | 💵 ${formatMoney(arr-gastos)} líquido
+                    `;
+                }
+
+                function atualizarStatus() {
+                    const b = $('statusBadge');
+                    if(!state.jornadaInicio) b.innerHTML = '<span class="status-dot"></span> PARADO', b.className='status-badge off';
+                    else if(state.jornadaEncerrada) b.innerHTML = '<span class="status-dot"></span> ENCERRADO', b.className='status-badge off';
+                    else {
+                        const paused = state.jornadaPausas.length && state.jornadaPausas[state.jornadaPausas.length-1].fim===null;
+                        if(paused) b.innerHTML = '<span class="status-dot"></span> PAUSADO', b.className='status-badge paused';
+                        else b.innerHTML = '<span class="status-dot"></span> EM ANDAMENTO', b.className='status-badge on';
+                    }
+                }
+
+                function atualizarBotoes() {
+                    const s=$('btnStart'), p=$('btnPause'), st=$('btnStop');
+                    if(!state.jornadaInicio) { s.classList.remove('hidden'); p.classList.add('hidden'); st.classList.add('hidden'); }
+                    else if(state.jornadaEncerrada) { s.classList.add('hidden'); p.classList.add('hidden'); st.classList.add('hidden'); }
+                    else {
+                        s.classList.add('hidden');
+                        const paused = state.jornadaPausas.length && state.jornadaPausas[state.jornadaPausas.length-1].fim===null;
+                        p.textContent = paused ? '▶ Retomar' : '⏸ Pausar';
+                        p.classList.remove('hidden'); st.classList.remove('hidden');
+                    }
+                }
+
+                function atualizarAreas() {
+                    const liberado = podeRegistrar();
+                    ['carouselWrapper','carouselDots','expensesSection','btnQuickRun'].forEach(id => $(id)?.classList.toggle('disabled-area', !liberado));
+                }
+
+                function renderizarTudo() {
+                    renderizarCarrossel();
+                    renderizarGrafico();
+                    atualizarDashboard();
+                    atualizarGastos();
+                    atualizarRelatorio();
+                    atualizarBotoes();
+                    atualizarAreas();
+                    atualizarStatus();
+                }
+
+                function atualizarTimer() {
+                    const segundos = calcTempo();
+                    $('timerDisplay').textContent = formatTime(segundos);
+                    atualizarDashboard();
+                    atualizarRelatorio();
+                }
+
+                function iniciar() {
+                    state.jornadaInicio = Date.now(); state.jornadaPausas = []; state.jornadaEncerrada = false; state.jornadaFim = null;
+                    salvar(); clearInterval(state.timerInterval);
+                    state.timerInterval = setInterval(atualizarTimer, 1000);
+                    atualizarTimer(); renderizarTudo();
+                }
+
+                function pausar() {
+                    if(!state.jornadaInicio || state.jornadaEncerrada) return;
+                    const p = state.jornadaPausas;
+                    p.length && p[p.length-1].fim===null ? p[p.length-1].fim=Date.now() : p.push({inicio:Date.now(), fim:null});
+                    salvar(); renderizarTudo();
+                }
+
+                function encerrar() {
+                    if(!state.jornadaInicio || state.jornadaEncerrada) return;
+                    const p = state.jornadaPausas;
+                    if(p.length && p[p.length-1].fim===null) p[p.length-1].fim=Date.now();
+                    state.jornadaEncerrada = true; state.jornadaFim = Date.now();
+                    clearInterval(state.timerInterval);
+                    salvarResumoDiario();
+                    salvar(); atualizarTimer(); renderizarTudo();
+                    mostrarResumo();
+                }
+
+                function mostrarResumo() {
+                    const feitas = state.corridas.filter(c=>c.real!==null);
+                    const arr = feitas.reduce((s,c)=>s+c.real,0);
+                    const gastos = state.gastos.reduce((s,g)=>s+g.valor,0);
+                    let html = `<p>⏱ ${formatTime(calcTempo())} | 🚕 ${feitas.length} corridas</p><p>💰 ${formatMoney(arr)} arrecadado | 💵 ${formatMoney(arr-gastos)} líquido</p>`;
+                    if(feitas.length) {
+                        html += `<table style="width:100%;font-size:11px;margin-top:8px;border-collapse:collapse;"><tr><th>#</th><th>Prev.</th><th>Real</th><th>Dif.</th></tr>`;
+                        feitas.forEach((c,i) => {
+                            const d = c.real - c.previsto;
+                            html += `<tr><td>${i+1}</td><td>${formatMoney(c.previsto)}</td><td>${formatMoney(c.real)}</td><td style="color:${d>=0?'var(--green)':'var(--red)'}">${formatMoney(d)}</td></tr>`;
+                        });
+                        html += `</table>`;
+                    }
+                    $('resumoContent').innerHTML = html;
+                    $('modalResumo').classList.remove('hidden');
+                }
+
+                function salvarResumoDiario() {
+                    const arr = state.corridas.reduce((s,c) => s + (c.real||0), 0);
+                    const gastos = state.gastos.reduce((s,g) => s + g.valor, 0);
+                    const feitas = state.corridas.filter(c => c.real !== null).length;
+                    const tempo = calcTempo();
+                    const registro = {
+                        data: state.dataJornada,
+                        meta: state.metaDiaria,
+                        arrecadado: arr,
+                        corridas: feitas,
+                        tempo: tempo,
+                        gastos: gastos,
+                        lucro: arr - gastos,
+                        pctMeta: state.metaDiaria > 0 ? Math.round((arr/state.metaDiaria)*100) : 0
+                    };
+                    let historico = JSON.parse(localStorage.getItem(historyKey) || '[]');
+                    historico = historico.filter(r => r.data !== state.dataJornada);
+                    historico.push(registro);
+                    if (historico.length > 60) historico = historico.slice(-60);
+                    localStorage.setItem(historyKey, JSON.stringify(historico));
+                }
+
+                function resetar() {
+                    if(!confirm('Iniciar nova jornada? Os dados atuais serão perdidos (mas salvos no histórico se houver algo).')) return;
+                    if (state.jornadaInicio && !state.jornadaEncerrada) {
+                        const p = state.jornadaPausas;
+                        if(p.length && p[p.length-1].fim===null) p[p.length-1].fim=Date.now();
+                        state.jornadaEncerrada = true;
+                        state.jornadaFim = Date.now();
+                        salvarResumoDiario();
+                    } else if (state.corridas.some(c => c.real !== null) || state.gastos.length > 0) {
+                        salvarResumoDiario();
+                    }
+                    clearInterval(state.timerInterval);
+                    state.jornadaInicio=null; state.jornadaPausas=[]; state.jornadaEncerrada=false; state.jornadaFim=null;
+                    state.corridas = gerarProgressao(state.metaDiaria, state.corridasPrevistas).map(p => ({previsto:p, real:null, pagamento:null, obs:'', hora:null}));
+                    state.gastos = []; state.dataJornada = new Date().toISOString().split('T')[0];
+                    state.carouselIndex = 0;
+                    $('timerDisplay').textContent = '00:00:00';
+                    salvar(); renderizarTudo();
+                }
+
+                function abrirGestaoMes() {
+                    const historico = JSON.parse(localStorage.getItem(historyKey) || '[]');
+                    const agora = new Date();
+                    const mesAtual = agora.getMonth();
+                    const anoAtual = agora.getFullYear();
+                    const diasDoMes = historico.filter(r => {
+                        const d = new Date(r.data + 'T00:00:00');
+                        return d.getMonth() === mesAtual && d.getFullYear() === anoAtual;
+                    }).sort((a,b) => a.data.localeCompare(b.data));
+                    let html = '';
+                    if (diasDoMes.length === 0) {
+                        html = '<p>Nenhum registro para este mês.</p>';
+                    } else {
+                        html = `<table class="month-table"><thead><tr><th>Dia</th><th>Meta</th><th>Arrec.</th><th>Corr.</th><th>Lucro</th><th>%</th></tr></thead><tbody>`;
+                        let totalMeta = 0, totalArr = 0, totalCorr = 0, totalLucro = 0;
+                        diasDoMes.forEach(r => {
+                            const dataFormatada = r.data.split('-').reverse().join('/');
+                            html += `<tr><td>${dataFormatada}</td><td>${formatMoney(r.meta)}</td><td>${formatMoney(r.arrecadado)}</td><td>${r.corridas}</td><td style="color:${r.lucro>=0?'var(--green)':'var(--red)'}">${formatMoney(r.lucro)}</td><td>${r.pctMeta}%</td></tr>`;
+                            totalMeta += r.meta; totalArr += r.arrecadado; totalCorr += r.corridas; totalLucro += r.lucro;
+                        });
+                        html += `<tr class="month-total"><td><strong>Total</strong></td><td>${formatMoney(totalMeta)}</td><td>${formatMoney(totalArr)}</td><td>${totalCorr}</td><td style="color:${totalLucro>=0?'var(--green)':'var(--red)'}">${formatMoney(totalLucro)}</td><td>--</td></tr></tbody></table>`;
+                    }
+                    $('gestaoMesContent').innerHTML = html;
+                    $('modalGestaoMes').classList.remove('hidden');
+                }
+
+                function salvar() {
+                    const toSave = {
+                        metaDiaria: state.metaDiaria, corridasPrevistas: state.corridasPrevistas,
+                        corridas: state.corridas, gastos: state.gastos,
+                        jornadaInicio: state.jornadaInicio, jornadaPausas: state.jornadaPausas,
+                        jornadaEncerrada: state.jornadaEncerrada, jornadaFim: state.jornadaFim,
+                        dataJornada: state.dataJornada, carouselIndex: state.carouselIndex
+                    };
+                    localStorage.setItem(stateKey, JSON.stringify(toSave));
+                }
+
+                function carregar() {
+                    const d = localStorage.getItem(stateKey);
+                    if(!d) return false;
+                    try {
+                        const obj = JSON.parse(d);
+                        if(obj.dataJornada === new Date().toISOString().split('T')[0] || obj.jornadaEncerrada===false) {
+                            Object.assign(state, obj);
+                            if(state.jornadaInicio && !state.jornadaEncerrada) state.timerInterval = setInterval(atualizarTimer, 1000);
+                            renderizarTudo(); atualizarTimer(); return true;
+                        }
+                    } catch(e){}
+                    return false;
+                }
+
+                // Eventos
+                $('btnStart').addEventListener('click', iniciar);
+                $('btnPause').addEventListener('click', pausar);
+                $('btnStop').addEventListener('click', encerrar);
+                $('btnConfig').addEventListener('click', ()=>{ $('editMetaValor').value=state.metaDiaria; $('editMetaCorridas').value=state.corridasPrevistas; $('modalMeta').classList.remove('hidden'); });
+                $('btnCancelMeta').addEventListener('click', ()=>$('modalMeta').classList.add('hidden'));
+                $('btnSaveMeta').addEventListener('click', ()=>{
+                    const m = parseFloat($('editMetaValor').value)||500, n = parseInt($('editMetaCorridas').value)||20;
+                    if(m>0 && n>0) aplicarMeta(m,n);
+                    $('modalMeta').classList.add('hidden');
+                });
+                $('btnQuickRun').addEventListener('click', quickRun);
+                $('btnSalvarCorrida').addEventListener('click', salvarCorrida);
+                $('btnCancelCorrida').addEventListener('click', ()=>$('modalCorrida').classList.add('hidden'));
+                $('btnRemoveCorrida').addEventListener('click', removerCorrida);
+                $('btnAddExpense').addEventListener('click', abrirModalGasto);
+                $('btnSaveGasto').addEventListener('click', salvarGasto);
+                $('btnCancelGasto').addEventListener('click', ()=>$('modalGasto').classList.add('hidden'));
+                $('btnReset').addEventListener('click', resetar);
+                $('btnGestaoMes').addEventListener('click', abrirGestaoMes);
+                $('btnFecharResumo').addEventListener('click', ()=>$('modalResumo').classList.add('hidden'));
+                $('btnFecharGestao').addEventListener('click', ()=>$('modalGestaoMes').classList.add('hidden'));
+                window.addEventListener('click', e => {
+                    if(e.target === $('modalCorrida')) $('modalCorrida').classList.add('hidden');
+                    if(e.target === $('modalGasto')) $('modalGasto').classList.add('hidden');
+                    if(e.target === $('modalMeta')) $('modalMeta').classList.add('hidden');
+                    if(e.target === $('modalResumo')) $('modalResumo').classList.add('hidden');
+                    if(e.target === $('modalGestaoMes')) $('modalGestaoMes').classList.add('hidden');
+                });
+
+                // Logout
+                $('btnLogout').addEventListener('click', () => {
+                    if (confirm('Tem certeza que deseja sair?')) {
+                        logout();
+                    }
+                });
+
+                if(!carregar()) aplicarMeta(500,20);
+            } // fim initApp
+        })();
+    </script>
+</body>
+</html>               const m = parseFloat($('editMetaValor').value)||500, n = parseInt($('editMetaCorridas').value)||20;
+                    if(m>0 && n>0) aplicarMeta(m,n);
+                    $('modalMeta').classList.add('hidden');
+                });
+                $('btnQuickRun').addEventListener('click', quickRun);
+                $('btnSalvarCorrida').addEventListener('click', salvarCorrida);
+                $('btnCancelCorrida').addEventListener('click', ()=>$('modalCorrida').classList.add('hidden'));
+                $('btnRemoveCorrida').addEventListener('click', removerCorrida);
+                $('btnAddExpense').addEventListener('click', abrirModalGasto);
+                $('btnSaveGasto').addEventListener('click', salvarGasto);
+                $('btnCancelGasto').addEventListener('click', ()=>$('modalGasto').classList.add('hidden'));
+                $('btnReset').addEventListener('click', resetar);
+                $('btnGestaoMes').addEventListener('click', abrirGestaoMes);
+                $('btnFecharResumo').addEventListener('click', ()=>$('modalResumo').classList.add('hidden'));
+                $('btnFecharGestao').addEventListener('click', ()=>$('modalGestaoMes').classList.add('hidden'));
+                window.addEventListener('click', e => {
+                    if(e.target === $('modalCorrida')) $('modalCorrida').classList.add('hidden');
+                    if(e.target === $('modalGasto')) $('modalGasto').classList.add('hidden');
+                    if(e.target === $('modalMeta')) $('modalMeta').classList.add('hidden');
+                    if(e.target === $('modalResumo')) $('modalResumo').classList.add('hidden');
+                    if(e.target === $('modalGestaoMes')) $('modalGestaoMes').classList.add('hidden');
+                });
+
+                // Logout
+                $('btnLogout').addEventListener('click', () => {
+                    if (confirm('Tem certeza que deseja sair?')) {
+                        logout();
+                    }
+                });
+
+                if(!carregar()) aplicarMeta(500,20);
+            } // fim initApp
         })();
     </script>
 </body>
