@@ -10,8 +10,8 @@
     <style>
         :root {
             --bg: #05050f;
-            --surface: #12121f;
-            --surface2: #1a1a2e;
+            --surface: rgba(18, 18, 31, 0.7);
+            --surface2: rgba(26, 26, 46, 0.6);
             --text: #ffffff;
             --text2: #8c8ca5;
             --accent: #ff6b35;
@@ -20,14 +20,19 @@
             --blue: #0ad4ff;
             --purple: #b34aee;
             --gold: #f7c948;
-            --border: rgba(255,255,255,0.06);
-            --shadow-card: 0 4px 12px rgba(0,0,0,0.3);
+            --border: rgba(255, 255, 255, 0.06);
+            --glass-bg: rgba(255, 255, 255, 0.04);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --radius-sm: 12px;
+            --radius: 18px;
+            --radius-lg: 24px;
         }
 
         body.light {
             --bg: #f0f2f5;
-            --surface: #ffffff;
-            --surface2: #e9ecef;
+            --surface: rgba(255, 255, 255, 0.7);
+            --surface2: rgba(233, 236, 239, 0.6);
             --text: #111111;
             --text2: #555555;
             --accent: #ff6b35;
@@ -36,8 +41,10 @@
             --blue: #0288d1;
             --purple: #9c27b0;
             --gold: #f9a825;
-            --border: rgba(0,0,0,0.08);
-            --shadow-card: 0 4px 12px rgba(0,0,0,0.08);
+            --border: rgba(0, 0, 0, 0.08);
+            --glass-bg: rgba(0, 0, 0, 0.03);
+            --glass-border: rgba(0, 0, 0, 0.06);
+            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.08);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -50,109 +57,53 @@
             -webkit-tap-highlight-color: transparent;
             user-select: none;
             transition: background 0.3s, color 0.3s;
+            overflow-x: hidden;
         }
 
-        /* ===== TELA DE AUTENTICAÇÃO ===== */
+        .container { max-width: 520px; margin: 0 auto; padding: 16px 14px; }
+        @media (min-width: 768px) { .container { max-width: 780px; padding: 24px 20px; } }
+        @media (min-width: 1024px) { .container { max-width: 900px; } }
+
+        /* ===== AUTENTICAÇÃO ===== */
         .auth-screen {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 20px;
+            display: flex; align-items: center; justify-content: center;
+            min-height: 100vh; padding: 20px;
         }
         .auth-card {
-            background: var(--surface);
-            border-radius: 32px;
-            padding: 32px 24px;
-            width: 100%;
-            max-width: 400px;
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-card);
-            text-align: center;
+            background: var(--surface); border-radius: 32px;
+            padding: 32px 24px; width: 100%; max-width: 400px;
+            border: 1px solid var(--border); box-shadow: var(--shadow-card);
+            text-align: center; backdrop-filter: blur(20px);
         }
-        .auth-logo {
-            font-size: 48px;
-            margin-bottom: 8px;
-        }
+        .auth-logo { font-size: 48px; margin-bottom: 8px; }
         .auth-title {
-            font-size: 22px;
-            font-weight: 800;
-            margin-bottom: 4px;
+            font-size: 22px; font-weight: 800; margin-bottom: 4px;
             background: linear-gradient(135deg, var(--accent), var(--gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
-        .auth-subtitle {
-            font-size: 13px;
-            color: var(--text2);
-            margin-bottom: 24px;
-        }
+        .auth-subtitle { font-size: 13px; color: var(--text2); margin-bottom: 24px; }
         .auth-input {
-            width: 100%;
-            background: var(--surface2);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 14px 16px;
-            color: var(--text);
-            font-size: 15px;
-            outline: none;
-            transition: 0.2s;
-            margin-bottom: 12px;
-            font-family: 'Inter', sans-serif;
+            width: 100%; background: var(--surface2); border: 1px solid var(--border);
+            border-radius: 14px; padding: 14px 16px; color: var(--text); font-size: 15px;
+            outline: none; transition: 0.2s; margin-bottom: 12px; font-family: 'Inter', sans-serif;
         }
-        .auth-input:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(255,107,53,0.15);
-        }
+        .auth-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(255,107,53,0.15); }
         .auth-btn {
-            width: 100%;
-            background: linear-gradient(135deg, var(--accent), #ff5500);
-            border: none;
-            border-radius: 14px;
-            padding: 16px;
-            font-weight: 700;
-            font-size: 16px;
-            color: #fff;
-            cursor: pointer;
-            transition: 0.2s;
-            margin-top: 8px;
+            width: 100%; background: linear-gradient(135deg, var(--accent), #ff5500);
+            border: none; border-radius: 14px; padding: 16px; font-weight: 700; font-size: 16px;
+            color: #fff; cursor: pointer; transition: 0.2s; margin-top: 8px;
             box-shadow: 0 6px 20px rgba(255,107,53,0.3);
         }
         .auth-btn:active { transform: scale(0.97); }
-        .auth-switch {
-            margin-top: 16px;
-            font-size: 13px;
-            color: var(--text2);
-        }
-        .auth-switch a {
-            color: var(--accent);
-            cursor: pointer;
-            text-decoration: underline;
-            font-weight: 600;
-        }
-        .auth-error {
-            color: var(--red);
-            font-size: 12px;
-            margin-bottom: 8px;
-            display: none;
-            text-align: left;
-        }
+        .auth-switch { margin-top: 16px; font-size: 13px; color: var(--text2); }
+        .auth-switch a { color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600; }
+        .auth-error { color: var(--red); font-size: 12px; margin-bottom: 8px; display: none; text-align: left; }
         .auth-error.show { display: block; }
 
-        /* ===== CONTEÚDO PRINCIPAL (oculto até login) ===== */
-        .app-container {
-            max-width: 520px;
-            margin: 0 auto;
-            padding: 16px 14px;
-        }
-        @media (min-width: 768px) { .app-container { max-width: 780px; padding: 24px 20px; } }
-        @media (min-width: 1024px) { .app-container { max-width: 900px; } }
-
-        /* (O restante do CSS do app continua idêntico ao último código) */
+        /* ===== HEADER ===== */
         .header {
             display: flex; align-items: center; justify-content: space-between;
-            margin-bottom: 14px; background: var(--surface); border-radius: 24px;
+            margin-bottom: 14px; background: var(--surface); border-radius: var(--radius-lg);
             padding: 14px 18px; border: 1px solid var(--border);
             backdrop-filter: blur(20px); box-shadow: var(--shadow-card);
             transition: background 0.3s, border-color 0.3s;
@@ -172,7 +123,7 @@
         .header p { font-size: 11px; color: var(--text2); margin-top: 2px; }
         .header-actions { display: flex; gap: 8px; }
         .icon-btn {
-            background: var(--surface2); border: 1px solid var(--border);
+            background: var(--surface2); border: 1px solid var(--glass-border);
             border-radius: 14px; width: 42px; height: 42px;
             display: flex; align-items: center; justify-content: center;
             cursor: pointer; font-size: 18px; color: var(--text2);
@@ -180,6 +131,7 @@
         }
         .icon-btn:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 12px rgba(255,107,53,0.3); }
 
+        /* Status */
         .status-box { text-align: center; margin-bottom: 14px; }
         .status-badge {
             display: inline-flex; align-items: center; gap: 6px;
@@ -195,8 +147,9 @@
         .on .status-dot { background: var(--green); box-shadow: 0 0 8px var(--green); }
         .paused .status-dot { background: #ffaa00; box-shadow: 0 0 8px #ffaa00; }
 
+        /* Timer */
         .timer-section {
-            background: var(--surface); border-radius: 24px;
+            background: var(--surface); border-radius: var(--radius-lg);
             padding: 18px; margin-bottom: 14px; border: 1.5px solid var(--accent);
             box-shadow: 0 8px 32px rgba(255,107,53,0.15); text-align: center;
         }
@@ -217,10 +170,13 @@
         .btn.start { background: linear-gradient(135deg, #2ecc40, #27ae30); box-shadow: 0 6px 20px rgba(46,204,64,0.3); }
         .btn.pause { background: linear-gradient(135deg, #ffaa00, #f28500); box-shadow: 0 6px 20px rgba(255,170,0,0.3); }
         .btn.stop { background: linear-gradient(135deg, #ff3860, #d6304a); box-shadow: 0 6px 20px rgba(255,56,96,0.3); }
+        .btn.primary { background: linear-gradient(135deg, var(--accent), #ff5500); box-shadow: 0 6px 20px rgba(255,107,53,0.25); }
+        .btn.secondary { background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text); }
         .hidden { display: none !important; }
 
+        /* Progresso */
         .progress-card {
-            background: var(--surface); border-radius: 18px;
+            background: var(--surface); border-radius: var(--radius);
             padding: 14px; margin-bottom: 14px; border: 1px solid var(--border);
             backdrop-filter: blur(10px); box-shadow: var(--shadow-card);
         }
@@ -229,10 +185,11 @@
         .progress-bar { background: rgba(128,128,128,0.2); height: 8px; border-radius: 10px; overflow: hidden; }
         .progress-fill { background: linear-gradient(90deg, var(--accent), var(--gold)); height: 100%; width: 0%; border-radius: 10px; transition: width 0.5s; }
 
+        /* Dashboard */
         .dashboard { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 14px; }
         @media (min-width: 768px) { .dashboard { grid-template-columns: repeat(6,1fr); } }
         .card {
-            background: var(--surface); border-radius: 18px; padding: 14px 6px;
+            background: var(--surface); border-radius: var(--radius); padding: 14px 6px;
             text-align: center; border: 1px solid var(--border);
             backdrop-filter: blur(8px); transition: 0.3s; box-shadow: var(--shadow-card);
         }
@@ -243,9 +200,8 @@
         .card.green .card-value { color: var(--green); }
         .card.blue .card-value { color: var(--blue); }
 
+        /* Carrossel */
         .section-title { font-size: 14px; font-weight: 700; margin: 14px 0 8px; display: flex; align-items: center; gap: 8px; color: var(--text); }
-
-        /* Carrossel (mantido) */
         .carousel-wrapper { position: relative; width: 100%; overflow: hidden; padding: 20px 0 10px; margin-bottom: 10px; perspective: 800px; }
         .carousel-track-container { overflow: visible; width: 100%; }
         .carousel-track {
@@ -254,7 +210,7 @@
         }
         @media (min-width: 600px) { .carousel-track { padding: 0 calc(50% - 90px); } }
         .carousel-card {
-            flex: 0 0 auto; width: 130px; margin: 0 8px; background: #1e1e30;
+            flex: 0 0 auto; width: 130px; margin: 0 8px; background: var(--surface2);
             border: 1px solid var(--border); border-radius: 20px; padding: 16px 6px;
             text-align: center; cursor: pointer; transition: all 0.25s ease-out;
             transform: rotateY(25deg) scale(0.8) translateZ(-50px); opacity: 0.6;
@@ -288,6 +244,7 @@
         .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text2); opacity: 0.4; transition: 0.3s; cursor: pointer; }
         .carousel-dot.active { opacity: 1; background: var(--accent); width: 24px; border-radius: 4px; }
 
+        /* Corrida rápida */
         .quick-btn {
             width: 100%; background: linear-gradient(135deg, var(--accent), #ff5500);
             border: none; border-radius: 16px; padding: 16px; font-weight: 700; font-size: 15px;
@@ -296,14 +253,15 @@
         }
         .quick-btn:active { transform: scale(0.97); }
 
-        .chart-section { background: var(--surface); border-radius: 18px; padding: 16px; margin-bottom: 14px; border: 1px solid var(--border); box-shadow: var(--shadow-card); }
+        /* Gráfico */
+        .chart-section { background: var(--surface); border-radius: var(--radius); padding: 16px; margin-bottom: 14px; border: 1px solid var(--border); box-shadow: var(--shadow-card); }
         .chart-title { font-size: 14px; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; color: var(--text); }
-        .chart-container { display: flex; align-items: flex-end; gap: 6px; height: 180px; padding: 0 4px; overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; scrollbar-color: rgba(128,128,128,0.3) transparent; }
+        .chart-container { display: flex; align-items: flex-end; gap: 6px; height: 180px; padding: 0 4px; overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; }
         .chart-container::-webkit-scrollbar { height: 4px; }
         .chart-container::-webkit-scrollbar-thumb { background: rgba(128,128,128,0.3); border-radius: 4px; }
         .chart-bar-group { display: flex; flex-direction: column; align-items: center; min-width: 28px; flex: 0 0 auto; position: relative; }
         .chart-bar-wrapper { display: flex; align-items: flex-end; gap: 3px; height: 150px; cursor: pointer; position: relative; }
-        .chart-bar { width: 14px; border-radius: 6px 6px 0 0; transition: all 0.3s ease; position: relative; }
+        .chart-bar { width: 14px; border-radius: 6px 6px 0 0; transition: all 0.3s ease; }
         .chart-bar.predicted { background: rgba(128,128,128,0.3); }
         .chart-bar.real { background: var(--green); width: 18px; box-shadow: 0 0 8px rgba(62,252,90,0.4); }
         .chart-bar.real.negative { background: var(--red); box-shadow: 0 0 8px rgba(255,56,96,0.4); }
@@ -313,19 +271,20 @@
             background: var(--surface2); color: var(--text); padding: 6px 10px;
             border-radius: 8px; font-size: 10px; white-space: nowrap;
             pointer-events: none; opacity: 0; transition: opacity 0.2s;
-            border: 1px solid var(--border); box-shadow: var(--shadow-card); z-index: 5;
+            border: 1px solid var(--border); z-index: 5;
         }
         .chart-bar-group:hover .chart-tooltip { opacity: 1; }
 
+        /* Layout lado a lado */
         .side-by-side { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 14px; }
         .side-by-side .half { flex: 1 1 280px; min-width: 0; }
         .expenses, .report {
-            background: var(--surface); border-radius: 18px; padding: 14px;
+            background: var(--surface); border-radius: var(--radius); padding: 14px;
             border: 1px solid var(--border); box-shadow: var(--shadow-card);
         }
         .expense-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--text); }
         .secondary-btn {
-            width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
+            width: 100%; background: var(--glass-bg); border: 1px solid var(--glass-border);
             border-radius: 12px; padding: 12px; color: var(--text); font-weight: 600; font-size: 13px;
             cursor: pointer; margin-top: 10px; transition: 0.2s; text-align: center;
         }
@@ -371,51 +330,91 @@
         .modal h3 { margin-bottom: 12px; font-size: 18px; font-weight: 700; }
         .modal label { display: block; font-size: 11px; color: var(--text2); margin-bottom: 4px; font-weight: 600; }
         .modal input, .modal select, .modal textarea {
-            width: 100%; background: #1a1a2e; border: 1px solid rgba(255,255,255,0.1);
+            width: 100%; background: rgba(30,30,50,0.8); border: 1px solid rgba(255,255,255,0.1);
             border-radius: 12px; padding: 10px 12px; color: #fff; font-size: 14px;
             outline: none; transition: 0.2s; font-family: 'Inter', sans-serif;
         }
-        .modal input:focus, .modal select:focus, .modal textarea:focus {
-            border-color: var(--accent); box-shadow: 0 0 12px rgba(255,107,53,0.2);
-        }
+        .modal input:focus { border-color: var(--accent); box-shadow: 0 0 12px rgba(255,107,53,0.2); }
         .option-group { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
         .option-item {
-            flex: 1 0 auto; min-width: 70px; background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08); border-radius: 12px;
+            flex: 1 0 auto; min-width: 70px; background: var(--glass-bg);
+            border: 1px solid var(--glass-border); border-radius: 12px;
             padding: 10px 6px; text-align: center; font-size: 13px; font-weight: 600;
             color: var(--text); cursor: pointer; transition: 0.2s; white-space: nowrap;
             display: flex; align-items: center; justify-content: center; gap: 6px;
         }
         .option-item:hover { border-color: var(--accent); color: var(--accent); }
-        .option-item.active {
-            background: var(--accent); color: #fff; border-color: var(--accent);
-            box-shadow: 0 0 14px rgba(255,107,53,0.4);
-        }
-        .dot {
-            display: inline-block; width: 10px; height: 10px; border-radius: 50%;
-            flex-shrink: 0; box-shadow: 0 0 4px rgba(0,0,0,0.5);
-        }
+        .option-item.active { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: 0 0 14px rgba(255,107,53,0.4); }
+        .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
         .dot.uber { background: #000; }
         .dot.novennove { background: var(--gold); }
         .dot.indriver { background: var(--green); }
         .dot.particular { background: #aaa; }
-
         .modal .btn-row { display: flex; gap: 8px; justify-content: flex-end; margin-top: 16px; }
         .btn-sm { padding: 8px 16px; font-size: 12px; border-radius: 10px; }
-        .month-table { width: 100%; border-collapse: collapse; font-size: 11px; margin: 12px 0; color: var(--text); }
-        .month-table th { text-align: left; color: var(--accent); padding: 6px 4px; border-bottom: 1px solid var(--border); }
-        .month-table td { padding: 6px 4px; border-bottom: 1px solid var(--border); }
-        .month-total { font-weight: 800; color: var(--text); border-top: 2px solid var(--border); }
+
+        /* ===== MODAL GESTÃO DO MÊS ===== */
+        .gm-header {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 16px;
+        }
+        .gm-title { font-size: 18px; font-weight: 700; }
+        .gm-summary-cards {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px;
+        }
+        .gm-summary-card {
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            border-radius: var(--radius-sm); padding: 12px 6px; text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        .gm-summary-card .label { font-size: 9px; color: var(--text2); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px; font-weight: 600; }
+        .gm-summary-card .value { font-size: 15px; font-weight: 800; color: var(--text); }
+        .gm-day-list { display: flex; flex-direction: column; gap: 8px; max-height: 50vh; overflow-y: auto; padding-right: 4px; }
+        .gm-day-card {
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            border-radius: var(--radius); overflow: hidden; transition: all 0.2s;
+        }
+        .gm-day-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px 14px; cursor: pointer; transition: background 0.2s;
+        }
+        .gm-day-header:hover { background: rgba(128,128,128,0.05); }
+        .gm-day-info { display: flex; align-items: center; gap: 10px; }
+        .gm-day-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+        .gm-day-dot.positive { background: var(--green); }
+        .gm-day-dot.negative { background: var(--red); }
+        .gm-day-date { font-weight: 600; font-size: 13px; }
+        .gm-day-stats { font-size: 11px; color: var(--text2); }
+        .gm-day-stats strong { color: var(--text); }
+        .gm-day-actions { display: flex; gap: 4px; }
+        .gm-mini-btn {
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            border-radius: 8px; width: 28px; height: 28px; display: flex;
+            align-items: center; justify-content: center; cursor: pointer; font-size: 12px;
+            color: var(--text2); transition: 0.2s;
+        }
+        .gm-mini-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .gm-mini-btn.delete:hover { border-color: var(--red); color: var(--red); }
+        .gm-day-details {
+            padding: 0 14px 12px; border-top: 1px solid var(--glass-border); padding-top: 10px;
+            display: none; font-size: 11px; color: var(--text2);
+            animation: slideDown 0.3s ease-out;
+        }
+        @keyframes slideDown { from { opacity:0; max-height:0; } to { opacity:1; max-height:200px; } }
+        .gm-day-details.open { display: block; }
+        .gm-detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .gm-detail-grid div strong { color: var(--text); }
+        .gm-empty { text-align: center; padding: 24px; color: var(--text2); font-size: 13px; }
     </style>
 </head>
 <body class="dark">
-    <!-- Tela de Autenticação -->
+    <!-- ==================== TELA DE AUTENTICAÇÃO ==================== -->
     <div id="authScreen" class="auth-screen">
-        <div class="auth-card" id="authCard">
+        <div class="auth-card">
             <div class="auth-logo">🚗</div>
             <div class="auth-title">Meta Driver PRO</div>
             <div class="auth-subtitle" id="authSubtitle">Faça login para continuar</div>
-            <div class="auth-error" id="authError">Mensagem de erro</div>
+            <div class="auth-error" id="authError"></div>
             <input type="text" id="authUser" class="auth-input" placeholder="Usuário">
             <input type="password" id="authPass" class="auth-input" placeholder="Senha">
             <button class="auth-btn" id="authBtn">Entrar</button>
@@ -425,8 +424,8 @@
         </div>
     </div>
 
-    <!-- Conteúdo Principal (oculto inicialmente) -->
-    <div id="appContainer" class="app-container hidden">
+    <!-- ==================== CONTEÚDO PRINCIPAL ==================== -->
+    <div id="appContainer" class="container hidden">
         <header class="header">
             <div class="brand">
                 <div class="logo-icon">🚗</div>
@@ -508,7 +507,8 @@
         </footer>
     </div>
 
-    <!-- Modais (mantidos) -->
+    <!-- ==================== MODAIS ==================== -->
+    <!-- Modal Corrida -->
     <div class="modal-overlay hidden" id="modalCorrida">
         <div class="modal">
             <h3>🏁 Corrida <span id="modalCorridaNum"></span></h3>
@@ -533,6 +533,7 @@
         </div>
     </div>
 
+    <!-- Modal Gasto -->
     <div class="modal-overlay hidden" id="modalGasto">
         <div class="modal">
             <h3>➕ Novo Gasto</h3>
@@ -554,6 +555,7 @@
         </div>
     </div>
 
+    <!-- Modal Meta -->
     <div class="modal-overlay hidden" id="modalMeta">
         <div class="modal">
             <h3>⚙️ Meta do Dia</h3>
@@ -566,6 +568,7 @@
         </div>
     </div>
 
+    <!-- Modal Resumo -->
     <div class="modal-overlay hidden" id="modalResumo">
         <div class="modal" style="max-width:420px;">
             <h3>🏁 Jornada Encerrada</h3>
@@ -574,675 +577,311 @@
         </div>
     </div>
 
+    <!-- Modal Gestão do Mês (LIQUID GLASS) -->
     <div class="modal-overlay hidden" id="modalGestaoMes">
-        <div class="modal" style="max-width:440px;">
-            <h3>📅 Gestão do Mês</h3>
-            <div id="gestaoMesContent" style="font-size:12px; line-height:1.6;"></div>
-            <div class="btn-row"><button class="btn start btn-sm" id="btnFecharGestao">Fechar</button></div>
+        <div class="modal" style="max-width:440px; max-height:80vh;">
+            <div class="gm-header">
+                <div class="gm-title">📅 Gestão do Mês</div>
+                <button class="btn stop btn-sm" id="btnFecharGestao">Fechar</button>
+            </div>
+            <div class="gm-summary-cards" id="gmSummaryCards">
+                <div class="gm-summary-card"><div class="label">💰 Arrecadado</div><div class="value" id="gmArrecadado">R$ 0</div></div>
+                <div class="gm-summary-card"><div class="label">💵 Lucro</div><div class="value" id="gmLucro">R$ 0</div></div>
+                <div class="gm-summary-card"><div class="label">📆 Dias</div><div class="value" id="gmDias">0</div></div>
+            </div>
+            <div class="gm-day-list" id="gmDayList"></div>
+        </div>
+    </div>
+
+    <!-- Modal Editar Dia (dentro da gestão) -->
+    <div class="modal-overlay hidden" id="modalEditDay">
+        <div class="modal">
+            <h3>✏️ Editar Dia</h3>
+            <label>Data</label>
+            <input type="text" id="editDayData" disabled>
+            <label>Meta (R$)</label>
+            <input type="number" id="editDayMeta" step="0.01">
+            <label>Arrecadado (R$)</label>
+            <input type="number" id="editDayArrecadado" step="0.01">
+            <label>Corridas</label>
+            <input type="number" id="editDayCorridas" step="1">
+            <label>Gastos (R$)</label>
+            <input type="number" id="editDayGastos" step="0.01">
+            <div class="btn-row">
+                <button class="btn secondary btn-sm" id="btnCancelEdit">Cancelar</button>
+                <button class="btn primary btn-sm" id="btnSaveEdit">Salvar</button>
+            </div>
         </div>
     </div>
 
     <script>
         (function() {
-            // ============ AUTENTICAÇÃO ============
+            // ==================== AUTENTICAÇÃO ====================
             let currentUser = localStorage.getItem('currentUser');
-            let authMode = 'login'; // 'login' ou 'signup'
+            let authMode = 'login';
 
-            const authScreen = document.getElementById('authScreen');
-            const appContainer = document.getElementById('appContainer');
-            const authCard = document.getElementById('authCard');
-            const authSubtitle = document.getElementById('authSubtitle');
-            const authError = document.getElementById('authError');
-            const authUser = document.getElementById('authUser');
-            const authPass = document.getElementById('authPass');
-            const authBtn = document.getElementById('authBtn');
-            const authSwitchText = document.getElementById('authSwitchText');
-            const authSwitchLink = document.getElementById('authSwitchLink');
+            const $ = id => document.getElementById(id);
+            const authScreen = $('authScreen');
+            const appContainer = $('appContainer');
 
-            function showError(msg) {
-                authError.textContent = msg;
-                authError.classList.add('show');
-            }
-            function hideError() {
-                authError.classList.remove('show');
-            }
+            function showAuthError(msg) { $('authError').textContent = msg; $('authError').classList.add('show'); }
+            function hideAuthError() { $('authError').classList.remove('show'); }
 
             function updateAuthUI() {
                 if (authMode === 'login') {
-                    authSubtitle.textContent = 'Faça login para continuar';
-                    authBtn.textContent = 'Entrar';
-                    authSwitchText.innerHTML = 'Não tem conta? <a id="authSwitchLink">Crie uma</a>';
-                    document.getElementById('authSwitchLink').addEventListener('click', () => {
-                        authMode = 'signup';
-                        hideError();
-                        updateAuthUI();
-                    });
+                    $('authSubtitle').textContent = 'Faça login para continuar';
+                    $('authBtn').textContent = 'Entrar';
+                    $('authSwitchText').innerHTML = 'Não tem conta? <a id="authSwitchLink">Crie uma</a>';
                 } else {
-                    authSubtitle.textContent = 'Crie sua conta gratuita';
-                    authBtn.textContent = 'Criar conta';
-                    authSwitchText.innerHTML = 'Já tem conta? <a id="authSwitchLink">Faça login</a>';
-                    document.getElementById('authSwitchLink').addEventListener('click', () => {
-                        authMode = 'login';
-                        hideError();
-                        updateAuthUI();
-                    });
+                    $('authSubtitle').textContent = 'Crie sua conta gratuita';
+                    $('authBtn').textContent = 'Criar conta';
+                    $('authSwitchText').innerHTML = 'Já tem conta? <a id="authSwitchLink">Faça login</a>';
                 }
+                $('authSwitchLink').addEventListener('click', () => {
+                    authMode = authMode === 'login' ? 'signup' : 'login';
+                    hideAuthError();
+                    updateAuthUI();
+                });
             }
 
             function authenticate() {
-                const user = authUser.value.trim();
-                const pass = authPass.value.trim();
-                if (!user || !pass) {
-                    showError('Preencha todos os campos.');
-                    return;
-                }
+                const user = $('authUser').value.trim();
+                const pass = $('authPass').value.trim();
+                if (!user || !pass) { showAuthError('Preencha todos os campos.'); return; }
                 if (authMode === 'login') {
-                    const storedPass = localStorage.getItem(`user_${user}_pass`);
-                    if (storedPass === null) {
-                        showError('Usuário não encontrado.');
-                        return;
-                    }
-                    if (storedPass !== pass) {
-                        showError('Senha incorreta.');
-                        return;
-                    }
-                    // Login bem-sucedido
-                    currentUser = user;
-                    localStorage.setItem('currentUser', currentUser);
-                    entrarNoApp();
+                    const stored = localStorage.getItem(`user_${user}_pass`);
+                    if (!stored) { showAuthError('Usuário não encontrado.'); return; }
+                    if (stored !== pass) { showAuthError('Senha incorreta.'); return; }
+                    currentUser = user; localStorage.setItem('currentUser', currentUser); entrarNoApp();
                 } else {
-                    // Cadastro
-                    const existing = localStorage.getItem(`user_${user}_pass`);
-                    if (existing !== null) {
-                        showError('Usuário já existe.');
-                        return;
-                    }
+                    if (localStorage.getItem(`user_${user}_pass`)) { showAuthError('Usuário já existe.'); return; }
                     localStorage.setItem(`user_${user}_pass`, pass);
-                    currentUser = user;
-                    localStorage.setItem('currentUser', currentUser);
-                    entrarNoApp();
+                    currentUser = user; localStorage.setItem('currentUser', currentUser); entrarNoApp();
                 }
             }
 
             function entrarNoApp() {
                 authScreen.classList.add('hidden');
                 appContainer.classList.remove('hidden');
-                // Inicializa o app com os dados do usuário
                 initApp(currentUser);
             }
 
             function logout() {
-                localStorage.removeItem('currentUser');
-                currentUser = null;
-                appContainer.classList.add('hidden');
-                authScreen.classList.remove('hidden');
-                authUser.value = '';
-                authPass.value = '';
-                hideError();
-                if (state.timerInterval) clearInterval(state.timerInterval);
+                if (confirm('Tem certeza que deseja sair?')) {
+                    localStorage.removeItem('currentUser');
+                    currentUser = null;
+                    appContainer.classList.add('hidden');
+                    authScreen.classList.remove('hidden');
+                    $('authUser').value = ''; $('authPass').value = '';
+                    hideAuthError();
+                    if (window._appState && window._appState.timerInterval) clearInterval(window._appState.timerInterval);
+                }
             }
 
-            // Event listeners da autenticação
-            authBtn.addEventListener('click', authenticate);
-            authPass.addEventListener('keydown', (e) => { if (e.key === 'Enter') authenticate(); });
-            authSwitchLink.addEventListener('click', () => {
-                authMode = authMode === 'login' ? 'signup' : 'login';
-                hideError();
-                updateAuthUI();
-            });
+            $('authBtn').addEventListener('click', authenticate);
+            $('authPass').addEventListener('keydown', e => { if (e.key === 'Enter') authenticate(); });
             updateAuthUI();
+            if (currentUser) { entrarNoApp(); } else { return; } // Sai se não estiver logado
 
-            // Se já estiver logado, entrar direto
-            if (currentUser) {
-                entrarNoApp();
-                return; // para não executar o resto duas vezes
-            }
-
-            // ============ APP PRINCIPAL ============
+            // ==================== APP PRINCIPAL ====================
             function initApp(username) {
                 const stateKey = `metaDriverPro_${username}`;
                 const historyKey = `historicoMensal_${username}`;
 
                 const state = {
-                    metaDiaria: 500,
-                    corridasPrevistas: 20,
-                    corridas: [],
-                    gastos: [],
-                    jornadaInicio: null,
-                    jornadaPausas: [],
-                    jornadaEncerrada: false,
-                    timerInterval: null,
-                    dataJornada: new Date().toISOString().split('T')[0],
-                    carouselIndex: 0,
+                    metaDiaria: 500, corridasPrevistas: 20, corridas: [], gastos: [],
+                    jornadaInicio: null, jornadaPausas: [], jornadaEncerrada: false,
+                    timerInterval: null, dataJornada: new Date().toISOString().split('T')[0], carouselIndex: 0,
                 };
+                window._appState = state;
 
-                const $ = id => document.getElementById(id);
                 const formatMoney = v => 'R$ ' + (parseFloat(v)||0).toFixed(2).replace('.',',');
-                const formatTime = s => {
-                    const h = Math.floor(s/3600), m = Math.floor((s%3600)/60), sec = Math.floor(s%60);
-                    return `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${sec.toString().padStart(2,'0')}`;
-                };
-                const calcTempo = () => {
-                    if(!state.jornadaInicio) return 0;
-                    let fim = state.jornadaEncerrada ? (state.jornadaFim||Date.now()) : Date.now();
-                    let pausas = state.jornadaPausas.reduce((a,p) => a + ((p.fim||Date.now())-p.inicio), 0);
-                    return Math.max(0, Math.floor((fim - state.jornadaInicio - pausas)/1000));
-                };
+                const formatTime = s => { const h=Math.floor(s/3600), m=Math.floor((s%3600)/60), sec=Math.floor(s%60); return `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${sec.toString().padStart(2,'0')}`; };
+                const calcTempo = () => { if(!state.jornadaInicio) return 0; let fim=state.jornadaEncerrada?(state.jornadaFim||Date.now()):Date.now(); let p=state.jornadaPausas.reduce((a,p)=>a+((p.fim||Date.now())-p.inicio),0); return Math.max(0,Math.floor((fim-state.jornadaInicio-p)/1000)); };
                 const podeRegistrar = () => state.jornadaInicio && !state.jornadaEncerrada;
 
-                // Tema
-                function applyTheme(theme) {
-                    document.body.classList.toggle('light', theme === 'light');
-                    document.body.classList.toggle('dark', theme === 'dark');
-                    $('btnTheme').textContent = theme === 'light' ? '☀️' : '🌙';
-                    localStorage.setItem('theme', theme);
-                }
-                $('btnTheme').addEventListener('click', () => {
-                    const current = document.body.classList.contains('light') ? 'dark' : 'light';
-                    applyTheme(current);
-                });
-                applyTheme(localStorage.getItem('theme') || 'dark');
+                function applyTheme(theme) { document.body.classList.toggle('light',theme==='light'); document.body.classList.toggle('dark',theme==='dark'); $('btnTheme').textContent=theme==='light'?'☀️':'🌙'; localStorage.setItem('theme',theme); }
+                $('btnTheme').addEventListener('click',()=>{ applyTheme(document.body.classList.contains('light')?'dark':'light'); });
+                applyTheme(localStorage.getItem('theme')||'dark');
 
-                function gerarProgressao(meta, n) {
-                    if(n<=1) return [meta];
-                    let a1 = Math.round(meta/(n*2.8)), an = Math.round((2*meta/n)-a1);
-                    if(an<=a1) an = a1+n;
-                    let r = (an-a1)/(n-1);
-                    let arr = Array.from({length:n}, (_,i) => Math.round(a1+r*i));
-                    let diff = meta - arr.reduce((a,b)=>a+b,0);
-                    arr[arr.length-1] += diff;
-                    return arr;
-                }
+                function gerarProgressao(meta,n) { if(n<=1) return[meta]; let a1=Math.round(meta/(n*2.8)),an=Math.round((2*meta/n)-a1); if(an<=a1)an=a1+n; let r=(an-a1)/(n-1); let arr=Array.from({length:n},(_,i)=>Math.round(a1+r*i)); arr[arr.length-1]+=meta-arr.reduce((a,b)=>a+b,0); return arr; }
+                function aplicarMeta(meta,n) { state.metaDiaria=meta; state.corridasPrevistas=n; const prog=gerarProgressao(meta,n); state.corridas=prog.map((p,i)=>i<state.corridas.length?{...state.corridas[i],previsto:p}:{previsto:p,real:null,pagamento:null,obs:'',hora:null}).slice(0,n); state.carouselIndex=0; salvar(); renderizarTudo(); }
 
-                function aplicarMeta(meta, n) {
-                    state.metaDiaria = meta; state.corridasPrevistas = n;
-                    const prog = gerarProgressao(meta,n);
-                    state.corridas = prog.map((p,i) => i < state.corridas.length ? {...state.corridas[i], previsto:p} : {previsto:p, real:null, pagamento:null, obs:'', hora:null}).slice(0,n);
-                    state.carouselIndex = 0;
-                    salvar(); renderizarTudo();
-                }
+                // Carrossel
+                let carouselDragStart=0, carouselDragging=false, carouselOffsetX=0;
+                function renderizarCarrossel(){ const track=$('carouselTrack'), dots=$('carouselDots'); track.innerHTML=''; dots.innerHTML=''; if(!state.corridas.length)return; state.corridas.forEach((c,i)=>{ const card=document.createElement('div'); card.className='carousel-card'; if(c.real!==null)card.classList.add('done'); card.innerHTML=`<div class="carousel-num">#${i+1}</div><span class="carousel-pred">prev. ${formatMoney(c.previsto)}</span>${c.real!==null?`<span class="carousel-real">real ${formatMoney(c.real)}</span>`:''}`; card.addEventListener('click',()=>{ if(i===state.carouselIndex)abrirModalCorrida(i); else{state.carouselIndex=i;atualizarCarrossel();} }); track.appendChild(card); const dot=document.createElement('div'); dot.className='carousel-dot'; dot.addEventListener('click',()=>{state.carouselIndex=i;atualizarCarrossel();}); dots.appendChild(dot); }); $('carouselLeft').onclick=()=>{if(state.carouselIndex>0){state.carouselIndex--;atualizarCarrossel();}}; $('carouselRight').onclick=()=>{if(state.carouselIndex<state.corridas.length-1){state.carouselIndex++;atualizarCarrossel();}}; track.addEventListener('mousedown',e=>{carouselDragging=true;carouselDragStart=e.clientX;carouselOffsetX=0;track.style.transition='none';}); window.addEventListener('mousemove',e=>{if(!carouselDragging)return;carouselOffsetX=e.clientX-carouselDragStart;const cw=window.innerWidth>=600?184:146;track.style.transform=`translateX(${-state.carouselIndex*cw+carouselOffsetX}px)`;}); window.addEventListener('mouseup',()=>{if(!carouselDragging)return;carouselDragging=false;track.style.transition='transform 0.25s ease-out';if(carouselOffsetX<-20&&state.carouselIndex<state.corridas.length-1)state.carouselIndex++;else if(carouselOffsetX>20&&state.carouselIndex>0)state.carouselIndex--;atualizarCarrossel();}); track.addEventListener('touchstart',e=>{carouselDragging=true;carouselDragStart=e.touches[0].clientX;carouselOffsetX=0;track.style.transition='none';},{passive:true}); track.addEventListener('touchmove',e=>{if(!carouselDragging)return;carouselOffsetX=e.touches[0].clientX-carouselDragStart;const cw=window.innerWidth>=600?184:146;track.style.transform=`translateX(${-state.carouselIndex*cw+carouselOffsetX}px)`;},{passive:true}); track.addEventListener('touchend',()=>{if(!carouselDragging)return;carouselDragging=false;track.style.transition='transform 0.25s ease-out';if(carouselOffsetX<-20&&state.carouselIndex<state.corridas.length-1)state.carouselIndex++;else if(carouselOffsetX>20&&state.carouselIndex>0)state.carouselIndex--;atualizarCarrossel();}); atualizarCarrossel(); }
+                function atualizarCarrossel(){ const track=$('carouselTrack'); const cw=window.innerWidth>=600?184:146; track.style.transform=`translateX(${-state.carouselIndex*cw}px)`; track.querySelectorAll('.carousel-card').forEach((c,i)=>{c.classList.remove('active','left','right');if(i===state.carouselIndex)c.classList.add('active');else if(i===state.carouselIndex-1)c.classList.add('left');else if(i===state.carouselIndex+1)c.classList.add('right');}); $('carouselDots').querySelectorAll('.carousel-dot').forEach((d,i)=>d.classList.toggle('active',i===state.carouselIndex)); $('carouselLeft').style.opacity=state.carouselIndex===0?'0.3':'1'; $('carouselRight').style.opacity=state.carouselIndex>=state.corridas.length-1?'0.3':'1'; }
 
-                /* ============ CARRROSSEL 3D RÁPIDO ============ */
-                let carouselDragStart = 0;
-                let carouselDragging = false;
-                let carouselOffsetX = 0;
+                // Gráfico
+                function renderizarGrafico(){ const c=$('chartContainer'); c.innerHTML=''; if(!state.corridas.length){c.innerHTML='<p style="color:var(--text2);font-size:12px;text-align:center;width:100%;">Registre corridas para ver o gráfico.</p>';return;} const vals=state.corridas.map(c=>({previsto:c.previsto,real:c.real})); const max=Math.max(...vals.map(v=>v.previsto),...vals.filter(v=>v.real!==null).map(v=>v.real),1); vals.forEach((v,i)=>{ const g=document.createElement('div');g.className='chart-bar-group'; const w=document.createElement('div');w.className='chart-bar-wrapper'; const pb=document.createElement('div');pb.className='chart-bar predicted';pb.style.height=(v.previsto/max)*130+'px';w.appendChild(pb); if(v.real!==null){ const rb=document.createElement('div');rb.className='chart-bar real';if(v.real<v.previsto)rb.classList.add('negative');rb.style.height=(v.real/max)*130+'px';w.appendChild(rb); const t=document.createElement('div');t.className='chart-tooltip'; const dif=v.real-v.previsto; t.innerHTML=`#${i+1} | Prev: ${formatMoney(v.previsto)} | Real: ${formatMoney(v.real)}<br>Dif: ${dif>=0?'+':''}${formatMoney(dif)}`;w.appendChild(t); }else{ const t=document.createElement('div');t.className='chart-tooltip';t.textContent=`#${i+1} | Prev: ${formatMoney(v.previsto)} | Pendente`;w.appendChild(t); } g.appendChild(w); const l=document.createElement('div');l.className='chart-bar-label';l.textContent=`#${i+1}`;g.appendChild(l);c.appendChild(g); }); }
 
-                function renderizarCarrossel() {
-                    const track = $('carouselTrack');
-                    const dotsContainer = $('carouselDots');
-                    track.innerHTML = '';
-                    dotsContainer.innerHTML = '';
-                    if (!state.corridas.length) return;
+                // Corrida modal
+                let corridaEditando=null;
+                function abrirModalCorrida(i){ if(!podeRegistrar())return alert('Inicie a jornada primeiro!'); corridaEditando=i; const c=state.corridas[i]; $('modalCorridaNum').textContent=i+1; $('inputPrevisto').value=formatMoney(c.previsto); $('inputValorReal').value=''; $('inputObs').value=c.obs||''; document.querySelectorAll('#paymentOptions .option-item').forEach(o=>o.classList.toggle('active',o.dataset.value===(c.pagamento||'Uber'))); $('modalCorrida').classList.remove('hidden'); }
+                function salvarCorrida(){ const v=$('inputValorReal').value.trim(); let real=v===''?state.corridas[corridaEditando].previsto:(parseFloat(v)||0); const pg=document.querySelector('#paymentOptions .option-item.active')?.dataset.value||'Uber'; const obs=$('inputObs').value; const c=state.corridas[corridaEditando]; c.real=real;c.pagamento=pg;c.obs=obs;c.hora=new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}); salvar();$('modalCorrida').classList.add('hidden');renderizarTudo(); }
+                function removerCorrida(){ state.corridas[corridaEditando].real=null;state.corridas[corridaEditando].pagamento=null;state.corridas[corridaEditando].obs='';state.corridas[corridaEditando].hora=null; salvar();$('modalCorrida').classList.add('hidden');renderizarTudo(); }
+                function quickRun(){ if(!podeRegistrar())return alert('Inicie a jornada!'); const idx=state.corridas.findIndex(c=>c.real===null); if(idx===-1){alert('Todas as corridas previstas já foram registradas!');return;} state.carouselIndex=idx;corridaEditando=idx; const c=state.corridas[idx]; $('modalCorridaNum').textContent=idx+1;$('inputPrevisto').value=formatMoney(c.previsto);$('inputValorReal').value='';$('inputObs').value=''; document.querySelectorAll('#paymentOptions .option-item').forEach(o=>o.classList.toggle('active',o.dataset.value==='Uber')); $('modalCorrida').classList.remove('hidden');atualizarCarrossel(); }
+                document.querySelectorAll('#paymentOptions .option-item').forEach(o=>o.addEventListener('click',()=>{document.querySelectorAll('#paymentOptions .option-item').forEach(x=>x.classList.remove('active'));o.classList.add('active');}));
+                document.querySelectorAll('#gastoCategoryOptions .option-item').forEach(o=>o.addEventListener('click',()=>{document.querySelectorAll('#gastoCategoryOptions .option-item').forEach(x=>x.classList.remove('active'));o.classList.add('active');}));
 
-                    state.corridas.forEach((c, i) => {
-                        const card = document.createElement('div');
-                        card.className = 'carousel-card';
-                        if (c.real !== null) card.classList.add('done');
-                        card.innerHTML = `
-                            <div class="carousel-num">#${i+1}</div>
-                            <span class="carousel-pred">prev. ${formatMoney(c.previsto)}</span>
-                            ${c.real !== null ? `<span class="carousel-real">real ${formatMoney(c.real)}</span>` : ''}
-                        `;
-                        card.addEventListener('click', () => {
-                            if (i === state.carouselIndex) abrirModalCorrida(i);
-                            else { state.carouselIndex = i; atualizarCarrossel(); }
-                        });
-                        track.appendChild(card);
+                // Gastos
+                function abrirModalGasto(){ if(!podeRegistrar())return alert('Inicie a jornada primeiro!'); $('inputGastoDesc').value='';$('inputGastoValor').value=''; document.querySelectorAll('#gastoCategoryOptions .option-item').forEach(o=>o.classList.remove('active')); document.querySelector('#gastoCategoryOptions .option-item[data-cat="Combustível"]').classList.add('active'); $('modalGasto').classList.remove('hidden'); }
+                function salvarGasto(){ const desc=$('inputGastoDesc').value.trim(); const val=parseFloat($('inputGastoValor').value)||0; const cat=document.querySelector('#gastoCategoryOptions .option-item.active')?.dataset.cat||'Outro'; if(val<=0)return alert('Informe um valor válido.'); state.gastos.push({desc:desc||cat,valor:val,cat}); salvar();$('modalGasto').classList.add('hidden');renderizarTudo(); }
 
-                        const dot = document.createElement('div');
-                        dot.className = 'carousel-dot';
-                        dot.addEventListener('click', () => { state.carouselIndex = i; atualizarCarrossel(); });
-                        dotsContainer.appendChild(dot);
-                    });
+                function atualizarDashboard(){ const arr=state.corridas.reduce((s,c)=>s+(c.real||0),0), g=state.gastos.reduce((s,x)=>s+x.valor,0), f=state.corridas.filter(c=>c.real!==null).length, t=calcTempo(), gh=t>0?arr/(t/3600):0, pj=t>60?(arr/(t/3600))*24:0, falta=Math.max(0,state.metaDiaria-arr), pct=state.metaDiaria>0?Math.min(100,Math.round((arr/state.metaDiaria)*100)):0; $('cardArrecadado').textContent=formatMoney(arr); $('cardMeta').textContent=formatMoney(state.metaDiaria); $('cardCorridas').textContent=f; $('cardHora').textContent=formatMoney(gh); $('cardFalta').textContent=formatMoney(falta); $('cardProjecao').textContent=formatMoney(pj); $('progressPercent').textContent=pct+'%'; $('progressFill').style.width=pct+'%'; }
+                function atualizarGastos(){ const l=$('expensesList'); if(!state.gastos.length){l.innerHTML='Nenhum gasto';return;} l.innerHTML=state.gastos.map(g=>`<div class="expense-item"><span>${g.desc} <small style="color:var(--text2)">(${g.cat||'Outro'})</small></span><span>- ${formatMoney(g.valor)}</span></div>`).join(''); const t=state.gastos.reduce((s,g)=>s+g.valor,0); l.innerHTML+=`<div class="expense-item" style="font-weight:700;border-top:1px solid var(--border);margin-top:6px;padding-top:8px;"><span>Total</span><span>- ${formatMoney(t)}</span></div>`; }
+                function atualizarRelatorio(){ const arr=state.corridas.reduce((s,c)=>s+(c.real||0),0), g=state.gastos.reduce((s,x)=>s+x.valor,0), f=state.corridas.filter(c=>c.real!==null).length, t=calcTempo(), ini=state.jornadaInicio?new Date(state.jornadaInicio).toLocaleTimeString('pt-BR'):'--:--', fim=state.jornadaEncerrada&&state.jornadaFim?new Date(state.jornadaFim).toLocaleTimeString('pt-BR'):'--:--'; $('reportBox').innerHTML=`<strong>📅 ${state.dataJornada.split('-').reverse().join('/')}</strong><br>⏱ ${ini} → ${fim} | ⏳ ${formatTime(t)}<br>🚕 ${f} corridas | 💰 ${formatMoney(arr)} arrecadado<br>🧾 ${formatMoney(g)} gastos | 💵 ${formatMoney(arr-g)} líquido`; }
+                function atualizarStatus(){ const b=$('statusBadge'); if(!state.jornadaInicio)b.innerHTML='<span class="status-dot"></span> PARADO',b.className='status-badge off'; else if(state.jornadaEncerrada)b.innerHTML='<span class="status-dot"></span> ENCERRADO',b.className='status-badge off'; else{ const paused=state.jornadaPausas.length&&state.jornadaPausas[state.jornadaPausas.length-1].fim===null; if(paused)b.innerHTML='<span class="status-dot"></span> PAUSADO',b.className='status-badge paused'; else b.innerHTML='<span class="status-dot"></span> EM ANDAMENTO',b.className='status-badge on'; } }
+                function atualizarBotoes(){ const s=$('btnStart'),p=$('btnPause'),st=$('btnStop'); if(!state.jornadaInicio){s.classList.remove('hidden');p.classList.add('hidden');st.classList.add('hidden');}else if(state.jornadaEncerrada){s.classList.add('hidden');p.classList.add('hidden');st.classList.add('hidden');}else{s.classList.add('hidden');const paused=state.jornadaPausas.length&&state.jornadaPausas[state.jornadaPausas.length-1].fim===null;p.textContent=paused?'▶ Retomar':'⏸ Pausar';p.classList.remove('hidden');st.classList.remove('hidden');} }
+                function atualizarAreas(){ const lib=podeRegistrar();['carouselWrapper','carouselDots','expensesSection','btnQuickRun'].forEach(id=>$(id)?.classList.toggle('disabled-area',!lib)); }
+                function renderizarTudo(){ renderizarCarrossel(); renderizarGrafico(); atualizarDashboard(); atualizarGastos(); atualizarRelatorio(); atualizarBotoes(); atualizarAreas(); atualizarStatus(); }
+                function atualizarTimer(){ $('timerDisplay').textContent=formatTime(calcTempo()); atualizarDashboard(); atualizarRelatorio(); }
+                function iniciar(){ state.jornadaInicio=Date.now();state.jornadaPausas=[];state.jornadaEncerrada=false;state.jornadaFim=null; salvar();clearInterval(state.timerInterval);state.timerInterval=setInterval(atualizarTimer,1000);atualizarTimer();renderizarTudo(); }
+                function pausar(){ if(!state.jornadaInicio||state.jornadaEncerrada)return; const p=state.jornadaPausas; p.length&&p[p.length-1].fim===null?p[p.length-1].fim=Date.now():p.push({inicio:Date.now(),fim:null}); salvar();renderizarTudo(); }
+                function encerrar(){ if(!state.jornadaInicio||state.jornadaEncerrada)return; const p=state.jornadaPausas; if(p.length&&p[p.length-1].fim===null)p[p.length-1].fim=Date.now(); state.jornadaEncerrada=true;state.jornadaFim=Date.now(); clearInterval(state.timerInterval); salvarResumoDiario(); salvar();atualizarTimer();renderizarTudo();mostrarResumo(); }
+                function mostrarResumo(){ const feitas=state.corridas.filter(c=>c.real!==null), arr=feitas.reduce((s,c)=>s+c.real,0), g=state.gastos.reduce((s,x)=>s+x.valor,0); let h=`<p>⏱ ${formatTime(calcTempo())} | 🚕 ${feitas.length} corridas</p><p>💰 ${formatMoney(arr)} arrecadado | 💵 ${formatMoney(arr-g)} líquido</p>`; if(feitas.length){ h+=`<table style="width:100%;font-size:11px;margin-top:8px;border-collapse:collapse;"><tr><th>#</th><th>Prev.</th><th>Real</th><th>Dif.</th></tr>`; feitas.forEach((c,i)=>{ const d=c.real-c.previsto; h+=`<tr><td>${i+1}</td><td>${formatMoney(c.previsto)}</td><td>${formatMoney(c.real)}</td><td style="color:${d>=0?'var(--green)':'var(--red)'}">${formatMoney(d)}</td></tr>`; }); h+=`</table>`; } $('resumoContent').innerHTML=h;$('modalResumo').classList.remove('hidden'); }
+                function salvarResumoDiario(){ const arr=state.corridas.reduce((s,c)=>s+(c.real||0),0), g=state.gastos.reduce((s,x)=>s+x.valor,0), f=state.corridas.filter(c=>c.real!==null).length, t=calcTempo(); const reg={data:state.dataJornada,meta:state.metaDiaria,arrecadado:arr,corridas:f,tempo:t,gastos:g,lucro:arr-g,pctMeta:state.metaDiaria>0?Math.round((arr/state.metaDiaria)*100):0}; let hist=JSON.parse(localStorage.getItem(historyKey)||'[]'); hist=hist.filter(r=>r.data!==state.dataJornada); hist.push(reg); if(hist.length>60)hist=hist.slice(-60); localStorage.setItem(historyKey,JSON.stringify(hist)); }
+                function resetar(){ if(!confirm('Iniciar nova jornada? Os dados atuais serão perdidos (mas salvos no histórico).'))return; if(state.jornadaInicio&&!state.jornadaEncerrada){const p=state.jornadaPausas;if(p.length&&p[p.length-1].fim===null)p[p.length-1].fim=Date.now();state.jornadaEncerrada=true;state.jornadaFim=Date.now();salvarResumoDiario();}else if(state.corridas.some(c=>c.real!==null)||state.gastos.length>0){salvarResumoDiario();} clearInterval(state.timerInterval); state.jornadaInicio=null;state.jornadaPausas=[];state.jornadaEncerrada=false;state.jornadaFim=null; state.corridas=gerarProgressao(state.metaDiaria,state.corridasPrevistas).map(p=>({previsto:p,real:null,pagamento:null,obs:'',hora:null})); state.gastos=[];state.dataJornada=new Date().toISOString().split('T')[0];state.carouselIndex=0; $('timerDisplay').textContent='00:00:00'; salvar();renderizarTudo(); }
 
-                    $('carouselLeft').onclick = () => { if (state.carouselIndex > 0) { state.carouselIndex--; atualizarCarrossel(); } };
-                    $('carouselRight').onclick = () => { if (state.carouselIndex < state.corridas.length - 1) { state.carouselIndex++; atualizarCarrossel(); } };
-
-                    track.addEventListener('mousedown', (e) => {
-                        carouselDragging = true; carouselDragStart = e.clientX; carouselOffsetX = 0;
-                        track.style.transition = 'none';
-                    });
-                    window.addEventListener('mousemove', (e) => {
-                        if (!carouselDragging) return;
-                        carouselOffsetX = e.clientX - carouselDragStart;
-                        const cardWidth = window.innerWidth >= 600 ? 184 : 146;
-                        const shift = -state.carouselIndex * cardWidth + carouselOffsetX;
-                        track.style.transform = `translateX(${shift}px)`;
-                    });
-                    window.addEventListener('mouseup', () => {
-                        if (!carouselDragging) return;
-                        carouselDragging = false;
-                        track.style.transition = 'transform 0.25s ease-out';
-                        if (carouselOffsetX < -20 && state.carouselIndex < state.corridas.length - 1) state.carouselIndex++;
-                        else if (carouselOffsetX > 20 && state.carouselIndex > 0) state.carouselIndex--;
-                        atualizarCarrossel();
-                    });
-                    track.addEventListener('touchstart', (e) => {
-                        carouselDragging = true; carouselDragStart = e.touches[0].clientX; carouselOffsetX = 0;
-                        track.style.transition = 'none';
-                    }, {passive: true});
-                    track.addEventListener('touchmove', (e) => {
-                        if (!carouselDragging) return;
-                        carouselOffsetX = e.touches[0].clientX - carouselDragStart;
-                        const cardWidth = window.innerWidth >= 600 ? 184 : 146;
-                        const shift = -state.carouselIndex * cardWidth + carouselOffsetX;
-                        track.style.transform = `translateX(${shift}px)`;
-                    }, {passive: true});
-                    track.addEventListener('touchend', () => {
-                        if (!carouselDragging) return;
-                        carouselDragging = false;
-                        track.style.transition = 'transform 0.25s ease-out';
-                        if (carouselOffsetX < -20 && state.carouselIndex < state.corridas.length - 1) state.carouselIndex++;
-                        else if (carouselOffsetX > 20 && state.carouselIndex > 0) state.carouselIndex--;
-                        atualizarCarrossel();
-                    });
-
-                    atualizarCarrossel();
-                }
-
-                function atualizarCarrossel() {
-                    const track = $('carouselTrack');
-                    const cardWidth = window.innerWidth >= 600 ? 184 : 146;
-                    const shift = -state.carouselIndex * cardWidth;
-                    track.style.transform = `translateX(${shift}px)`;
-                    const cards = track.querySelectorAll('.carousel-card');
-                    cards.forEach((card, i) => {
-                        card.classList.remove('active', 'left', 'right');
-                        if (i === state.carouselIndex) card.classList.add('active');
-                        else if (i === state.carouselIndex - 1) card.classList.add('left');
-                        else if (i === state.carouselIndex + 1) card.classList.add('right');
-                    });
-                    const dots = $('carouselDots').querySelectorAll('.carousel-dot');
-                    dots.forEach((dot, i) => dot.classList.toggle('active', i === state.carouselIndex));
-                    $('carouselLeft').style.opacity = state.carouselIndex === 0 ? '0.3' : '1';
-                    $('carouselRight').style.opacity = state.carouselIndex >= state.corridas.length - 1 ? '0.3' : '1';
-                }
-
-                function renderizarGrafico() {
-                    const container = $('chartContainer');
-                    container.innerHTML = '';
-                    if (!state.corridas.length) {
-                        container.innerHTML = '<p style="color:var(--text2); font-size:12px; text-align:center; width:100%;">Registre corridas para ver o gráfico.</p>';
-                        return;
-                    }
-                    const valores = state.corridas.map(c => ({ previsto: c.previsto, real: c.real }));
-                    const maxVal = Math.max(...valores.map(v => v.previsto), ...valores.filter(v => v.real !== null).map(v => v.real), 1);
-                    valores.forEach((v, i) => {
-                        const group = document.createElement('div'); group.className = 'chart-bar-group';
-                        const wrapper = document.createElement('div'); wrapper.className = 'chart-bar-wrapper';
-                        const prevBar = document.createElement('div'); prevBar.className = 'chart-bar predicted';
-                        prevBar.style.height = (v.previsto / maxVal) * 130 + 'px';
-                        wrapper.appendChild(prevBar);
-                        if (v.real !== null) {
-                            const realBar = document.createElement('div'); realBar.className = 'chart-bar real';
-                            if (v.real < v.previsto) realBar.classList.add('negative');
-                            realBar.style.height = (v.real / maxVal) * 130 + 'px';
-                            wrapper.appendChild(realBar);
-                            const tooltip = document.createElement('div'); tooltip.className = 'chart-tooltip';
-                            const dif = v.real - v.previsto;
-                            tooltip.innerHTML = `#${i+1} | Prev: ${formatMoney(v.previsto)} | Real: ${formatMoney(v.real)}<br>Dif: ${dif >= 0 ? '+' : ''}${formatMoney(dif)}`;
-                            wrapper.appendChild(tooltip);
-                        } else {
-                            const tooltip = document.createElement('div'); tooltip.className = 'chart-tooltip';
-                            tooltip.textContent = `#${i+1} | Prev: ${formatMoney(v.previsto)} | Pendente`;
-                            wrapper.appendChild(tooltip);
-                        }
-                        group.appendChild(wrapper);
-                        const label = document.createElement('div'); label.className = 'chart-bar-label';
-                        label.textContent = `#${i+1}`;
-                        group.appendChild(label);
-                        container.appendChild(group);
-                    });
-                }
-
-                let corridaEditando = null;
-                function abrirModalCorrida(index) {
-                    if(!podeRegistrar()) return alert('Inicie a jornada primeiro!');
-                    corridaEditando = index;
-                    const c = state.corridas[index];
-                    $('modalCorridaNum').textContent = index+1;
-                    $('inputPrevisto').value = formatMoney(c.previsto);
-                    $('inputValorReal').value = '';
-                    $('inputObs').value = c.obs || '';
-                    const plataforma = c.pagamento || 'Uber';
-                    document.querySelectorAll('#paymentOptions .option-item').forEach(opt => {
-                        opt.classList.toggle('active', opt.dataset.value === plataforma);
-                    });
-                    $('modalCorrida').classList.remove('hidden');
-                }
-
-                function salvarCorrida() {
-                    const valorDigitado = $('inputValorReal').value.trim();
-                    let real = valorDigitado === '' ? state.corridas[corridaEditando].previsto : (parseFloat(valorDigitado) || 0);
-                    const pagamento = document.querySelector('#paymentOptions .option-item.active')?.dataset.value || 'Uber';
-                    const obs = $('inputObs').value;
-                    const c = state.corridas[corridaEditando];
-                    c.real = real; c.pagamento = pagamento; c.obs = obs;
-                    c.hora = new Date().toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
-                    salvar(); $('modalCorrida').classList.add('hidden'); renderizarTudo();
-                }
-
-                function removerCorrida() {
-                    const c = state.corridas[corridaEditando];
-                    c.real = null; c.pagamento = null; c.obs = ''; c.hora = null;
-                    salvar(); $('modalCorrida').classList.add('hidden'); renderizarTudo();
-                }
-
-                function quickRun() {
-                    if(!podeRegistrar()) return alert('Inicie a jornada!');
-                    const idx = state.corridas.findIndex(c => c.real === null);
-                    if(idx === -1) { alert('Todas as corridas previstas já foram registradas!'); return; }
-                    state.carouselIndex = idx;
-                    corridaEditando = idx;
-                    const c = state.corridas[idx];
-                    $('modalCorridaNum').textContent = idx+1;
-                    $('inputPrevisto').value = formatMoney(c.previsto);
-                    $('inputValorReal').value = '';
-                    $('inputObs').value = '';
-                    document.querySelectorAll('#paymentOptions .option-item').forEach(opt => opt.classList.toggle('active', opt.dataset.value === 'Uber'));
-                    $('modalCorrida').classList.remove('hidden');
-                    atualizarCarrossel();
-                }
-
-                document.querySelectorAll('#paymentOptions .option-item').forEach(opt => {
-                    opt.addEventListener('click', () => {
-                        document.querySelectorAll('#paymentOptions .option-item').forEach(o => o.classList.remove('active'));
-                        opt.classList.add('active');
-                    });
-                });
-                document.querySelectorAll('#gastoCategoryOptions .option-item').forEach(opt => {
-                    opt.addEventListener('click', () => {
-                        document.querySelectorAll('#gastoCategoryOptions .option-item').forEach(o => o.classList.remove('active'));
-                        opt.classList.add('active');
-                    });
-                });
-
-                function abrirModalGasto() {
-                    if(!podeRegistrar()) return alert('Inicie a jornada primeiro!');
-                    $('inputGastoDesc').value = '';
-                    $('inputGastoValor').value = '';
-                    document.querySelectorAll('#gastoCategoryOptions .option-item').forEach(o => o.classList.remove('active'));
-                    document.querySelector('#gastoCategoryOptions .option-item[data-cat="Combustível"]').classList.add('active');
-                    $('modalGasto').classList.remove('hidden');
-                }
-
-                function salvarGasto() {
-                    const desc = $('inputGastoDesc').value.trim();
-                    const valor = parseFloat($('inputGastoValor').value) || 0;
-                    const cat = document.querySelector('#gastoCategoryOptions .option-item.active')?.dataset.cat || 'Outro';
-                    if (valor <= 0) return alert('Informe um valor válido.');
-                    const descFinal = desc || cat;
-                    state.gastos.push({ desc: descFinal, valor, cat });
-                    salvar(); $('modalGasto').classList.add('hidden'); renderizarTudo();
-                }
-
-                function atualizarDashboard() {
-                    const arr = state.corridas.reduce((s,c) => s + (c.real||0), 0);
-                    const gastos = state.gastos.reduce((s,g) => s + g.valor, 0);
-                    const feitas = state.corridas.filter(c => c.real !== null).length;
-                    const tempo = calcTempo();
-                    const ganhoH = tempo>0 ? arr/(tempo/3600) : 0;
-                    const proj = tempo>60 ? (arr/(tempo/3600))*24 : 0;
-                    const falta = Math.max(0, state.metaDiaria - arr);
-                    const pct = state.metaDiaria>0 ? Math.min(100, Math.round((arr/state.metaDiaria)*100)) : 0;
-                    $('cardArrecadado').textContent = formatMoney(arr);
-                    $('cardMeta').textContent = formatMoney(state.metaDiaria);
-                    $('cardCorridas').textContent = feitas;
-                    $('cardHora').textContent = formatMoney(ganhoH);
-                    $('cardFalta').textContent = formatMoney(falta);
-                    $('cardProjecao').textContent = formatMoney(proj);
-                    $('progressPercent').textContent = pct+'%';
-                    $('progressFill').style.width = pct+'%';
-                }
-
-                function atualizarGastos() {
-                    const list = $('expensesList');
-                    if(!state.gastos.length) { list.innerHTML = 'Nenhum gasto'; return; }
-                    list.innerHTML = state.gastos.map(g => `
-                        <div class="expense-item">
-                            <span>${g.desc} <small style="color:var(--text2)">(${g.cat || 'Outro'})</small></span>
-                            <span>- ${formatMoney(g.valor)}</span>
-                        </div>
-                    `).join('');
-                    const total = state.gastos.reduce((s,g)=>s+g.valor,0);
-                    list.innerHTML += `<div class="expense-item" style="font-weight:700;border-top:1px solid var(--border);margin-top:6px;padding-top:8px;"><span>Total</span><span>- ${formatMoney(total)}</span></div>`;
-                }
-
-                function atualizarRelatorio() {
-                    const arr = state.corridas.reduce((s,c)=>s+(c.real||0),0);
-                    const gastos = state.gastos.reduce((s,g)=>s+g.valor,0);
-                    const feitas = state.corridas.filter(c=>c.real!==null).length;
-                    const tempo = calcTempo();
-                    const inicio = state.jornadaInicio ? new Date(state.jornadaInicio).toLocaleTimeString('pt-BR') : '--:--';
-                    const fim = state.jornadaEncerrada && state.jornadaFim ? new Date(state.jornadaFim).toLocaleTimeString('pt-BR') : '--:--';
-                    $('reportBox').innerHTML = `
-                        <strong>📅 ${state.dataJornada.split('-').reverse().join('/')}</strong><br>
-                        ⏱ ${inicio} → ${fim} | ⏳ ${formatTime(tempo)}<br>
-                        🚕 ${feitas} corridas | 💰 ${formatMoney(arr)} arrecadado<br>
-                        🧾 ${formatMoney(gastos)} gastos | 💵 ${formatMoney(arr-gastos)} líquido
-                    `;
-                }
-
-                function atualizarStatus() {
-                    const b = $('statusBadge');
-                    if(!state.jornadaInicio) b.innerHTML = '<span class="status-dot"></span> PARADO', b.className='status-badge off';
-                    else if(state.jornadaEncerrada) b.innerHTML = '<span class="status-dot"></span> ENCERRADO', b.className='status-badge off';
-                    else {
-                        const paused = state.jornadaPausas.length && state.jornadaPausas[state.jornadaPausas.length-1].fim===null;
-                        if(paused) b.innerHTML = '<span class="status-dot"></span> PAUSADO', b.className='status-badge paused';
-                        else b.innerHTML = '<span class="status-dot"></span> EM ANDAMENTO', b.className='status-badge on';
-                    }
-                }
-
-                function atualizarBotoes() {
-                    const s=$('btnStart'), p=$('btnPause'), st=$('btnStop');
-                    if(!state.jornadaInicio) { s.classList.remove('hidden'); p.classList.add('hidden'); st.classList.add('hidden'); }
-                    else if(state.jornadaEncerrada) { s.classList.add('hidden'); p.classList.add('hidden'); st.classList.add('hidden'); }
-                    else {
-                        s.classList.add('hidden');
-                        const paused = state.jornadaPausas.length && state.jornadaPausas[state.jornadaPausas.length-1].fim===null;
-                        p.textContent = paused ? '▶ Retomar' : '⏸ Pausar';
-                        p.classList.remove('hidden'); st.classList.remove('hidden');
-                    }
-                }
-
-                function atualizarAreas() {
-                    const liberado = podeRegistrar();
-                    ['carouselWrapper','carouselDots','expensesSection','btnQuickRun'].forEach(id => $(id)?.classList.toggle('disabled-area', !liberado));
-                }
-
-                function renderizarTudo() {
-                    renderizarCarrossel();
-                    renderizarGrafico();
-                    atualizarDashboard();
-                    atualizarGastos();
-                    atualizarRelatorio();
-                    atualizarBotoes();
-                    atualizarAreas();
-                    atualizarStatus();
-                }
-
-                function atualizarTimer() {
-                    const segundos = calcTempo();
-                    $('timerDisplay').textContent = formatTime(segundos);
-                    atualizarDashboard();
-                    atualizarRelatorio();
-                }
-
-                function iniciar() {
-                    state.jornadaInicio = Date.now(); state.jornadaPausas = []; state.jornadaEncerrada = false; state.jornadaFim = null;
-                    salvar(); clearInterval(state.timerInterval);
-                    state.timerInterval = setInterval(atualizarTimer, 1000);
-                    atualizarTimer(); renderizarTudo();
-                }
-
-                function pausar() {
-                    if(!state.jornadaInicio || state.jornadaEncerrada) return;
-                    const p = state.jornadaPausas;
-                    p.length && p[p.length-1].fim===null ? p[p.length-1].fim=Date.now() : p.push({inicio:Date.now(), fim:null});
-                    salvar(); renderizarTudo();
-                }
-
-                function encerrar() {
-                    if(!state.jornadaInicio || state.jornadaEncerrada) return;
-                    const p = state.jornadaPausas;
-                    if(p.length && p[p.length-1].fim===null) p[p.length-1].fim=Date.now();
-                    state.jornadaEncerrada = true; state.jornadaFim = Date.now();
-                    clearInterval(state.timerInterval);
-                    salvarResumoDiario();
-                    salvar(); atualizarTimer(); renderizarTudo();
-                    mostrarResumo();
-                }
-
-                function mostrarResumo() {
-                    const feitas = state.corridas.filter(c=>c.real!==null);
-                    const arr = feitas.reduce((s,c)=>s+c.real,0);
-                    const gastos = state.gastos.reduce((s,g)=>s+g.valor,0);
-                    let html = `<p>⏱ ${formatTime(calcTempo())} | 🚕 ${feitas.length} corridas</p><p>💰 ${formatMoney(arr)} arrecadado | 💵 ${formatMoney(arr-gastos)} líquido</p>`;
-                    if(feitas.length) {
-                        html += `<table style="width:100%;font-size:11px;margin-top:8px;border-collapse:collapse;"><tr><th>#</th><th>Prev.</th><th>Real</th><th>Dif.</th></tr>`;
-                        feitas.forEach((c,i) => {
-                            const d = c.real - c.previsto;
-                            html += `<tr><td>${i+1}</td><td>${formatMoney(c.previsto)}</td><td>${formatMoney(c.real)}</td><td style="color:${d>=0?'var(--green)':'var(--red)'}">${formatMoney(d)}</td></tr>`;
-                        });
-                        html += `</table>`;
-                    }
-                    $('resumoContent').innerHTML = html;
-                    $('modalResumo').classList.remove('hidden');
-                }
-
-                function salvarResumoDiario() {
-                    const arr = state.corridas.reduce((s,c) => s + (c.real||0), 0);
-                    const gastos = state.gastos.reduce((s,g) => s + g.valor, 0);
-                    const feitas = state.corridas.filter(c => c.real !== null).length;
-                    const tempo = calcTempo();
-                    const registro = {
-                        data: state.dataJornada,
-                        meta: state.metaDiaria,
-                        arrecadado: arr,
-                        corridas: feitas,
-                        tempo: tempo,
-                        gastos: gastos,
-                        lucro: arr - gastos,
-                        pctMeta: state.metaDiaria > 0 ? Math.round((arr/state.metaDiaria)*100) : 0
-                    };
-                    let historico = JSON.parse(localStorage.getItem(historyKey) || '[]');
-                    historico = historico.filter(r => r.data !== state.dataJornada);
-                    historico.push(registro);
-                    if (historico.length > 60) historico = historico.slice(-60);
-                    localStorage.setItem(historyKey, JSON.stringify(historico));
-                }
-
-                function resetar() {
-                    if(!confirm('Iniciar nova jornada? Os dados atuais serão perdidos (mas salvos no histórico se houver algo).')) return;
-                    if (state.jornadaInicio && !state.jornadaEncerrada) {
-                        const p = state.jornadaPausas;
-                        if(p.length && p[p.length-1].fim===null) p[p.length-1].fim=Date.now();
-                        state.jornadaEncerrada = true;
-                        state.jornadaFim = Date.now();
-                        salvarResumoDiario();
-                    } else if (state.corridas.some(c => c.real !== null) || state.gastos.length > 0) {
-                        salvarResumoDiario();
-                    }
-                    clearInterval(state.timerInterval);
-                    state.jornadaInicio=null; state.jornadaPausas=[]; state.jornadaEncerrada=false; state.jornadaFim=null;
-                    state.corridas = gerarProgressao(state.metaDiaria, state.corridasPrevistas).map(p => ({previsto:p, real:null, pagamento:null, obs:'', hora:null}));
-                    state.gastos = []; state.dataJornada = new Date().toISOString().split('T')[0];
-                    state.carouselIndex = 0;
-                    $('timerDisplay').textContent = '00:00:00';
-                    salvar(); renderizarTudo();
-                }
-
+                // ==================== GESTÃO DO MÊS (LIQUID GLASS) ====================
                 function abrirGestaoMes() {
-                    const historico = JSON.parse(localStorage.getItem(historyKey) || '[]');
+                    const hist = JSON.parse(localStorage.getItem(historyKey) || '[]');
                     const agora = new Date();
                     const mesAtual = agora.getMonth();
                     const anoAtual = agora.getFullYear();
-                    const diasDoMes = historico.filter(r => {
+                    const diasDoMes = hist.filter(r => {
                         const d = new Date(r.data + 'T00:00:00');
                         return d.getMonth() === mesAtual && d.getFullYear() === anoAtual;
-                    }).sort((a,b) => a.data.localeCompare(b.data));
-                    let html = '';
-                    if (diasDoMes.length === 0) {
-                        html = '<p>Nenhum registro para este mês.</p>';
+                    }).sort((a, b) => b.data.localeCompare(a.data));
+
+                    // Resumo
+                    const totalArr = diasDoMes.reduce((s, r) => s + (r.arrecadado || 0), 0);
+                    const totalLucro = diasDoMes.reduce((s, r) => s + (r.lucro || (r.arrecadado || 0) - (r.gastos || 0)), 0);
+                    $('gmArrecadado').textContent = formatMoney(totalArr);
+                    $('gmLucro').textContent = formatMoney(totalLucro);
+                    $('gmDias').textContent = diasDoMes.length;
+                    $('gmLucro').style.color = totalLucro >= 0 ? 'var(--green)' : 'var(--red)';
+
+                    // Lista de dias
+                    const list = $('gmDayList');
+                    if (!diasDoMes.length) {
+                        list.innerHTML = '<div class="gm-empty">📭 Nenhum registro neste mês.</div>';
                     } else {
-                        html = `<table class="month-table"><thead><tr><th>Dia</th><th>Meta</th><th>Arrec.</th><th>Corr.</th><th>Lucro</th><th>%</th></tr></thead><tbody>`;
-                        let totalMeta = 0, totalArr = 0, totalCorr = 0, totalLucro = 0;
-                        diasDoMes.forEach(r => {
-                            const dataFormatada = r.data.split('-').reverse().join('/');
-                            html += `<tr><td>${dataFormatada}</td><td>${formatMoney(r.meta)}</td><td>${formatMoney(r.arrecadado)}</td><td>${r.corridas}</td><td style="color:${r.lucro>=0?'var(--green)':'var(--red)'}">${formatMoney(r.lucro)}</td><td>${r.pctMeta}%</td></tr>`;
-                            totalMeta += r.meta; totalArr += r.arrecadado; totalCorr += r.corridas; totalLucro += r.lucro;
-                        });
-                        html += `<tr class="month-total"><td><strong>Total</strong></td><td>${formatMoney(totalMeta)}</td><td>${formatMoney(totalArr)}</td><td>${totalCorr}</td><td style="color:${totalLucro>=0?'var(--green)':'var(--red)'}">${formatMoney(totalLucro)}</td><td>--</td></tr></tbody></table>`;
+                        list.innerHTML = diasDoMes.map((day, i) => {
+                            const arr = day.arrecadado || 0;
+                            const gastos = day.gastos || 0;
+                            const lucro = day.lucro || (arr - gastos);
+                            const cor = lucro >= 0 ? 'var(--green)' : 'var(--red)';
+                            const dotClass = lucro >= 0 ? 'positive' : 'negative';
+                            const dataFormatada = day.data.split('-').reverse().join('/');
+                            return `
+                                <div class="gm-day-card" data-index="${i}" data-date="${day.data}">
+                                    <div class="gm-day-header" onclick="window.toggleGmDay(${i})">
+                                        <div class="gm-day-info">
+                                            <span class="gm-day-dot ${dotClass}"></span>
+                                            <span class="gm-day-date">${dataFormatada}</span>
+                                            <span class="gm-day-stats">💰 <strong>${formatMoney(arr)}</strong> | 💵 <strong style="color:${cor}">${formatMoney(lucro)}</strong></span>
+                                        </div>
+                                        <div class="gm-day-actions" onclick="event.stopPropagation()">
+                                            <button class="gm-mini-btn" title="Editar" onclick="window.editGmDay('${day.data}')">✏️</button>
+                                            <button class="gm-mini-btn delete" title="Excluir" onclick="window.deleteGmDay('${day.data}')">🗑</button>
+                                        </div>
+                                    </div>
+                                    <div class="gm-day-details" id="gmDetails-${i}">
+                                        <div class="gm-detail-grid">
+                                            <div>🎯 Meta: <strong>${formatMoney(day.meta || 0)}</strong></div>
+                                            <div>🚕 Corridas: <strong>${day.corridas || 0}</strong></div>
+                                            <div>⏱ Tempo: <strong>${formatTime(day.tempo || 0)}</strong></div>
+                                            <div>📊 % Meta: <strong>${day.pctMeta || 0}%</strong></div>
+                                            <div>🧾 Gastos: <strong>${formatMoney(gastos)}</strong></div>
+                                            <div>💵 Lucro: <strong style="color:${cor}">${formatMoney(lucro)}</strong></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('');
                     }
-                    $('gestaoMesContent').innerHTML = html;
+
+                    // Salva referência para uso nas funções globais
+                    window._gmData = { historyKey, diasDoMes, history: hist };
                     $('modalGestaoMes').classList.remove('hidden');
                 }
 
-                function salvar() {
-                    const toSave = {
-                        metaDiaria: state.metaDiaria, corridasPrevistas: state.corridasPrevistas,
-                        corridas: state.corridas, gastos: state.gastos,
-                        jornadaInicio: state.jornadaInicio, jornadaPausas: state.jornadaPausas,
-                        jornadaEncerrada: state.jornadaEncerrada, jornadaFim: state.jornadaFim,
-                        dataJornada: state.dataJornada, carouselIndex: state.carouselIndex
-                    };
-                    localStorage.setItem(stateKey, JSON.stringify(toSave));
+                // Funções globais para o modal
+                window.toggleGmDay = function(index) {
+                    const details = document.getElementById(`gmDetails-${index}`);
+                    if (details) details.classList.toggle('open');
+                };
+
+                window.editGmDay = function(data) {
+                    const { history, historyKey } = window._gmData;
+                    const day = history.find(r => r.data === data);
+                    if (!day) return;
+                    $('editDayData').value = data.split('-').reverse().join('/');
+                    $('editDayMeta').value = day.meta || 0;
+                    $('editDayArrecadado').value = day.arrecadado || 0;
+                    $('editDayCorridas').value = day.corridas || 0;
+                    $('editDayGastos').value = day.gastos || 0;
+                    $('modalEditDay').dataset.editDate = data;
+                    $('modalEditDay').classList.remove('hidden');
+                };
+
+                window.deleteGmDay = function(data) {
+                    if (!confirm('Tem certeza que deseja excluir este dia permanentemente?')) return;
+                    const { historyKey, history } = window._gmData;
+                    const filtered = history.filter(r => r.data !== data);
+                    localStorage.setItem(historyKey, JSON.stringify(filtered));
+                    abrirGestaoMes(); // Reabre o modal atualizado
+                };
+
+                function salvarEditDay() {
+                    const data = $('modalEditDay').dataset.editDate;
+                    if (!data) return;
+                    const { history, historyKey } = window._gmData;
+                    const day = history.find(r => r.data === data);
+                    if (!day) return;
+                    day.meta = parseFloat($('editDayMeta').value) || 0;
+                    day.arrecadado = parseFloat($('editDayArrecadado').value) || 0;
+                    day.corridas = parseInt($('editDayCorridas').value) || 0;
+                    day.gastos = parseFloat($('editDayGastos').value) || 0;
+                    day.lucro = day.arrecadado - day.gastos;
+                    day.pctMeta = day.meta > 0 ? Math.round((day.arrecadado / day.meta) * 100) : 0;
+                    localStorage.setItem(historyKey, JSON.stringify(history));
+                    $('modalEditDay').classList.add('hidden');
+                    abrirGestaoMes(); // Atualiza o modal
                 }
 
-                function carregar() {
-                    const d = localStorage.getItem(stateKey);
-                    if(!d) return false;
-                    try {
-                        const obj = JSON.parse(d);
-                        if(obj.dataJornada === new Date().toISOString().split('T')[0] || obj.jornadaEncerrada===false) {
-                            Object.assign(state, obj);
-                            if(state.jornadaInicio && !state.jornadaEncerrada) state.timerInterval = setInterval(atualizarTimer, 1000);
-                            renderizarTudo(); atualizarTimer(); return true;
-                        }
-                    } catch(e){}
-                    return false;
-                }
+                // Eventos dos modais de gestão
+                $('btnSaveEdit').addEventListener('click', salvarEditDay);
+                $('btnCancelEdit').addEventListener('click', () => $('modalEditDay').classList.add('hidden'));
 
-                // Eventos
-                $('btnStart').addEventListener('click', iniciar);
-                $('btnPause').addEventListener('click', pausar);
-                $('btnStop').addEventListener('click', encerrar);
-                $('btnConfig').addEventListener('click', ()=>{ $('editMetaValor').value=state.metaDiaria; $('editMetaCorridas').value=state.corridasPrevistas; $('modalMeta').classList.remove('hidden'); });
-                $('btnCancelMeta').addEventListener('click', ()=>$('modalMeta').classList.add('hidden'));
-                $('btnSaveMeta').addEventListener('click', ()=>{
-                    const m = parseFloat($('editMetaValor').value)||500, n = parseInt($('editMetaCorridas').value)||20;
-                    if(m>0 && n>0) aplicarMeta(m,n);
-                    $('modalMeta').classList.add('hidden');
-                });
-                $('btnQuickRun').addEventListener('click', quickRun);
-                $('btnSalvarCorrida').addEventListener('click', salvarCorrida);
-                $('btnCancelCorrida').addEventListener('click', ()=>$('modalCorrida').classList.add('hidden'));
-                $('btnRemoveCorrida').addEventListener('click', removerCorrida);
-                $('btnAddExpense').addEventListener('click', abrirModalGasto);
-                $('btnSaveGasto').addEventListener('click', salvarGasto);
-                $('btnCancelGasto').addEventListener('click', ()=>$('modalGasto').classList.add('hidden'));
-                $('btnReset').addEventListener('click', resetar);
-                $('btnGestaoMes').addEventListener('click', abrirGestaoMes);
-                $('btnFecharResumo').addEventListener('click', ()=>$('modalResumo').classList.add('hidden'));
-                $('btnFecharGestao').addEventListener('click', ()=>$('modalGestaoMes').classList.add('hidden'));
-                window.addEventListener('click', e => {
-                    if(e.target === $('modalCorrida')) $('modalCorrida').classList.add('hidden');
-                    if(e.target === $('modalGasto')) $('modalGasto').classList.add('hidden');
-                    if(e.target === $('modalMeta')) $('modalMeta').classList.add('hidden');
-                    if(e.target === $('modalResumo')) $('modalResumo').classList.add('hidden');
-                    if(e.target === $('modalGestaoMes')) $('modalGestaoMes').classList.add('hidden');
-                });
+                // Salvar estado
+                function salvar(){ localStorage.setItem(stateKey,JSON.stringify({metaDiaria:state.metaDiaria,corridasPrevistas:state.corridasPrevistas,corridas:state.corridas,gastos:state.gastos,jornadaInicio:state.jornadaInicio,jornadaPausas:state.jornadaPausas,jornadaEncerrada:state.jornadaEncerrada,jornadaFim:state.jornadaFim,dataJornada:state.dataJornada,carouselIndex:state.carouselIndex})); }
+                function carregar(){ const d=localStorage.getItem(stateKey); if(!d)return false; try{ const obj=JSON.parse(d); if(obj.dataJornada===new Date().toISOString().split('T')[0]||obj.jornadaEncerrada===false){ Object.assign(state,obj); if(state.jornadaInicio&&!state.jornadaEncerrada)state.timerInterval=setInterval(atualizarTimer,1000); renderizarTudo();atualizarTimer();return true; } }catch(e){} return false; }
 
-                // Logout
-                $('btnLogout').addEventListener('click', () => {
-                    if (confirm('Tem certeza que deseja sair?')) {
-                        logout();
-                    }
-                });
+                // Eventos principais
+                $('btnStart').addEventListener('click',iniciar);
+                $('btnPause').addEventListener('click',pausar);
+                $('btnStop').addEventListener('click',encerrar);
+                $('btnConfig').addEventListener('click',()=>{$('editMetaValor').value=state.metaDiaria;$('editMetaCorridas').value=state.corridasPrevistas;$('modalMeta').classList.remove('hidden');});
+                $('btnCancelMeta').addEventListener('click',()=>$('modalMeta').classList.add('hidden'));
+                $('btnSaveMeta').addEventListener('click',()=>{const m=parseFloat($('editMetaValor').value)||500,n=parseInt($('editMetaCorridas').value)||20;if(m>0&&n>0)aplicarMeta(m,n);$('modalMeta').classList.add('hidden');});
+                $('btnQuickRun').addEventListener('click',quickRun);
+                $('btnSalvarCorrida').addEventListener('click',salvarCorrida);
+                $('btnCancelCorrida').addEventListener('click',()=>$('modalCorrida').classList.add('hidden'));
+                $('btnRemoveCorrida').addEventListener('click',removerCorrida);
+                $('btnAddExpense').addEventListener('click',abrirModalGasto);
+                $('btnSaveGasto').addEventListener('click',salvarGasto);
+                $('btnCancelGasto').addEventListener('click',()=>$('modalGasto').classList.add('hidden'));
+                $('btnReset').addEventListener('click',resetar);
+                $('btnGestaoMes').addEventListener('click',abrirGestaoMes);
+                $('btnFecharResumo').addEventListener('click',()=>$('modalResumo').classList.add('hidden'));
+                $('btnFecharGestao').addEventListener('click',()=>$('modalGestaoMes').classList.add('hidden'));
+                $('btnLogout').addEventListener('click',logout);
+                window.addEventListener('click',e=>{ if(e.target===$('modalCorrida'))$('modalCorrida').classList.add('hidden'); if(e.target===$('modalGasto'))$('modalGasto').classList.add('hidden'); if(e.target===$('modalMeta'))$('modalMeta').classList.add('hidden'); if(e.target===$('modalResumo'))$('modalResumo').classList.add('hidden'); if(e.target===$('modalGestaoMes'))$('modalGestaoMes').classList.add('hidden'); if(e.target===$('modalEditDay'))$('modalEditDay').classList.add('hidden'); });
 
-                if(!carregar()) aplicarMeta(500,20);
-            } // fim initApp
+                if(!carregar())aplicarMeta(500,20);
+            }
         })();
     </script>
 </body>
